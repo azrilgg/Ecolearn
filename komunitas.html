@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Komunitas</title>
+
+    <!-- GOOGLE FONT POPPINS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">EcoLearn</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="belajar.html">Belajar</a></li>
+        <li><a class="active" href="komunitas.html">Komunitas</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- HERO KOMUNITAS -->
+<header class="subpage-hero community-hero">
+    <div class="hero-content" data-aos="fade-up">
+        <h1>Komunitas <span>EcoLearn</span></h1>
+        <p>
+            Tempat berkumpulnya para pecinta lingkungan untuk berbagi, berdiskusi,
+            dan membuat perubahan nyata untuk bumi.
+        </p>
+        <i class="fa-solid fa-users icon-hero"></i>
+    </div>
+</header>
+
+<!-- INTRO SECTION -->
+<section class="intro-section sub-intro">
+    <div class="container">
+        <div class="intro-text" data-aos="fade-right">
+            <h2>Kenalan Yuk dengan Komunitas Kita!</h2>
+            <p>
+                Komunitas EcoLearn hadir sebagai wadah bagi para pelajar, aktivis, dan siapa pun 
+                yang peduli dengan masa depan bumi.  
+                Di sini kita saling berbagi ilmu, pengalaman, dan inspirasi untuk hidup lebih hijau.
+            </p>
+        </div>
+
+        <div class="intro-img" data-aos="fade-left">
+            <img src="image/komunitas-intro.jpg">
+        </div>
+    </div>
+</section>
+
+<!-- COMMUNITY BENEFITS -->
+<section class="community-benefits">
+    <h2 data-aos="fade-up">Apa yang Bisa Kamu Lakukan di Komunitas?</h2>
+    <div class="benefit-grid container">
+
+        <div class="benefit-card" data-aos="zoom-in">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Diskusi Lingkungan</h3>
+            <p>Bahas topik sampah, daur ulang, konservasi, dan solusi nyata.</p>
+        </div>
+
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="150">
+            <i class="fa-solid fa-recycle"></i>
+            <h3>Proyek Bersama</h3>
+            <p>Ikut kegiatan nyata seperti bersih pantai, penghijauan, dll.</p>
+        </div>
+
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="300">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Forum Interaktif</h3>
+            <p>Bikin thread, tanya jawab, atau bagi ide kreatif.</p>
+        </div>
+
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="450">
+            <i class="fa-solid fa-award"></i>
+            <h3>Ranking Member</h3>
+            <p>Kumpulkan poin dari aktivitas dan naikkan levelmu!</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FORUM PREVIEW -->
+<section class="forum-preview">
+    <div class="container">
+        <h2 data-aos="fade-up">Topik Forum Populer</h2>
+
+        <div class="forum-grid">
+
+            <div class="forum-card" data-aos="fade-right">
+                <h3><i class="fa-solid fa-trash"></i> Cara Mengurangi Sampah Harian</h3>
+                <p>Diskusi tentang cara mengurangi sampah plastik dan organik.</p>
+                <a class="forum-btn">Ikuti Diskusi</a>
+            </div>
+
+            <div class="forum-card" data-aos="fade-right" data-aos-delay="150">
+                <h3><i class="fa-solid fa-bottle-water"></i> Daur Ulang Botol Plastik</h3>
+                <p>Kumpulan ide kreatif mendaur ulang botol bekas menjadi barang berguna.</p>
+                <a class="forum-btn">Lihat Ide</a>
+            </div>
+
+            <div class="forum-card" data-aos="fade-right" data-aos-delay="300">
+                <h3><i class="fa-solid fa-tree"></i> Menanam Pohon di Lingkungan Rumah</h3>
+                <p>Tutorial dan pengalaman para anggota yang sudah berhasil.</p>
+                <a class="forum-btn">Pelajari</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- TOP MEMBERS -->
+<section class="top-members">
+    <div class="container">
+        <h2 data-aos="fade-up">Top Member EcoLearn</h2>
+        <p class="sub" data-aos="fade-up" data-aos-delay="100">
+            Member aktif yang sering berdiskusi, berbagi, dan berkontribusi.
+        </p>
+
+        <div class="member-grid">
+
+            <div class="member-card" data-aos="zoom-in">
+                <img src="image/member1.jpg">
+                <h3>@GreenHero</h3>
+                <p>Level 12 • 2400 Poin</p>
+            </div>
+
+            <div class="member-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="image/member2.jpg">
+                <h3>@EcoGirl</h3>
+                <p>Level 10 • 1980 Poin</p>
+            </div>
+
+            <div class="member-card" data-aos="zoom-in" data-aos-delay="400">
+                <img src="image/member3.jpg">
+                <h3>@EarthSaver</h3>
+                <p>Level 9 • 1660 Poin</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA TO KONTAK -->
+<section class="cta-final">
+    <div class="container" data-aos="fade-up">
+        <h2>Ayo gabung dan diskusi bareng!</h2>
+        <p>Ingin tanya lebih lanjut? Hubungi kami kapan saja.</p>
+        <a href="kontak.html" class="btn-primary">Hubungi Kami</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 EcoLearn. Komunitas Hijau untuk Semua.</p>
+</footer>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+<!-- AOS INIT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({ duration: 900, once: true });
+</script>
+
+</body>
+</html>

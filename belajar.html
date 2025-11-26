@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Belajar Lingkungan</title>
+
+    <!-- GOOGLE FONT POPPINS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">EcoLearn</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a class="active" href="belajar.html">Belajar</a></li>
+        <li><a href="komunitas.html">Komunitas</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- HEADER INTRO -->
+<header class="subpage-hero">
+    <div class="hero-content" data-aos="fade-up">
+        <h1>Mulai Belajar di <span>EcoLearn</span></h1>
+        <p>Pelajari sampah, daur ulang, lingkungan, dan konservasi alam dengan cara interaktif dan mudah dipahami.</p>
+        <i class="fa-solid fa-book-open icon-hero"></i>
+    </div>
+</header>
+
+<!-- INTRO SECTION -->
+<section class="intro-section sub-intro">
+    <div class="container">
+        <div class="intro-text" data-aos="fade-right">
+            <h2>Yuk Kenalan dengan Ilmu Lingkungan!</h2>
+            <p>
+                Belajar lingkungan itu penting untuk masa depan bumi. Di halaman ini, kamu bisa menemukan berbagai materi menarik 
+                seputar pengelolaan sampah, daur ulang, polusi, dan cara menjaga bumi.  
+                Semua materi disajikan dalam bentuk modern, visual, dan mudah dipahami.
+            </p>
+        </div>
+
+        <div class="intro-img" data-aos="fade-left">
+            <img src="image/belajar-intro.jpg">
+        </div>
+    </div>
+</section>
+
+<!-- CARD MATERI BELAJAR -->
+<section class="learn-grid">
+    <h2 data-aos="fade-up">Materi Pembelajaran</h2>
+
+    <div class="grid container">
+
+        <div class="learn-card" data-aos="zoom-in">
+            <img src="image/sampah.jpg">
+            <h3>Pengelolaan Sampah</h3>
+            <p>Pelajari cara memilah sampah organik dan anorganik serta dampaknya bagi lingkungan.</p>
+            <a class="btn-card">Baca Selengkapnya</a>
+        </div>
+
+        <div class="learn-card" data-aos="zoom-in" data-aos-delay="150">
+            <img src="image/recycle.jpg">
+            <h3>Daur Ulang</h3>
+            <p>Bagaimana cara mendaur ulang barang bekas menjadi barang baru yang bermanfaat?</p>
+            <a class="btn-card">Pelajari</a>
+        </div>
+
+        <div class="learn-card" data-aos="zoom-in" data-aos-delay="300">
+            <img src="image/lingkungan.jpg">
+            <h3>Konservasi Alam</h3>
+            <p>Memahami bagaimana menjaga ekosistem, hutan, dan laut agar tetap lestari.</p>
+            <a class="btn-card">Selengkapnya</a>
+        </div>
+
+        <div class="learn-card" data-aos="zoom-in" data-aos-delay="450">
+            <img src="image/energi.jpg">
+            <h3>Energi Terbarukan</h3>
+            <p>Mengenal energi surya, angin, biomassa, dan teknologi hijau lainnya.</p>
+            <a class="btn-card">Baca</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION PANJANG DETAIL -->
+<section class="long-eco-section">
+    <div class="container">
+        <h2 data-aos="fade-up">Mengapa Kita Harus Belajar Lingkungan?</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Bumi semakin tua dan penuh tekanan. Dengan mempelajari lingkungan,
+            kita dapat mengetahui bagaimana sampah dan polusi mempengaruhi kehidupan manusia.
+            Selain itu, kita bisa tahu langkah-langkah nyata untuk menjaga bumi tetap sehat.
+        </p>
+
+        <div class="long-img" data-aos="zoom-in">
+            <img src="image/learn-deep.jpg">
+        </div>
+
+        <p data-aos="fade-up" data-aos-delay="200">
+            Mulai dari cara kecil seperti tidak membuang sampah sembarangan, hingga gerakan besar seperti
+            penggunaan energi hijau — semua bisa dimulai dari pengetahuan yang benar.
+        </p>
+    </div>
+</section>
+
+<!-- CTA KE KOMUNITAS -->
+<section class="cta-final">
+    <div class="container" data-aos="fade-up">
+        <h2>Siap belajar lebih jauh lagi?</h2>
+        <p>Bergabung dengan komunitas EcoLearn untuk berdiskusi dan berbagi pengalaman!</p>
+        <a href="komunitas.html" class="btn-primary">Gabung Komunitas</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 EcoLearn. Edukasi untuk masa depan bumi.</p>
+</footer>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+<!-- AOS INIT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({ duration: 900, once: true });
+</script>
+
+</body>
+</html>

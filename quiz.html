@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn - Quiz Lingkungan</title>
+
+  <!-- POPPINS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+  <!-- STYLE -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">EcoLearn</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="belajar.html">Belajar</a></li>
+      <li><a href="komunitas.html">Komunitas</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
+      <li><a class="active" href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="subpage-hero quiz-hero">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Quiz <span>EcoLearn</span></h1>
+      <p>Uji pengetahuanmu tentang lingkungan, dapatkan poin, dan raih ranking terbaik!</p>
+      <i class="fa-solid fa-lightbulb icon-hero"></i>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro-section sub-intro">
+    <div class="container">
+      <div class="intro-text" data-aos="fade-right">
+        <h2>Siap Tantangan?</h2>
+        <p>
+          Quiz EcoLearn terdiri dari <b>10 soal pilihan ganda</b> seputar sampah, daur ulang,
+          energi terbarukan, polusi, dan konservasi alam.
+          Kamu akan mendapat poin berdasarkan jawaban benar, dan rankingmu akan disimpan otomatis!
+        </p>
+      </div>
+      <div class="intro-img" data-aos="fade-left">
+        <img src="image/quiz-intro.jpg" alt="EcoLearn Quiz">
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ SECTION -->
+  <section class="quiz-section">
+    <div class="container">
+      <!-- PROGRESS -->
+      <div class="quiz-progress" data-aos="fade-up">
+        <div class="progress-label">Progress: <span id="quiz-progress-number">0/10</span></div>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- QUIZ BOX -->
+      <div class="quiz-card" data-aos="fade-up" id="quiz-card">
+        <h2 id="quiz-question">Loading soal...</h2>
+        <div class="quiz-options" id="quiz-options"></div>
+        <button class="btn-primary" id="next-btn" disabled>Lanjut</button>
+      </div>
+
+      <!-- RESULT -->
+      <div class="quiz-result" id="quiz-result" style="display:none" data-aos="fade-up">
+        <h2>Hasil Quiz</h2>
+        <p>Skor kamu: <span id="final-score">0</span> poin</p>
+        <div class="rank-box">
+          <h3>Peringkatmu: <span id="player-rank">-</span></h3>
+        </div>
+        <button class="btn-primary" id="restart-btn">
+          <i class="fa-solid fa-rotate-right"></i> Ulangi Quiz
+        </button>
+      </div>
+
+      <!-- LEADERBOARD -->
+      <div class="leaderboard-box" id="leaderboard-box" style="display:none" data-aos="fade-up">
+        <h2>Leaderboard</h2>
+        <ul id="leaderboard-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-final">
+    <div class="container" data-aos="fade-up">
+      <h2>Mau belajar lebih banyak tentang lingkungan?</h2>
+      <p>Kunjungi halaman belajar kami penuh materi lengkap!</p>
+      <a href="belajar.html" class="btn-primary">Ke Halaman Belajar</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 EcoLearn. Bangun generasi peduli lingkungan.</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+  <!-- AOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init({ duration: 900, once: true });</script>
+</body>
+</html>

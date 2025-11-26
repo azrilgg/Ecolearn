@@ -550,55 +550,54 @@ footer {
     }
 }
 
-
 /* =========================================================
    LONG ECO SECTION - EDUKASI PANJANG
 ========================================================= */
 .long-eco-section {
     width: 100%;
-    background: #ecf0f1;
-    padding: 100px 0;
-    position: relative;
+    background: linear-gradient(135deg, #ecf0f1, #ffffff);
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .long-eco-section .container {
+    max-width: 1100px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .long-eco-section h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #2c3e50;
-    text-align: center;
-    margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .long-eco-section p {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: #555;
     line-height: 1.8;
-    text-align: center;
 }
 
 .long-eco-section .long-img {
     display: flex;
     justify-content: center;
-    margin: 30px 0;
 }
 
 .long-eco-section .long-img img {
     width: 100%;
     max-width: 800px;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .long-eco-section .long-img img:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.2);
 }
 
 /* =========================================================
@@ -607,52 +606,52 @@ footer {
 .stats-section {
     width: 100%;
     background: #fff;
-    padding: 100px 0;
+    padding: 120px 20px;
     text-align: center;
 }
 
 .stats-section h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #2c3e50;
-    margin-bottom: 50px;
+    font-weight: 700;
+    margin-bottom: 60px;
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 40px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .stat-box {
-    background: #ecf0f1;
-    padding: 30px 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #2ecc71;
+    color: #fff;
+    padding: 40px 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .stat-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    background: #27ae60;
 }
 
 .stat-box i {
-    font-size: 2.5rem;
-    color: #2ecc71;
-    margin-bottom: 15px;
+    font-size: 3rem;
+    margin-bottom: 20px;
 }
 
 .stat-box h3 {
-    font-size: 2rem;
-    color: #2c3e50;
-    margin-bottom: 5px;
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .stat-box p {
-    font-size: 1rem;
-    color: #555;
+    font-size: 1.1rem;
 }
 
 /* =========================================================
@@ -660,51 +659,52 @@ footer {
 ========================================================= */
 .testimoni-section {
     width: 100%;
-    background: #f4f7f9;
-    padding: 100px 0;
+    background: linear-gradient(135deg, #f4f7f9, #ffffff);
+    padding: 120px 20px;
     text-align: center;
 }
 
 .testimoni-section h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #2c3e50;
-    margin-bottom: 50px;
+    font-weight: 700;
+    margin-bottom: 60px;
 }
 
 .testimoni-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
+    gap: 40px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .testimoni-card {
     background: #fff;
-    padding: 30px 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 35px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimoni-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
 }
 
 .testimoni-card p {
     font-size: 1.1rem;
     color: #555;
-    line-height: 1.7;
+    line-height: 1.8;
     margin-bottom: 20px;
 }
 
 .testimoni-card h4 {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #2ecc71;
     text-align: right;
 }
@@ -713,24 +713,29 @@ footer {
    RESPONSIVE
 ========================================================= */
 @media (max-width: 1200px) {
-    .long-eco-section .long-img img,
-    .stats-grid,
-    .testimoni-grid {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 992px) {
     .long-eco-section h2,
     .stats-section h2,
     .testimoni-section h2 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
     }
 
     .long-eco-section p,
     .stat-box p,
     .testimoni-card p {
-        font-size: 1rem;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .long-eco-section .long-img img,
+    .stats-grid,
+    .testimoni-grid {
+        max-width: 100%;
+    }
+    .long-eco-section h2,
+    .stats-section h2,
+    .testimoni-section h2 {
+        font-size: 2.2rem;
     }
 }
 
@@ -752,16 +757,11 @@ footer {
         gap: 20px;
     }
 
-    .long-eco-section .long-img img {
-        border-radius: 12px;
-    }
-
-    .stat-box {
-        padding: 20px 15px;
-    }
-
+    .long-eco-section .long-img img,
+    .stat-box,
     .testimoni-card {
-        padding: 20px 15px;
+        border-radius: 16px;
+        padding: 20px;
     }
 }
-
+            

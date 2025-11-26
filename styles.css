@@ -11,7 +11,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* cegah scroll horizontal */
 }
 
 body {
@@ -19,7 +23,6 @@ body {
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth;
-    overflow-x:hidden;
 }
 
 a {
@@ -37,6 +40,7 @@ img {
 -------------------------- */
 .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -80,6 +84,7 @@ h1, h2, h3, h4 {
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 100%;
 }
 
 .navbar .logo {
@@ -91,6 +96,7 @@ h1, h2, h3, h4 {
 .nav-links {
     display: flex;
     list-style: none;
+    gap: 20px;
 }
 
 .nav-links li {
@@ -104,19 +110,17 @@ h1, h2, h3, h4 {
     transition: 0.3s ease;
 }
 
-.nav-links .active{
-  display:flex;
-}
-
+.nav-links a.active,
 .nav-links a:hover {
     background: #2ecc71;
     color: #fff;
 }
 
 .hamburger {
-    display: flex;
+    display: none;
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 1100;
 }
 
 /* -------------------------
@@ -511,18 +515,22 @@ footer {
         background: #fff;
         position: absolute;
         top: 60px;
-        right: 20px;
-        width: 200px;
+        right: 0;
+        width: 250px;
         padding: 15px;
-        border-radius: 8px;
+        border-radius: 0 0 8px 8px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        z-index: 1050;
     }
+
     .navbar .nav-links.active {
         display: flex;
     }
+
     .hamburger {
-        display: block;
+        display: flex;
     }
+
     .intro-section .container,
     .contact-grid {
         flex-direction: column;
@@ -533,5 +541,11 @@ footer {
     .btn-primary, .learn-card .btn-card, .forum-btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+    }
+
+    .navbar .nav-links {
+        width: 100%;
+        right: 0;
+        top: 55px;
     }
 }

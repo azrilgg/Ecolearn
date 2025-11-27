@@ -1061,7 +1061,7 @@ footer {
   width: 0%;
   background: #ffffff;
   border-radius: 50px;
-  animation: loadBar 2.4s ease forwards;
+  animation: loadBar 1.1s ease forwards;
 }
 
 /* ========== ANIMATIONS ========== */

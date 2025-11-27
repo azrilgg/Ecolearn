@@ -126,7 +126,7 @@ h1, h2, h3, h4 {
 /* -------------------------
    HERO
 -------------------------- */
-.hero, .subpage-hero {
+.hero {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,9 +137,9 @@ h1, h2, h3, h4 {
     position: relative;
 }
 
-.subpage-hero.community-hero { background: url('image/community-hero.jpg') center/cover no-repeat; }
-.subpage-hero.contact-hero { background: url('image/contact-hero.jpg') center/cover no-repeat; }
-.subpage-hero.quiz-hero { background: url('image/quiz-hero.jpg') center/cover no-repeat; }
+.community-hero { background: url('image/community-hero.jpg') center/cover no-repeat; }
+.contact-hero { background: url('image/contact-hero.jpg') center/cover no-repeat; }
+.quiz-hero { background: url('image/quiz-hero.jpg') center/cover no-repeat; }
 
 .hero-content h1 span, .subpage-hero h1 span {
     color: #2ecc71;
@@ -150,6 +150,17 @@ h1, h2, h3, h4 {
     margin-top: 20px;
 }
 
+
+.subpage-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('image/learn-bg.jpg') center/cover no-repeat;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
 /* -------------------------
    INTRO SECTION
 -------------------------- */

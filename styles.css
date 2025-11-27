@@ -995,4 +995,77 @@ footer {
     }
 }
 
+/* ========== LEARN SECTION LOADER STYLE ========== */
+#learnload-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  color: #fff;
+  transition: opacity 0.8s ease;
+}
 
+#learnload-screen.learnload-hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.learnload-inner {
+  text-align: center;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+/* Icon */
+.learnload-icon {
+  font-size: clamp(48px, 7vw, 70px);
+  margin-bottom: 15px;
+  animation: iconPulse 1.4s infinite ease-in-out;
+}
+
+/* Title */
+.learnload-text {
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 700;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+/* Slogan */
+.learnload-slogan {
+  font-size: clamp(12px, 3vw, 16px);
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+/* Bar */
+.learnload-bar {
+  width: clamp(160px, 50vw, 280px);
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.3);
+  margin: auto;
+  overflow: hidden;
+}
+
+.learnload-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* Animations */
+@keyframes iconPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

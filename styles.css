@@ -1154,106 +1154,155 @@ footer {
     }
 }
 
-/* ====== COMMUNITY INTRO SCREEN (NO JS) ====== */
+/* ============================================================
+   PREMIUM COMMUNITY INTRO (PURE CSS)
+   ============================================================ */
 #communityload-screen {
     position: fixed;
     inset: 0;
-    background: linear-gradient(135deg, #4a2b18, #6d3d1f, #8a5127);
+    width: 100%;
+    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 9999;
+    align-items: center;
+    z-index: 99999;
 
+    /* Orange-Gold Nature Gradient */
+    background: linear-gradient(135deg, #3a2317, #5b321d, #8a5127, #c97b3a);
+    background-size: 300% 300%;
+    animation: communityBGmove 8s ease-in-out infinite;
+
+    /* Auto hide like learn intro */
     animation: communityFadeOut 0.8s ease forwards;
-    animation-delay: 2.4s; /* Lama tampil sebelum hilang */
+    animation-delay: 2.8s;
 }
 
+/* BG soft movement */
+@keyframes communityBGmove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position:   0% 50%; }
+}
+
+
+/* ============================================================
+   INNER CONTENT
+   ============================================================ */
 .communityload-inner {
     text-align: center;
-    color: #fff6e0;
-    animation: communityFadeUp 1.2s ease;
+    color: #ffeccc;
+
+    opacity: 0;
+    animation: communityFadeUp 1.2s ease forwards;
 }
 
-/* ICON */
+@keyframes communityFadeUp {
+    from { opacity: 0; transform: translateY(25px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* ============================================================
+   ICON (orange-gold glow)
+   ============================================================ */
 .communityload-icon {
-    font-size: 3.8rem;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, #ffda7a, #ffbb44, #ff9933);
+    font-size: 4.2rem;
+    margin-bottom: 14px;
+
+    background: linear-gradient(135deg, #ffda7a, #ffb74a, #ff9933);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: communitySpin 2.2s infinite linear;
-    filter: drop-shadow(0 0 8px rgba(255, 185, 100, 0.45));
+
+    filter: drop-shadow(0 0 12px rgba(255,180,80,0.45));
+
+    /* Icon pop + slow hover float */
+    animation: communityIconPop 1s ease-out, communityIconFloat 3s ease-in-out infinite;
 }
 
-/* TEXT */
+@keyframes communityIconPop {
+    0%   { transform: scale(0.4) rotate(-20deg); opacity: 0; }
+    60%  { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes communityIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
 .communityload-text {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    background: linear-gradient(90deg, #ffdd99, #ffcc66, #ffa733);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+
+    background: linear-gradient(90deg, #ffe0a6, #ffc766, #ff9f33);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    letter-spacing: 1.5px;
 }
 
-/* SLOGAN */
+
+/* ============================================================
+   SLOGAN
+   ============================================================ */
 .communityload-slogan {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin-bottom: 22px;
-    letter-spacing: 0.5px;
-    font-weight: 300;
+    font-size: 1.15rem;
+    opacity: 0;
+    margin-bottom: 26px;
+    color: #ffe6c7;
+    letter-spacing: 0.4px;
     font-style: italic;
-    color: #ffe8c5;
+
+    animation: communitySloganFade 1.3s ease forwards;
+    animation-delay: 0.5s;
 }
 
-/* Progress Bar Outer */
+@keyframes communitySloganFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
 .communityload-bar {
-    width: 160px;
-    height: 6px;
-    border-radius: 10px;
-    background: rgba(255, 200, 120, 0.35);
+    width: 200px;
+    height: 9px;
+    border-radius: 20px;
     overflow: hidden;
     margin: 0 auto;
+
+    background: rgba(255, 190, 120, 0.25);
+    box-shadow: inset 0 0 12px rgba(255, 150, 60, 0.3);
 }
 
-/* Progress Bar Fill */
 .communityload-fill {
     display: block;
-    width: 0%;
     height: 100%;
+    width: 0%;
+    border-radius: 20px;
+
     background: linear-gradient(90deg, #ffdd99, #ffb74a, #ff8f2f);
-    animation: communityBarFill 2.4s ease forwards;
+    box-shadow: 0 0 12px rgba(255,160,70,0.5);
+
+    animation: communityBarFill 2.3s ease forwards;
 }
-
-
-/* =======================================================
-   ANIMATIONS
-   ======================================================= */
 
 @keyframes communityBarFill {
-    from { width: 0%; }
-    to { width: 100%; }
+    0%   { width: 0%; }
+    100% { width: 100%; }
 }
 
-/* Icon rotation */
-@keyframes communitySpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
 
-/* Fade up content */
-@keyframes communityFadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(14px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Fade out entire screen */
+/* ============================================================
+   AUTO HIDE SCREEN
+   ============================================================ */
 @keyframes communityFadeOut {
     to {
         opacity: 0;
@@ -1262,46 +1311,20 @@ footer {
 }
 
 
-/* =======================================================
-   RESPONSIVE (SAME STRUCTURE AS LEARN INTRO)
-   ======================================================= */
-
-@media (max-width: 1024px) {
-    .communityload-icon { font-size: 3.4rem; }
-    .communityload-text { font-size: 1.6rem; }
-    .communityload-slogan { font-size: 1rem; }
-    .communityload-bar { width: 150px; }
-}
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
 
 @media (max-width: 768px) {
-    .communityload-icon { font-size: 3rem; }
-    .communityload-text { font-size: 1.45rem; }
-    .communityload-slogan {
-        font-size: 0.95rem;
-        margin-bottom: 18px;
-    }
-    .communityload-bar {
-        width: 130px;
-        height: 5px;
-    }
+    .communityload-icon { font-size: 3.4rem; }
+    .communityload-text { font-size: 1.7rem; }
+    .communityload-slogan { font-size: 1rem; }
+    .communityload-bar { width: 150px; height: 7px }
 }
 
 @media (max-width: 480px) {
-    .communityload-icon { font-size: 2.4rem; }
-    .communityload-text { font-size: 1.3rem; }
-    .communityload-slogan { font-size: 0.9rem; }
-    .communityload-bar {
-        width: 110px;
-        height: 4px;
-    }
-}
-
-@media (max-width: 360px) {
-    .communityload-icon { font-size: 2rem; }
-    .communityload-text { font-size: 1.15rem; }
-    .communityload-slogan { font-size: 0.85rem; }
-    .communityload-bar {
-        width: 95px;
-        height: 4px;
-    }
+    .communityload-icon { font-size: 2.8rem; }
+    .communityload-text { font-size: 1.45rem; }
+    .communityload-slogan { font-size: 0.92rem; }
+    .communityload-bar { width: 120px; height: 6px }
 }

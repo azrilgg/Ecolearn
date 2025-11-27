@@ -236,3 +236,13 @@ introBtn.addEventListener("click", function (e) {
         ripple.remove();
     }, 600);
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("learnload-screen");
+
+    // biar benar-benar hilang dari layar (bukan cuma opacity 0)
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 2600); // waktu harus sedikit lebih besar dari animation-delay + fadeout
+});

@@ -1301,12 +1301,12 @@ footer {
 
 
 /* ============================================================
-   ECO CONTACT INTRO — RUBY ROSE / MAGENTA LUX EDITION
+   ECO CONTACT INTRO — BROWN × OBSIDIAN EDITION
    ============================================================ */
 #eco-contact-intro {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #4a0d23, #7a1038, #d72638);
+  background: linear-gradient(135deg, #1c1b1b, #3e2723, #5d4037);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1318,16 +1318,16 @@ footer {
 
 .eco-contact-wrapper {
   text-align: center;
-  color: #ffeaf3;
+  color: #efe7e3;
   animation: contactFadeUp 1.2s ease;
 }
 
-/* ICON */
+/* ICON — obsidian highlight shine */
 .eco-contact-icon {
   font-size: 3.8rem;
   margin-bottom: 12px;
 
-  background: linear-gradient(180deg, #ffd1e8, #ff5fa2, #d72638);
+  background: linear-gradient(180deg, #d7ccc8, #8d6e63, #5d4037);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -1340,7 +1340,6 @@ footer {
   font-weight: 600;
   margin-bottom: 16px;
   letter-spacing: 0.8px;
-  color: #ffe6f1;
 }
 
 /* SLOGAN */
@@ -1351,31 +1350,32 @@ footer {
   letter-spacing: 0.4px;
   font-weight: 300;
   font-style: italic;
-  color: #ffd7ec;
+  color: #e7dcd6;
 }
 
-/* PROGRESS BAR */
+/* PROGRESS BAR OUTER */
 .eco-contact-progress {
   width: 160px;
   height: 6px;
   border-radius: 10px;
-  background: rgba(255, 224, 236, 0.35);
+  background: rgba(255,255,255,0.25);
   overflow: hidden;
-  margin: auto;
+  margin: 0 auto;
 }
 
+/* PROGRESS FILL — bronze coffee shine */
 .eco-contact-progress-fill {
   display: block;
   width: 0%;
   height: 100%;
   border-radius: 10px;
 
-  background: linear-gradient(90deg, #ffd1e8, #ff5fa2, #d72638);
+  background: linear-gradient(90deg, #d7ccc8, #8d6e63, #5d4037);
   animation: contactBarFill 2.4s ease forwards;
 }
 
 /* ============================================================
-   ANIMATIONS
+   ANIMATIONS (TIDAK DIUBAH)
    ============================================================ */
 @keyframes contactBarFill {
   from { width: 0%; }
@@ -1388,29 +1388,22 @@ footer {
 }
 
 @keyframes contactFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes contactFadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+  to { opacity: 0; visibility: hidden; }
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE (TIDAK DIUBAH)
    ============================================================ */
 @media (max-width: 1024px) {
   .eco-contact-icon { font-size: 3.4rem; }
   .eco-contact-title { font-size: 1.6rem; }
+  .eco-contact-slogan { font-size: 1rem; }
+  .eco-contact-progress { width: 150px; }
 }
 
 @media (max-width: 768px) {

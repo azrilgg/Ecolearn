@@ -1154,129 +1154,154 @@ footer {
     }
 }
 
-/* Extra small devices */
-@media (max-width: 360px) {
-    .learnload-icon {
-        font-size: 2rem;
-    }
-    .learnload-text {
-        font-size: 1.15rem;
-    }
-    .learnload-slogan {
-        font-size: 0.85rem;
-    }
-    .learnload-bar {
-        width: 95px;
-        height: 4px;
-    }
-}
-
-/* ====== ECO COMMUNITY INTRO SCREEN ====== */
-#eco-community-intro {
-    width: 100%;
-    height: 100vh;
+/* ====== COMMUNITY INTRO SCREEN (NO JS) ====== */
+#communityload-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #4a2b18, #6d3d1f, #8a5127);
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #2c1a10, #4a2b18, #6d3d1f);
-    background-size: 200% 200%;
-    animation: eco-bg-move 12s ease infinite;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    justify-content: center;
+    z-index: 9999;
+
+    animation: communityFadeOut 0.8s ease forwards;
+    animation-delay: 2.4s; /* Lama tampil sebelum hilang */
 }
 
-/* Background Animation */
-@keyframes eco-bg-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Wrapper */
-.eco-community-wrapper {
+.communityload-inner {
     text-align: center;
-    color: #fffbe8;
-    padding: 40px 50px;
-    border-radius: 22px;
-    backdrop-filter: blur(12px);
-    background: rgba(255, 204, 133, 0.12);
-    box-shadow: 0 0 25px rgba(255, 159, 67, 0.2),
-                0 0 60px rgba(255, 140, 50, 0.08);
-    animation: eco-fade-in 1.2s ease forwards;
-    opacity: 0;
+    color: #fff6e0;
+    animation: communityFadeUp 1.2s ease;
 }
 
-@keyframes eco-fade-in {
-    from { transform: translateY(30px) scale(0.96); opacity: 0; }
-    to { transform: translateY(0px) scale(1); opacity: 1; }
-}
-
-/* Icon */
-.eco-community-icon {
-    font-size: 80px;
-    color: #ffcc66;
+/* ICON */
+.communityload-icon {
+    font-size: 3.8rem;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, #ffda7a, #ffbb44, #ff9933);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 8px rgba(255, 189, 100, 0.4));
-    animation: eco-icon-pop 1.3s cubic-bezier(.25,.46,.45,.94);
+    animation: communitySpin 2.2s infinite linear;
+    filter: drop-shadow(0 0 8px rgba(255, 185, 100, 0.45));
 }
 
-@keyframes eco-icon-pop {
-    0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
-    60% { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(1); }
-}
-
-/* Title */
-.eco-community-title {
-    font-size: 45px;
-    margin-top: 15px;
-    font-weight: 700;
-    letter-spacing: 2px;
+/* TEXT */
+.communityload-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 16px;
     background: linear-gradient(90deg, #ffdd99, #ffcc66, #ffa733);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
 }
 
-/* Slogan */
-.eco-community-slogan {
-    font-size: 17px;
-    margin: 10px 0 30px;
-    color: #ffeccc;
-    opacity: 0;
-    animation: eco-slogan-fade 1.6s ease forwards;
-    animation-delay: 0.6s;
+/* SLOGAN */
+.communityload-slogan {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 22px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    font-style: italic;
+    color: #ffe8c5;
 }
 
-@keyframes eco-slogan-fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0px); }
-}
-
-/* Progress Bar */
-.eco-community-progress {
-    width: 250px;
-    height: 10px;
-    background: rgba(255, 200, 120, 0.2);
-    border-radius: 50px;
+/* Progress Bar Outer */
+.communityload-bar {
+    width: 160px;
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255, 200, 120, 0.35);
     overflow: hidden;
     margin: 0 auto;
-    box-shadow: inset 0 0 10px rgba(255, 150, 60, 0.3);
 }
 
-.eco-community-progress-fill {
+/* Progress Bar Fill */
+.communityload-fill {
     display: block;
     width: 0%;
     height: 100%;
     background: linear-gradient(90deg, #ffdd99, #ffb74a, #ff8f2f);
-    box-shadow: 0 0 10px rgba(255, 180, 80, 0.6);
-    border-radius: 50px;
-    animation: eco-progress-run 2.3s ease-in-out forwards;
+    animation: communityBarFill 2.4s ease forwards;
 }
 
-@keyframes eco-progress-run {
-    0% { width: 0%; }
-    100% { width: 100%; }
+
+/* =======================================================
+   ANIMATIONS
+   ======================================================= */
+
+@keyframes communityBarFill {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* Icon rotation */
+@keyframes communitySpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Fade up content */
+@keyframes communityFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade out entire screen */
+@keyframes communityFadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+/* =======================================================
+   RESPONSIVE (SAME STRUCTURE AS LEARN INTRO)
+   ======================================================= */
+
+@media (max-width: 1024px) {
+    .communityload-icon { font-size: 3.4rem; }
+    .communityload-text { font-size: 1.6rem; }
+    .communityload-slogan { font-size: 1rem; }
+    .communityload-bar { width: 150px; }
+}
+
+@media (max-width: 768px) {
+    .communityload-icon { font-size: 3rem; }
+    .communityload-text { font-size: 1.45rem; }
+    .communityload-slogan {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+    }
+    .communityload-bar {
+        width: 130px;
+        height: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .communityload-icon { font-size: 2.4rem; }
+    .communityload-text { font-size: 1.3rem; }
+    .communityload-slogan { font-size: 0.9rem; }
+    .communityload-bar {
+        width: 110px;
+        height: 4px;
+    }
+}
+
+@media (max-width: 360px) {
+    .communityload-icon { font-size: 2rem; }
+    .communityload-text { font-size: 1.15rem; }
+    .communityload-slogan { font-size: 0.85rem; }
+    .communityload-bar {
+        width: 95px;
+        height: 4px;
+    }
 }

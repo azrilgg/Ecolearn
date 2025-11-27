@@ -194,3 +194,45 @@ restartBtn.addEventListener("click", () => {
    INITIAL LOAD
 ========================= */
 loadQuestion();
+
+
+
+// ========== ECOINTRO ANIMATIONS JS ==========
+
+// Fade-in intro saat halaman dimuat
+document.addEventListener("DOMContentLoaded", () => {
+    const intro = document.querySelector(".ecointro-content");
+    intro.style.opacity = "0";
+
+    setTimeout(() => {
+        intro.style.transition = "1.2s ease";
+        intro.style.opacity = "1";
+    }, 200);
+});
+
+// Parallax halus untuk background
+window.addEventListener("scroll", () => {
+    const bg = document.querySelector(".ecointro-bg");
+    let offset = window.pageYOffset * 0.2; 
+    bg.style.transform = `translateY(${offset}px)`;
+});
+
+// Ripple effect untuk button
+const introBtn = document.querySelector(".ecointro-btn");
+
+introBtn.addEventListener("click", function (e) {
+    let ripple = document.createElement("span");
+    ripple.classList.add("eco-ripple");
+
+    let x = e.clientX - this.offsetLeft;
+    let y = e.clientY - this.offsetTop;
+
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    this.appendChild(ripple);
+
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+});

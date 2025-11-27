@@ -1170,3 +1170,113 @@ footer {
         height: 4px;
     }
 }
+
+/* ====== ECO COMMUNITY INTRO SCREEN ====== */
+#eco-community-intro {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2c1a10, #4a2b18, #6d3d1f);
+    background-size: 200% 200%;
+    animation: eco-bg-move 12s ease infinite;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Background Animation */
+@keyframes eco-bg-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Wrapper */
+.eco-community-wrapper {
+    text-align: center;
+    color: #fffbe8;
+    padding: 40px 50px;
+    border-radius: 22px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 204, 133, 0.12);
+    box-shadow: 0 0 25px rgba(255, 159, 67, 0.2),
+                0 0 60px rgba(255, 140, 50, 0.08);
+    animation: eco-fade-in 1.2s ease forwards;
+    opacity: 0;
+}
+
+@keyframes eco-fade-in {
+    from { transform: translateY(30px) scale(0.96); opacity: 0; }
+    to { transform: translateY(0px) scale(1); opacity: 1; }
+}
+
+/* Icon */
+.eco-community-icon {
+    font-size: 80px;
+    color: #ffcc66;
+    background: linear-gradient(135deg, #ffda7a, #ffbb44, #ff9933);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(255, 189, 100, 0.4));
+    animation: eco-icon-pop 1.3s cubic-bezier(.25,.46,.45,.94);
+}
+
+@keyframes eco-icon-pop {
+    0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Title */
+.eco-community-title {
+    font-size: 45px;
+    margin-top: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ffdd99, #ffcc66, #ffa733);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+/* Slogan */
+.eco-community-slogan {
+    font-size: 17px;
+    margin: 10px 0 30px;
+    color: #ffeccc;
+    opacity: 0;
+    animation: eco-slogan-fade 1.6s ease forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes eco-slogan-fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0px); }
+}
+
+/* Progress Bar */
+.eco-community-progress {
+    width: 250px;
+    height: 10px;
+    background: rgba(255, 200, 120, 0.2);
+    border-radius: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: inset 0 0 10px rgba(255, 150, 60, 0.3);
+}
+
+.eco-community-progress-fill {
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ffdd99, #ffb74a, #ff8f2f);
+    box-shadow: 0 0 10px rgba(255, 180, 80, 0.6);
+    border-radius: 50px;
+    animation: eco-progress-run 2.3s ease-in-out forwards;
+}
+
+@keyframes eco-progress-run {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}

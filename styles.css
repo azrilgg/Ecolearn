@@ -1154,177 +1154,147 @@ footer {
     }
 }
 
-/* ============================================================
-   PREMIUM COMMUNITY INTRO (PURE CSS)
+    /* ============================================================
+   ECO COMMUNITY INTRO (MATCH LEARN STYLE — ORANGE GOLD EDITION)
    ============================================================ */
-#communityload-screen {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
+#eco-community-intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ff9800, #ffa726, #ffb74d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 
-    /* Orange-Gold Nature Gradient */
-    background: linear-gradient(135deg, #3a2317, #5b321d, #8a5127, #c97b3a);
-    background-size: 300% 300%;
-    animation: communityBGmove 8s ease-in-out infinite;
-
-    /* Auto hide like learn intro */
-    animation: communityFadeOut 0.8s ease forwards;
-    animation-delay: 2.8s;
+  animation: communityFadeOut 0.8s ease forwards;
+  animation-delay: 2.4s; /* Lama tampil sebelum hilang */
 }
 
-/* BG soft movement */
-@keyframes communityBGmove {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position:   0% 50%; }
+.eco-community-wrapper {
+  text-align: center;
+  color: #fffdf5;
+  animation: communityFadeUp 1.2s ease;
 }
 
+/* ICON (spin seperti learn) */
+.eco-community-icon {
+  font-size: 3.8rem;
+  margin-bottom: 12px;
 
-/* ============================================================
-   INNER CONTENT
-   ============================================================ */
-.communityload-inner {
-    text-align: center;
-    color: #ffeccc;
+  background: linear-gradient(180deg, #fff8e1, #ffe082, #ffca28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-    opacity: 0;
-    animation: communityFadeUp 1.2s ease forwards;
+  animation: communitySpin 2.2s infinite linear;
 }
 
-@keyframes communityFadeUp {
-    from { opacity: 0; transform: translateY(25px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+/* TITLE */
+.eco-community-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.8px;
 }
 
-
-/* ============================================================
-   ICON (orange-gold glow)
-   ============================================================ */
-.communityload-icon {
-    font-size: 4.2rem;
-    margin-bottom: 14px;
-
-    background: linear-gradient(135deg, #ffda7a, #ffb74a, #ff9933);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    filter: drop-shadow(0 0 12px rgba(255,180,80,0.45));
-
-    /* Icon pop + slow hover float */
-    animation: communityIconPop 1s ease-out, communityIconFloat 3s ease-in-out infinite;
+/* SLOGAN */
+.eco-community-slogan {
+  font-size: 1.05rem;
+  opacity: 0.92;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-weight: 300;
+  font-style: italic;
+  color: #fff3cd;
 }
 
-@keyframes communityIconPop {
-    0%   { transform: scale(0.4) rotate(-20deg); opacity: 0; }
-    60%  { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(1); }
+/* BAR OUTER */
+.eco-community-progress {
+  width: 160px;
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.4);
+  overflow: hidden;
+  margin: 0 auto;
 }
 
-@keyframes communityIconFloat {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-8px); }
+/* BAR FILL */
+.eco-community-progress-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #fff8e1, #ffe082, #ffca28);
+  animation: communityBarFill 2.4s ease forwards;
 }
-
 
 /* ============================================================
-   TITLE
+   ANIMATIONS (COPY EXACT STYLE FROM LEARNLOAD)
    ============================================================ */
-.communityload-text {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 12px;
 
-    background: linear-gradient(90deg, #ffe0a6, #ffc766, #ff9f33);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    letter-spacing: 1.5px;
-}
-
-
-/* ============================================================
-   SLOGAN
-   ============================================================ */
-.communityload-slogan {
-    font-size: 1.15rem;
-    opacity: 0;
-    margin-bottom: 26px;
-    color: #ffe6c7;
-    letter-spacing: 0.4px;
-    font-style: italic;
-
-    animation: communitySloganFade 1.3s ease forwards;
-    animation-delay: 0.5s;
-}
-
-@keyframes communitySloganFade {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-
-/* ============================================================
-   PROGRESS BAR
-   ============================================================ */
-.communityload-bar {
-    width: 200px;
-    height: 9px;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 0 auto;
-
-    background: rgba(255, 190, 120, 0.25);
-    box-shadow: inset 0 0 12px rgba(255, 150, 60, 0.3);
-}
-
-.communityload-fill {
-    display: block;
-    height: 100%;
-    width: 0%;
-    border-radius: 20px;
-
-    background: linear-gradient(90deg, #ffdd99, #ffb74a, #ff8f2f);
-    box-shadow: 0 0 12px rgba(255,160,70,0.5);
-
-    animation: communityBarFill 2.3s ease forwards;
-}
-
+/* Bar Fill */
 @keyframes communityBarFill {
-    0%   { width: 0%; }
-    100% { width: 100%; }
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
+/* Icon slow rotation */
+@keyframes communitySpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-/* ============================================================
-   AUTO HIDE SCREEN
-   ============================================================ */
+/* Fade up content */
+@keyframes communityFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade out entire screen */
 @keyframes communityFadeOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
-
 
 /* ============================================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE (COPY STRUCTURE FROM LEARNLOAD)
    ============================================================ */
 
-@media (max-width: 768px) {
-    .communityload-icon { font-size: 3.4rem; }
-    .communityload-text { font-size: 1.7rem; }
-    .communityload-slogan { font-size: 1rem; }
-    .communityload-bar { width: 150px; height: 7px }
+/* Tablet & HP besar */
+@media (max-width: 1024px) {
+  .eco-community-icon { font-size: 3.4rem; }
+  .eco-community-title { font-size: 1.6rem; }
+  .eco-community-slogan { font-size: 1rem; }
+  .eco-community-progress { width: 150px; }
 }
 
+/* HP sedang */
+@media (max-width: 768px) {
+  .eco-community-icon { font-size: 3rem; }
+  .eco-community-title { font-size: 1.45rem; }
+  .eco-community-slogan { font-size: 0.95rem; margin-bottom: 18px; }
+  .eco-community-progress { width: 130px; height: 5px; }
+}
+
+/* HP kecil */
 @media (max-width: 480px) {
-    .communityload-icon { font-size: 2.8rem; }
-    .communityload-text { font-size: 1.45rem; }
-    .communityload-slogan { font-size: 0.92rem; }
-    .communityload-bar { width: 120px; height: 6px }
+  .eco-community-icon { font-size: 2.4rem; }
+  .eco-community-title { font-size: 1.3rem; }
+  .eco-community-slogan { font-size: 0.9rem; margin-bottom: 16px; }
+  .eco-community-progress { width: 110px; height: 4px; }
+}
+
+/* Extra small */
+@media (max-width: 360px) {
+  .eco-community-icon { font-size: 2rem; }
+  .eco-community-title { font-size: 1.15rem; }
+  .eco-community-slogan { font-size: 0.85rem; }
+  .eco-community-progress { width: 95px; height: 4px; }
 }

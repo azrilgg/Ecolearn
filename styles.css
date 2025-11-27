@@ -1298,3 +1298,138 @@ footer {
   .eco-community-slogan { font-size: 0.85rem; }
   .eco-community-progress { width: 95px; height: 4px; }
 }
+
+
+/* ============================================================
+   ECO CONTACT INTRO — RUBY ROSE / MAGENTA LUX EDITION
+   ============================================================ */
+#eco-contact-intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #4a0d23, #7a1038, #d72638);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  animation: contactFadeOut 0.8s ease forwards;
+  animation-delay: 2.4s;
+}
+
+.eco-contact-wrapper {
+  text-align: center;
+  color: #ffeaf3;
+  animation: contactFadeUp 1.2s ease;
+}
+
+/* ICON */
+.eco-contact-icon {
+  font-size: 3.8rem;
+  margin-bottom: 12px;
+
+  background: linear-gradient(180deg, #ffd1e8, #ff5fa2, #d72638);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: contactSpin 2.2s infinite linear;
+}
+
+/* TITLE */
+.eco-contact-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.8px;
+  color: #ffe6f1;
+}
+
+/* SLOGAN */
+.eco-contact-slogan {
+  font-size: 1.05rem;
+  opacity: 0.92;
+  margin-bottom: 22px;
+  letter-spacing: 0.4px;
+  font-weight: 300;
+  font-style: italic;
+  color: #ffd7ec;
+}
+
+/* PROGRESS BAR */
+.eco-contact-progress {
+  width: 160px;
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255, 224, 236, 0.35);
+  overflow: hidden;
+  margin: auto;
+}
+
+.eco-contact-progress-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: 10px;
+
+  background: linear-gradient(90deg, #ffd1e8, #ff5fa2, #d72638);
+  animation: contactBarFill 2.4s ease forwards;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes contactBarFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes contactSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes contactFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contactFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .eco-contact-icon { font-size: 3.4rem; }
+  .eco-contact-title { font-size: 1.6rem; }
+}
+
+@media (max-width: 768px) {
+  .eco-contact-icon { font-size: 3rem; }
+  .eco-contact-title { font-size: 1.45rem; }
+  .eco-contact-slogan { font-size: 0.95rem; margin-bottom: 18px; }
+  .eco-contact-progress { width: 130px; height: 5px; }
+}
+
+@media (max-width: 480px) {
+  .eco-contact-icon { font-size: 2.4rem; }
+  .eco-contact-title { font-size: 1.3rem; }
+  .eco-contact-slogan { font-size: 0.9rem; margin-bottom: 16px; }
+  .eco-contact-progress { width: 110px; height: 4px; }
+}
+
+@media (max-width: 360px) {
+  .eco-contact-icon { font-size: 2rem; }
+  .eco-contact-title { font-size: 1.15rem; }
+  .eco-contact-slogan { font-size: 0.85rem; }
+  .eco-contact-progress { width: 95px; height: 4px; }
+}

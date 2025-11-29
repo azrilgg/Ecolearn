@@ -412,6 +412,18 @@ h1, h2, h3, h4 {
 /* -------------------------
    CONTACT FORM & INFO
 -------------------------- */
+
+.subpage-kontak {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('image/kontak-bg.jpg') center/cover no-repeat;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
 .contact-section {
     padding: 80px 0;
     background: #fff;

@@ -1607,3 +1607,81 @@ footer {
   .eco-quiz-slogan { font-size: 0.85rem; }
   .eco-quiz-progress { width: 95px; height: 4px; }
 }
+/* ===== VIDEO BACKGROUND KHUSUS INTRO ===== */
+.intro-section.sub-intro {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;  /* aman di semua device */
+}
+
+.intro-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  /* Cover penuh di semua layar */
+  min-width: 100%;
+  min-height: 100%;
+  
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.45;
+  filter: brightness(60%);
+}
+
+/* Konten tetap di depan video */
+.intro-section.sub-intro .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Teks responsif */
+.intro-section.sub-intro h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.intro-section.sub-intro p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  max-width: 750px;
+}
+
+/* =======================
+   RESPONSIVE BREAKPOINTS
+======================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .intro-section.sub-intro {
+    padding: 80px 0;
+  }
+
+  .intro-bg-video {
+    opacity: 0.4;
+  }
+}
+
+/* HP Besar & Sedang */
+@media (max-width: 768px) {
+  .intro-section.sub-intro {
+    padding: 70px 0;
+  }
+
+  .intro-bg-video {
+    opacity: 0.35;
+    filter: brightness(55%);
+  }
+}
+
+/* HP Kecil (Samsung A03, iPhone SE, dll) */
+@media (max-width: 480px) {
+  .intro-section.sub-intro {
+    padding: 60px 0;
+  }
+
+  .intro-section.sub-intro p {
+    font-size: 0.95rem;
+  }
+}

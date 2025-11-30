@@ -1856,7 +1856,7 @@ footer {
 
 
 /* ================================
-   VERTICAL ROADMAP ULTRA PREMIUM
+VERTICAL ROADMAP ULTRA PREMIUM
 =================================*/
 .eco-roadmap {
     padding: 100px 0;
@@ -1927,10 +1927,11 @@ footer {
 .roadmap-step::before {
     content: "";
     position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
     width: 28px;
     height: 28px;
+    transform: translate(-50%, -50%);
     background: #ffffff;
     border: 5px solid #1abc9c;
     border-radius: 50%;
@@ -1972,9 +1973,11 @@ footer {
     line-height: 1.7;
 }
 
-/* RESPONSIVE */
+/* ============================
+RESPONSIVE FIX 900PX
+============================ */
 @media (max-width: 900px) {
-    
+
     .roadmap-step {
         flex-direction: column;
         justify-content: center !important;
@@ -1995,6 +1998,7 @@ footer {
         border-top: 6px solid #1abc9c;
     }
 
+    /* Hilangkan garis & titik */
     .roadmap-timeline::before {
         display: none;
     }
@@ -2004,67 +2008,16 @@ footer {
     }
 }
 
+/* ============================
+RESPONSIVE FIX 600PX
+============================ */
 @media (max-width: 600px) {
+
     .eco-roadmap h2 {
         font-size: 2rem;
     }
 
     .roadmap-info h3 {
         font-size: 1.2rem;
-    }
-}
-
-
-/* ================================
-FIX BULATAN ROADMAP – RESPONSIVE
-=================================*/
-
-/* Posisi bulatan tidak boleh nabrak konten */
-.roadmap-step {
-    position: relative;
-}
-
-/* Bulatan reposisi agar selalu tepat pada garis di mode desktop */
-.roadmap-step::before {
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* --- FIX UNTUK DESKTOP LEBAR (supaya bulatan tidak menabrak card) --- */
-@media (min-width: 901px) {
-
-    .roadmap-step:nth-child(odd)::before {
-        left: calc(50% - 3px); /* geser 3px untuk center pas */
-    }
-
-    .roadmap-step:nth-child(even)::before {
-        left: calc(50% - 3px);
-    }
-}
-
-/* ================================
-MOBILE FIX – Bulatan turun ke tengah
-=================================*/
-@media (max-width: 900px) {
-
-    /* bulatan hilang (sesuai CSS kamu), tapi posisinya harus tetap aman */
-    .roadmap-step::before {
-        display: none !important;
-    }
-
-    /* Step auto jadi tengah tanpa dorongan flex */
-    .roadmap-step {
-        align-items: center !important;
-        justify-content: center !important;
-    }
-}
-
-/* ================================
-EXTRA FIX AGAR FOTO DAN CARD TIDAK GESER WAKTU HP
-=================================*/
-@media (max-width: 900px) {
-    .roadmap-photo,
-    .roadmap-info {
-        margin: 0 auto;
     }
 }

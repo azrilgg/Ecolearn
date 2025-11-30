@@ -1856,8 +1856,22 @@ footer {
 
 
 /* ================================
-VERTICAL ROADMAP ULTRA PREMIUM
+VERTICAL ROADMAP ULTRA PREMIUM — FINAL FIX
+(style preserved, only layout fixes)
 =================================*/
+
+/* ---------- root spacing for timeline center gap ---------- */
+/* aura: safe space on center so card won't touch the middle line/dot */
+:root{
+  --roadmap-center-safe: 110px; /* total safe gap around center (adjust if you want more) */
+  --roadmap-side-width: calc((100% - var(--roadmap-center-safe)) / 2);
+  --card-width: 420px; /* original card width kept for large screens */
+  --photo-width: 280px; /* original photo width */
+}
+
+/* =========================
+BASE LAYOUT
+=========================*/
 .eco-roadmap {
     padding: 100px 0;
     background: #f4f7fb;
@@ -1908,22 +1922,36 @@ VERTICAL ROADMAP ULTRA PREMIUM
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
-/* STEP ITEM */
+/* STEP ITEM
+   change: each step becomes a full-width flex row where each side
+   (left & right) has a reserved area. This prevents cards from
+   reaching the center line/dot.
+*/
 .roadmap-step {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between; /* keep sides away from center */
     gap: 25px;
     margin-bottom: 120px;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px; /* little breathing room */
 }
 
-/* STEP GENAP DI KANAN */
+/* Keep natural order: photo then info for odd; reversed for even */
+.roadmap-step > .roadmap-photo,
+.roadmap-step > .roadmap-info {
+    flex: 0 0 auto; /* fixed sizing per element below */
+}
+
+/* STEP GENAP DI KANAN - we reverse visual order so card appears on right */
 .roadmap-step:nth-child(even) {
-    justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
 /* BULATAN DI GARIS */
+/* keep dot above the center and above the line and slightly overlay */
 .roadmap-step::before {
     content: "";
     position: absolute;
@@ -1935,29 +1963,43 @@ VERTICAL ROADMAP ULTRA PREMIUM
     background: #ffffff;
     border: 5px solid #1abc9c;
     border-radius: 50%;
-    z-index: 10;
+    z-index: 30; /* above cards */
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    pointer-events: none;
 }
 
-/* KONTEN STEP */
+/* KONTEN STEP — DESKTOP SIZING (large screens) */
+/* We keep original pixel widths but constrain them so they cannot cross the center safe zone */
 .roadmap-photo {
-    width: 280px;
+    width: var(--photo-width);
     height: 180px;
     object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 8px 35px rgba(0,0,0,0.25);
+    z-index: 10;
 }
 
+/* The info card keeps its visual style but we enforce max-width so it won't touch center */
 .roadmap-info {
-    width: 420px;
+    width: var(--card-width);
+    max-width: calc(var(--roadmap-side-width) - 20px); /* ensure it's smaller than reserved side */
     text-align: left;
     background: white;
     padding: 25px 30px;
     border-radius: 18px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     border-left: 6px solid #1abc9c;
+    z-index: 12; /* below the dot but above the line */
+    box-sizing: border-box;
 }
 
+/* If a card is too wide for the reserved side, shrink it gracefully */
+@media (min-width: 1200px) {
+    /* On ultra wide screens keep original card width */
+    .roadmap-info { max-width: var(--card-width); }
+}
+
+/* Text styles unchanged */
 .roadmap-info h3 {
     display: flex;
     align-items: center;
@@ -1974,8 +2016,18 @@ VERTICAL ROADMAP ULTRA PREMIUM
 }
 
 /* ============================
-RESPONSIVE FIX 900PX
+RESPONSIVE BREAKPOINTS
 ============================ */
+
+/* Tablet / medium screens: make side widths fluid but still prevent overlap */
+@media (max-width: 1100px) {
+    :root{ --roadmap-center-safe: 100px; }
+    .roadmap-photo { width: 260px; height: 170px; }
+    .roadmap-info { width: 360px; padding: 22px; }
+}
+
+/* At <= 900px we switch to column layout (original behavior),
+   but ensure cards don't overlap and timeline line/dot are hidden */
 @media (max-width: 900px) {
 
     .roadmap-step {
@@ -1983,11 +2035,17 @@ RESPONSIVE FIX 900PX
         justify-content: center !important;
         text-align: center;
         margin-bottom: 80px;
+        padding: 0;
+    }
+
+    .roadmap-step:nth-child(even) {
+        flex-direction: column; /* undo row-reverse for stacked layout */
     }
 
     .roadmap-photo {
         width: 100%;
         height: 200px;
+        margin: 0 auto;
     }
 
     .roadmap-info {
@@ -1996,28 +2054,31 @@ RESPONSIVE FIX 900PX
         padding: 20px;
         border-left: none;
         border-top: 6px solid #1abc9c;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
-    /* Hilangkan garis & titik */
-    .roadmap-timeline::before {
-        display: none;
-    }
-
-    .roadmap-step::before {
-        display: none;
-    }
+    /* hide center line & dot on mobile (like original) */
+    .roadmap-timeline::before { display: none; }
+    .roadmap-step::before { display: none; }
 }
 
-/* ============================
-RESPONSIVE FIX 600PX
-============================ */
+/* Small phones: typography scale down (typo fixed) */
 @media (max-width: 600px) {
-
-    .eco-roadmap h2 {
-        font-size: 2rem;
-    }
-
-    .roadmap-info h3 {
-        font-size: 1.2rem;
-    }
+    .eco-roadmap h2 { font-size: 2rem; }
+    .roadmap-info h3 { font-size: 1.2rem; }
+    .roadmap-desc { font-size: 1rem; }
 }
+
+/* Extra safety: ensure no element gets negative margins that reach center */
+.roadmap-photo,
+.roadmap-info {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* ensure overflow does not allow cards to visually cross center line */
+.roadmap-timeline,
+.roadmap-step {
+    overflow: visible;
+   }

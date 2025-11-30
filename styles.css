@@ -1853,3 +1853,163 @@ footer {
         font-size: 1.6rem;
     }
 }
+
+
+/* ================================
+   VERTICAL ROADMAP ULTRA PREMIUM
+=================================*/
+.eco-roadmap {
+    padding: 100px 0;
+    background: #f4f7fb;
+    overflow: hidden;
+}
+
+.roadmap-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+.eco-roadmap h2 {
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: #0b3c5d;
+    margin-bottom: 10px;
+}
+
+.roadmap-desc {
+    max-width: 780px;
+    margin: 0 auto 80px;
+    color: #444;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* TIMELINE WRAPPER */
+.roadmap-timeline {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+/* GARIS TENGAH */
+.roadmap-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #1abc9c, #3cb371);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+/* STEP ITEM */
+.roadmap-step {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    margin-bottom: 120px;
+    position: relative;
+}
+
+/* STEP GENAP DI KANAN */
+.roadmap-step:nth-child(even) {
+    justify-content: flex-end;
+}
+
+/* BULATAN DI GARIS */
+.roadmap-step::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    background: #ffffff;
+    border: 5px solid #1abc9c;
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* KONTEN STEP */
+.roadmap-photo {
+    width: 280px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 35px rgba(0,0,0,0.25);
+}
+
+.roadmap-info {
+    width: 420px;
+    text-align: left;
+    background: white;
+    padding: 25px 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-left: 6px solid #1abc9c;
+}
+
+.roadmap-info h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.35rem;
+    color: #0b5345;
+    margin-bottom: 10px;
+}
+
+.roadmap-info p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    
+    .roadmap-step {
+        flex-direction: column;
+        justify-content: center !important;
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .roadmap-photo {
+        width: 100%;
+        height: 200px;
+    }
+
+    .roadmap-info {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        border-left: none;
+        border-top: 6px solid #1abc9c;
+    }
+
+    .roadmap-timeline::before {
+        display: none;
+    }
+
+    .roadmap-step::before {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .eco-roadmap h2 {
+        font-size: 2rem;
+    }
+
+    .roadmap-info h3 {
+        font-size: 1.2rem;
+    }
+}

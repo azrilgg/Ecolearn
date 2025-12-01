@@ -3136,19 +3136,15 @@ RESPONSIVE BREAKPOINTS
 .icon-wrap {
     width: 48px;
     height: 48px;
-
     border-radius: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    /* gold gradient */
     background: linear-gradient(135deg, #ffd700, #b8860b);
-    color: #000; /* icon jadi kontras */
-
+    color: #000;
     font-size: 22px;
 
-    /* gold strong glow */
     box-shadow:
         0 6px 20px rgba(0, 0, 0, 0.25),
         0 0 20px rgba(255, 215, 0, 0.65),
@@ -3158,6 +3154,8 @@ RESPONSIVE BREAKPOINTS
     line-height: 0;
     position: relative;
     z-index: 2;
+
+    margin-left: 6px; /* ⭐ FIX POSISI ICON KE TENGAH */
 }
 
 

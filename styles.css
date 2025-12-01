@@ -2082,3 +2082,221 @@ RESPONSIVE BREAKPOINTS
 .roadmap-step {
     overflow: visible;
    }
+
+/* =======================
+   IMPACT SECTION PREMIUM
+========================= */
+
+.impact-zone {
+  padding: 80px 0;
+  background: #f6fef8;
+}
+
+.impact-container {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+/* --------- Header ---------- */
+.impact-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.impact-header .impact-badge {
+  background: #d9ffe4;
+  padding: 6px 18px;
+  border-radius: 30px;
+  color: #0f9d58;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.impact-header h2 {
+  font-size: 34px;
+  color: #021f0b;
+  font-weight: 800;
+}
+
+.impact-header h2 span {
+  color: #0f9d58;
+}
+
+.impact-header p {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 10px;
+  color: #5e6f65;
+  font-size: 15px;
+}
+
+/* --------- Card Grid ---------- */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* --------- Card ---------- */
+.impact-card {
+  background: white;
+  padding: 25px;
+  border-radius: 22px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  position: relative;
+  transition: 0.25s ease;
+  border: 1px solid #eff2ef;
+}
+
+.impact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* --------- Icon Style ---------- */
+.icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: white;
+}
+
+.green { background: #0f9d58; }
+.blue { background: #3a9cf2; }
+.teal { background: #00bfa6; }
+.yellow { background: #ffcd36; color: #222; }
+.orange { background: #ff8c42; }
+.purple { background: #8254ff; }
+.red { background: #ff5757; }
+.pink { background: #ff7bd7; }
+.leaf { background: #37c978; }
+
+/* --------- Text Inside Card ---------- */
+.impact-card h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #021f0b;
+}
+
+.impact-card p {
+  margin-top: 5px;
+  color: #5e6f65;
+  font-size: 15px;
+}
+
+/* --------- Growth Badge ---------- */
+.impact-growth {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.up {
+  background: rgba(0, 180, 90, 0.12);
+  color: #0f9d58;
+}
+
+/* ===========================
+   RESPONSIVE OPTIMIZATION
+=========================== */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .impact-header h2 {
+    font-size: 30px;
+  }
+  .impact-zone {
+    padding: 60px 0;
+  }
+}
+
+/* HP Sedang (480–768px) */
+@media (max-width: 768px) {
+  .impact-grid {
+    gap: 18px;
+  }
+
+  .impact-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .icon-wrap {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .impact-card h3 {
+    font-size: 24px;
+  }
+
+  .impact-card p {
+    font-size: 14px;
+  }
+}
+
+/* HP Kecil (< 480px) */
+@media (max-width: 480px) {
+  .impact-header h2 {
+    font-size: 26px;
+  }
+
+  .impact-header p {
+    font-size: 14px;
+  }
+
+  .impact-card {
+    padding: 18px;
+  }
+
+  .icon-wrap {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .impact-card h3 {
+    font-size: 22px;
+  }
+
+  .impact-card p {
+    font-size: 13px;
+  }
+
+  .impact-growth {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+}
+
+/* HP Ultra Kecil (< 360px) */
+@media (max-width: 360px) {
+  .impact-header h2 {
+    font-size: 22px;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-card {
+    padding: 16px;
+  }
+
+  .impact-card h3 {
+    font-size: 20px;
+  }
+}

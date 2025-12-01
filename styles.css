@@ -3212,10 +3212,21 @@ RESPONSIVE BREAKPOINTS
     }
 }
 
+   /* ============================
+   ACHIEVEMENT SECTION FIXED
+   (Full Revision Without Style Change)
+============================ */
+
 /* SECTION */
 .achievement-section {
     padding: 70px 0;
     width: 100%;
+
+    /* ⭐ FIX UTAMA → buat section tidak ketahan container kecil */
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 /* HEADER */
@@ -3257,6 +3268,10 @@ RESPONSIVE BREAKPOINTS
     display: grid;
     gap: 22px;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+    /* ⭐ FIX TAMBAHAN → biar grid tidak ikut container sempit */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* CARD */
@@ -3328,7 +3343,15 @@ RESPONSIVE BREAKPOINTS
 .eco { background: #eaf8e6; color: #2e8b57; }
 .nature { background: #fff3e6; color: #d86f29; }
 
+/* ============================
+   RESPONSIVE
+============================ */
 @media (max-width: 450px) {
+    .achievement-section {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
     .achieve-title {
         font-size: 28px;
     }
@@ -3343,6 +3366,7 @@ RESPONSIVE BREAKPOINTS
 
     .achieve-grid {
         grid-template-columns: 1fr;
+        max-width: 100%;
     }
 }
 
@@ -3351,7 +3375,7 @@ RESPONSIVE BREAKPOINTS
         font-size: 13px;
         padding: 5px 10px;
     }
-    
+
     .achieve-title {
         font-size: 24px;
     }

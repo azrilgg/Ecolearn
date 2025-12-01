@@ -2487,13 +2487,16 @@ RESPONSIVE BREAKPOINTS
 
 /* Badge */
 .creative-badge {
-    display: inline-block;
+    display: block;            /* agar bisa center */
+    width: fit-content;        /* ukuran tetap mengikuti isi, tidak berubah */
+    
     padding: 8px 18px;
     background: #fff;
     color: #6a6a00;
     border-radius: 50px;
     font-size: 14px;
-    margin: 0 auto 20px;
+    
+    margin: 0 auto 20px;       /* ini akan bekerja sekarang */
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     text-align: center;
 }

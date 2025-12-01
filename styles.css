@@ -2922,3 +2922,89 @@ RESPONSIVE BREAKPOINTS
     font-size: 16px;
   }
 }
+
+/* =============================
+   WHY WEBSITE SECTION
+============================= */
+
+.why-website-section {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.why-badge {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #fff;
+  color: #3c8f6b;
+  border-radius: 50px;
+  font-size: 14px;
+  margin: 0 auto 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.why-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.why-title span {
+  color: #2bb673;
+}
+
+.why-subtitle {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: #555;
+  font-size: 16px;
+}
+
+/* GRID */
+.why-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* CARDS */
+.why-card {
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.why-card:hover {
+  transform: translateY(-5px);
+  border-color: #2bb67333;
+}
+
+.why-card i {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #2bb673;
+}
+
+.why-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.why-card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .why-title {
+    font-size: 26px;
+  }
+}

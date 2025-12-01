@@ -248,8 +248,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.querySelectorAll(".ultrafaq-item").forEach(item => {
-  item.querySelector(".ultrafaq-question").addEventListener("click", () => {
+
+const faqItems = document.querySelectorAll(".ultrafaq-item");
+
+faqItems.forEach(item => {
+  const btn = item.querySelector(".ultrafaq-question");
+  const answer = item.querySelector(".ultrafaq-answer");
+
+  btn.addEventListener("click", () => {
+
+    // Tutup item lain (opsional)
+    faqItems.forEach(i => {
+      if (i !== item) {
+        i.classList.remove("active");
+        i.querySelector(".ultrafaq-answer").style.maxHeight = null;
+      }
+    });
+
     item.classList.toggle("active");
+
+    if (item.classList.contains("active")) {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    } else {
+      answer.style.maxHeight = null;
+    }
   });
 });

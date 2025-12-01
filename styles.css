@@ -2901,7 +2901,7 @@ RESPONSIVE BREAKPOINTS
 }
 
 .ultrafaq-item.active .ultrafaq-answer {
-  max-height: 200px;
+  max-height: 1000px;
   padding-bottom: 15px;
 }
 

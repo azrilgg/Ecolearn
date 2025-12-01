@@ -2891,7 +2891,7 @@ RESPONSIVE BREAKPOINTS
 /* ANSWER */
 
 .ultrafaq-answer {
-  max-height: 0;
+  max-height: 1000px;
   overflow: hidden;
   font-size: 15px;
   color: #666;

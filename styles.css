@@ -2470,3 +2470,160 @@ RESPONSIVE BREAKPOINTS
   .facts-icon { width: 44px; height: 44px; font-size: 18px; }
   .facts-highlight { padding: 25px; }
 }
+
+/* ===========================
+    CREATIVE SECTION
+=========================== */
+
+.belajar-creative-section {
+    padding: 80px 20px;
+    background: #fff9e9;
+}
+
+.creative-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Badge */
+.creative-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #fff;
+    color: #6a6a00;
+    border-radius: 50px;
+    font-size: 14px;
+    margin: 0 auto 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* Titles */
+.creative-title {
+    text-align: center;
+    font-size: 38px;
+    color: #222;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.creative-title .orange { color: #ff7b00; }
+.creative-title .green { color: #00b16a; }
+
+.creative-desc {
+    text-align: center;
+    max-width: 700px;
+    margin: 15px auto 30px;
+    font-size: 16px;
+    color: #555;
+}
+
+.creative-features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* GRID */
+.creative-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.creative-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: 0.2s;
+}
+
+.creative-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.creative-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.creative-card-content {
+    padding: 20px;
+}
+
+.creative-card-content h3 {
+    font-size: 20px;
+    color: #222;
+    font-weight: 700;
+}
+
+.creative-card-content p {
+    color: #555;
+    font-size: 14px;
+    margin: 8px 0 15px;
+}
+
+/* Tags */
+.creative-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.creative-tags span {
+    background: #e8f8e8;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 50px;
+}
+
+/* Info row */
+.creative-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+}
+
+/* CTA */
+.creative-share {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.share-btn {
+    background: linear-gradient(to right, #ff7b00, #ffc100);
+    padding: 12px 28px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.share-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ===========================
+      RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+    .creative-title { font-size: 30px; }
+    .creative-features { flex-direction: column; gap: 10px; }
+    .creative-card img { height: 160px; }
+}
+
+@media (max-width: 480px) {
+    .creative-title { font-size: 26px; }
+    .creative-card { border-radius: 16px; }
+}

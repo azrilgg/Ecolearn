@@ -2804,3 +2804,118 @@ RESPONSIVE BREAKPOINTS
   .community-grid { gap: 18px; }
   .community-card h3 { font-size: 22px; }
 }
+
+/* =============================
+     ULTRA FAQ – PREMIUM STYLE
+============================= */
+
+.ultrafaq-section {
+  padding: 80px 0;
+  background: linear-gradient(to bottom, #fff9e9, #fffdf6);
+}
+
+.ultrafaq-container {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+}
+
+.ultrafaq-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ultrafaq-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 30px;
+  color: #c89f00;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 12px;
+}
+
+.ultrafaq-header h2 {
+  font-size: 30px;
+  color: #2a2a2a;
+  font-weight: 800;
+}
+
+.ultrafaq-header p {
+  color: #666;
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+/* FAQ LIST */
+
+.ultrafaq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ultrafaq-item {
+  background: white;
+  border-radius: 14px;
+  padding: 0 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+
+/* QUESTION BUTTON */
+
+.ultrafaq-question {
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ultrafaq-question .ultrafaq-icon {
+  transition: 0.3s ease;
+}
+
+/* ANSWER */
+
+.ultrafaq-answer {
+  max-height: 0;
+  overflow: hidden;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  transition: max-height 0.35s ease;
+  padding-right: 10px;
+}
+
+.ultrafaq-item.active .ultrafaq-answer {
+  max-height: 200px;
+  padding-bottom: 15px;
+}
+
+.ultrafaq-item.active .ultrafaq-icon {
+  transform: rotate(180deg);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .ultrafaq-header h2 {
+    font-size: 26px;
+  }
+  .ultrafaq-question {
+    font-size: 16px;
+  }
+}

@@ -246,3 +246,10 @@ document.addEventListener("DOMContentLoaded", () => {
         loader.style.display = "none";
     }, 2600); // waktu harus sedikit lebih besar dari animation-delay + fadeout
 });
+
+
+document.querySelectorAll(".ultrafaq-item").forEach(item => {
+  item.querySelector(".ultrafaq-question").addEventListener("click", () => {
+    item.classList.toggle("active");
+  });
+});

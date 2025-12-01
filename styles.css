@@ -2300,3 +2300,173 @@ RESPONSIVE BREAKPOINTS
     font-size: 20px;
   }
 }
+
+/* ===========================
+   LEARN FACTS SECTION
+=========================== */
+
+.learn-facts {
+  padding: 80px 0;
+  background: #fffef7;
+}
+
+.facts-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ----- Header ----- */
+.facts-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.facts-badge {
+  background: #fff2c4;
+  padding: 6px 16px;
+  border-radius: 30px;
+  color: #d69e00;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.facts-header h2 {
+  font-size: 36px;
+  color: #1d1d1d;
+  font-weight: 800;
+}
+
+.facts-header h2 span {
+  color: #f5b300;
+}
+
+.facts-header p {
+  margin-top: 10px;
+  color: #616161;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* ----- Grid ----- */
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* ----- Card ----- */
+.facts-card {
+  padding: 25px;
+  border-radius: 22px;
+  background: white;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+  border: 1px solid #eee;
+  transition: 0.25s ease;
+}
+
+.facts-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(0,0,0,0.08);
+}
+
+.facts-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.facts-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.facts-card p {
+  color: #575757;
+  font-size: 15px;
+}
+
+/* ----- Card Color Variants ----- */
+.soft-green  { background: #e7fff1; }
+.soft-blue   { background: #eaf3ff; }
+.soft-yellow { background: #fff5d9; }
+.soft-mint   { background: #eafff7; }
+.soft-purple { background: #f6eaff; }
+.soft-pink   { background: #ffeaf0; }
+
+/* Icon Colors */
+.soft-green .facts-icon  { background: #2ecc71; }
+.soft-blue .facts-icon   { background: #3498db; }
+.soft-yellow .facts-icon { background: #f1c40f; color: #222; }
+.soft-mint .facts-icon   { background: #1abc9c; }
+.soft-purple .facts-icon { background: #9b59b6; }
+.soft-pink .facts-icon   { background: #e74c3c; }
+
+/* ----- Highlight Box ----- */
+.facts-highlight {
+  margin-top: 50px;
+  padding: 35px;
+  background: #fff2c6;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+}
+
+.facts-highlight-icon {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border-radius: 18px;
+  background: #ffcb3b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.facts-highlight h3 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.facts-highlight p {
+  font-size: 16px;
+  color: #4a4a4a;
+}
+
+.facts-btn {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 30px;
+  background: #ffb300;
+  color: #222;
+  font-weight: 700;
+  transition: 0.25s;
+}
+
+.facts-btn:hover {
+  background: #e09d00;
+}
+
+/* ----- RESPONSIVE FIX ----- */
+@media (max-width: 450px) {
+  .facts-header h2 { font-size: 28px; }
+  .facts-card { padding: 20px; }
+  .facts-icon { width: 44px; height: 44px; font-size: 18px; }
+  .facts-highlight { padding: 25px; }
+}

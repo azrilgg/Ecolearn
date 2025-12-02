@@ -1615,21 +1615,21 @@ footer {
 }
 
 .intro-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: fixed;        /* supaya selalu penuh & tidak terpengaruh elemen lain */
+  top: 0;
+  left: 0;
+  width: 100vw;           /* penuh horizontal */
+  height: 100vh;          /* penuh vertikal */
+  object-fit: cover;      /* isi layar penuh */
+  object-position: center;
+  z-index: -1;            /* di belakang konten */
   
-  /* Cover penuh di semua layar */
-  width: 100vh;
-  height: 100vh;
-  
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  z-index: -1;
   opacity: 0.45;
   filter: brightness(60%);
-}
 
+  /* mencegah scroll menggoyang video di mobile */
+  pointer-events: none;
+}
 /* Konten tetap di depan video */
 .intro-section.sub-intro .container {
   position: relative;
@@ -1645,7 +1645,7 @@ footer {
 .intro-section.sub-intro p {
   font-size: clamp(1rem, 2vw, 1.3rem);
   line-height: 1.6;
-  max-width: 750px;
+  malx-width: 750px;
 }
 
 /* =======================

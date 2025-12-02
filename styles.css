@@ -3506,3 +3506,123 @@ RESPONSIVE BREAKPOINTS
     .rank { width: 28px; }
     .name { font-size: 14px; }
 }
+
+/* ================================
+   ULTRA HERO SECTION (SUPER CLEAN)
+   ================================ */
+.ultra-hero-section {
+  width: 100%;
+  min-height: 100vh;
+  background: url("image/hero-bg.jpg"), linear-gradient(#e9fff2, #d9fbe5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light birds effect opacity (mirip contoh) */
+.ultra-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 280px;
+  background: url("image/birds.png") no-repeat center;
+  background-size: contain;
+  opacity: 0.25;
+}
+
+/* Content container */
+.ultra-hero-container {
+  max-width: 760px;
+  z-index: 3;
+}
+
+/* Title style */
+.ultra-hero-title {
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  font-weight: 700;
+  color: #1d1d1d;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.ultra-hero-title span {
+  color: #15b365; /* Green highlight */
+}
+
+.ultra-hero-title .highlight {
+  background: #15b365;
+  padding: 0 8px;
+  border-radius: 8px;
+  color: #fff;
+}
+
+/* Subtitle */
+.ultra-hero-subtitle {
+  font-size: 1.05rem;
+  color: #4e4e4e;
+  max-width: 560px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+/* Buttons container */
+.ultra-hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Primary Button */
+.btn-ultra-primary {
+  background: #16c172;
+  color: #fff;
+  padding: 0.75rem 1.8rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.25s ease;
+}
+
+.btn-ultra-primary:hover {
+  background: #0ca45f;
+  transform: translateY(-2px);
+}
+
+/* Outline Button */
+.btn-ultra-outline {
+  border: 2px solid #16c172;
+  color: #16c172;
+  padding: 0.72rem 1.8rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.25s ease;
+}
+
+.btn-ultra-outline:hover {
+  background: #e8fff1;
+  transform: translateY(-2px);
+}
+
+/* Responsive padding */
+@media (max-width: 768px) {
+  .ultra-hero-section {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .btn-ultra-primary,
+  .btn-ultra-outline {
+    width: 100%;
+    text-align: center;
+  }
+}

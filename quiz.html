@@ -1,25 +1,589 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoLearn - Quiz Lingkungan</title>
-
-  <!-- POPPINS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- AOS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-
-  <!-- STYLE -->
+  <title>Quiz Challenge</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <!-- STYLE -->
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+   <!-- POPPINS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- NAVBAR -->
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .uqz-wrapper {
+            width: 100%;
+            min-height: 100%;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .uqz-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .uqz-header {
+            margin-bottom: 50px;
+        }
+
+        .uqz-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .uqz-header h1 span {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .uqz-header p {
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .uqz-levels h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uqz-level-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .uqz-level-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .uqz-level-card.uqz-selected {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .uqz-l-left h4 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uqz-l-left h4 span {
+            font-size: 14px;
+            background: rgba(255, 215, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .uqz-l-left p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .uqz-meta {
+            font-size: 13px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .uqz-l-right i {
+            font-size: 24px;
+            opacity: 0.6;
+        }
+
+        .uqz-start-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            color: #667eea;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .uqz-start-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .uqz-start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .uqz-free-tag {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .uqz-features, .uqz-tips {
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        .uqz-features h3, .uqz-tips h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uqz-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .uqz-feature-item i {
+            font-size: 24px;
+            color: #ffd700;
+            min-width: 30px;
+        }
+
+        .uqz-feature-item h4 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .uqz-feature-item p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .uqz-tips ul {
+            list-style: none;
+        }
+
+        .uqz-tips ul li {
+            font-size: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .uqz-tips ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+        }
+
+        .quiz-screen.active {
+            display: block;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .quiz-progress {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .quiz-timer {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .quiz-score {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .answer-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+
+        .answer-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(8px);
+        }
+
+        .answer-option.selected {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .answer-option.correct {
+            border-color: #4caf50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .answer-option.incorrect {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.2);
+        }
+
+        .quiz-nav-btn {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            color: #667eea;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-nav-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .quiz-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .results-screen.active {
+            display: block;
+        }
+
+        .results-trophy {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .results-score {
+            font-size: 64px;
+            font-weight: 800;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .results-message {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .results-stats {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .results-stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+        }
+
+        .results-stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .results-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .results-btn.primary {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            color: #667eea;
+            border: none;
+        }
+
+        /* Name Input Modal */
+        .name-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .name-modal.active {
+            display: flex;
+        }
+
+        .name-modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .name-modal h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .name-modal input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .name-modal input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .name-modal-btn {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            color: #667eea;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .name-modal-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .name-modal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Leaderboard */
+        .leaderboard {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+
+        .leaderboard h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard-rank {
+            font-size: 20px;
+            font-weight: 700;
+            width: 40px;
+        }
+
+        .leaderboard-info {
+            flex: 1;
+            padding: 0 16px;
+        }
+
+        .leaderboard-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .leaderboard-level {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .leaderboard-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .empty-leaderboard {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.7;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .uqz-header h1 {
+                font-size: 36px;
+            }
+
+            .uqz-header p {
+                font-size: 16px;
+            }
+
+            .question-card {
+                padding: 24px;
+            }
+
+            .question-text {
+                font-size: 20px;
+            }
+
+            .results-score {
+                font-size: 48px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">EcoLearn</div>
     <ul class="nav-links" id="navLinks">
@@ -89,230 +653,569 @@
       </div>
     </div>
   </section>
-
-  <section class="uqz-wrapper" id="uqz-section">
-    
-    <!-- BADGE -->
-    <div class="uqz-badge" data-aos="fade-down">
-        <i class="fa-solid fa-medal"></i> Quiz Challenge
+   
+  <div class="uqz-wrapper"><!-- Home Screen -->
+   <div class="home-screen" id="homeScreen">
+    <div class="uqz-badge"><i class="fa-solid fa-medal"></i> Quiz Challenge
     </div>
-
-    <!-- HEADER -->
-    <div class="uqz-header" data-aos="fade-up">
-        <h1>Siap untuk <span>Tantangan</span>?</h1>
-        <p>
-            Uji pengetahuanmu tentang pengelolaan sampah dan lingkungan dengan quiz interaktif yang
-            seru, edukatif, dan menantang!
-        </p>
+    <div class="uqz-header">
+     <h1 id="mainTitle">Siap untuk <span>Tantangan</span>?</h1>
+     <p id="subtitle">Uji pengetahuanmu tentang pengelolaan sampah dan lingkungan dengan quiz interaktif yang seru, edukatif, dan menantang!</p>
     </div>
-
-    <!-- LEVEL SELECTOR -->
-    <div class="uqz-levels" data-aos="fade-up">
-
-        <h3><i class="fa-solid fa-bullseye"></i> Pilih Tingkat Kesulitan</h3>
-
-        <div class="uqz-level-card uqz-easy" onclick="uqzChooseLevel('easy')">
-            <div class="uqz-l-left">
-                <h4>Mudah <span>10–15 poin</span></h4>
-                <p>Pertanyaan dasar tentang sampah & lingkungan</p>
-                <div class="uqz-meta"><i class="fa-solid fa-leaf"></i> 5 pertanyaan · ⏱ 30s</div>
-            </div>
-            <div class="uqz-l-right">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-
-        <div class="uqz-level-card uqz-medium" onclick="uqzChooseLevel('medium')">
-            <div class="uqz-l-left">
-                <h4>Sedang <span>15–20 poin</span></h4>
-                <p>Pengetahuan menengah tentang pengelolaan sampah</p>
-                <div class="uqz-meta"><i class="fa-solid fa-fire"></i> 10 pertanyaan · ⏱ 25s</div>
-            </div>
-            <div class="uqz-l-right">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-
-        <div class="uqz-level-card uqz-hard" onclick="uqzChooseLevel('hard')">
-            <div class="uqz-l-left">
-                <h4>Sulit <span>20–25 poin</span></h4>
-                <p>Tantangan untuk kamu yang sudah jago lingkungan</p>
-                <div class="uqz-meta"><i class="fa-solid fa-bolt"></i> 20 pertanyaan · ⏱ 20s</div>
-            </div>
-            <div class="uqz-l-right">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-
-        <button class="uqz-start-btn" onclick="uqzStartQuiz()" id="uqzStartBtn">
-            <i class="fa-solid fa-play"></i> Mulai Quiz Sekarang!
-        </button>
-
-        <p class="uqz-free-tag">GRATIS · Tidak perlu daftar · Hasil langsung keluar</p>
-    </div>
-
-    <!-- FEATURES -->
-    <div class="uqz-features" data-aos="fade-up">
-        <h3><i class="fa-solid fa-sparkles"></i> Fitur Quiz</h3>
-
-        <div class="uqz-feature-item">
-            <i class="fa-solid fa-stopwatch"></i>
-            <div>
-                <h4>Timer Challenge</h4>
-                <p>Waktu semakin cepat setiap level meningkat</p>
-            </div>
-        </div>
-
-        <div class="uqz-feature-item">
-            <i class="fa-solid fa-trophy"></i>
-            <div>
-                <h4>Sistem Poin</h4>
-                <p>Dapatkan poin lebih besar untuk soal sulit</p>
-            </div>
-        </div>
-
-        <div class="uqz-feature-item">
-            <i class="fa-solid fa-book-open"></i>
-            <div>
-                <h4>Penjelasan</h4>
-                <p>Lihat jawaban benar di akhir sesi</p>
-            </div>
-        </div>
-
-        <div class="uqz-feature-item">
-            <i class="fa-solid fa-ranking-star"></i>
-            <div>
-                <h4>Leaderboard</h4>
-                <p>Bandingkan skor dengan pemain lain</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- TIPS -->
-    <div class="uqz-tips" data-aos="fade-up">
-        <h3><i class="fa-solid fa-lightbulb"></i> Tips Bermain</h3>
-
-        <ul>
-            <li>📝 Baca soal secara teliti</li>
-            <li>⏱ Gunakan waktu sebaik mungkin</li>
-            <li>📘 Pelajari jawaban benar</li>
-            <li>🔄 Coba semua tingkat kesulitan</li>
-        </ul>
-    </div>
-
-    <!-- STATS -->
-    <div class="uqz-stats" data-aos="fade-up">
-        <h3>Statistik Quiz</h3>
-
-        <div class="uqz-stats-grid">
-            <div class="uqz-stat-item">
-                <p>Total Pemain</p>
-                <h2>12,547</h2>
-            </div>
-            <div class="uqz-stat-item">
-                <p>Quiz Hari Ini</p>
-                <h2>234</h2>
-            </div>
-            <div class="uqz-stat-item">
-                <p>Skor Tertinggi</p>
-                <h2>2,450</h2>
-            </div>
-            <div class="uqz-stat-item">
-                <p>Rata-rata Skor</p>
-                <h2>1,280</h2>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<!-- QUIZ BOX -->
-<section id="uqzQuizBox" class="uqz-hidden">
-    <div class="uqz-quiz-card">
-
-        <div class="uqz-top">
-            <div class="uqz-progress">
-                <div id="uqzProgressFill"></div>
-            </div>
-            <div class="uqz-timer">⏱ <span id="uqzTimer">20</span>s</div>
-        </div>
-
-        <h2 id="uqzQuestionText"></h2>
-        <div id="uqzOptionsBox" class="uqz-options"></div>
-
-        <button id="uqzNextBtn" class="uqz-next-btn" disabled>Selanjutnya</button>
-    </div>
-</section>
-
-<!-- RESULT -->
-<section id="uqzResultBox" class="uqz-hidden">
-    <div class="uqz-result-card">
-        <h2 id="uqzScoreText"></h2>
-        <p id="uqzScoreMessage"></p>
-
-        <button onclick="uqzRestartQuiz()" class="uqz-restart-btn">
-            Coba Lagi
-        </button>
-    </div>
-</section>
-
-  <!-- QUIZ SECTION -->
-  <section class="quiz-section">
-    <div class="container">
-      <!-- PROGRESS -->
-      <div class="quiz-progress" data-aos="fade-up">
-        <div class="progress-label">Progress: <span id="quiz-progress-number">0/10</span></div>
-        <div class="progress-bar">
-          <div id="progress-fill"></div>
-        </div>
+    <div class="uqz-levels">
+     <h3><i class="fa-solid fa-bullseye"></i> Pilih Tingkat Kesulitan</h3>
+     <div class="uqz-level-card uqz-easy" onclick="chooseLevel('easy')" id="easyCard">
+      <div class="uqz-l-left">
+       <h4>Mudah <span>2 poin/soal</span></h4>
+       <p>Pertanyaan dasar tentang sampah &amp; lingkungan</p>
+       <div class="uqz-meta">
+        <i class="fa-solid fa-leaf"></i> 5 pertanyaan · ⏱ 30s
+       </div>
       </div>
-
-      <!-- QUIZ BOX -->
-      <div class="quiz-card" data-aos="fade-up" id="quiz-card">
-        <h2 id="quiz-question">Loading soal...</h2>
-        <div class="quiz-options" id="quiz-options"></div>
-        <button class="btn-primary" id="next-btn" disabled>Lanjut</button>
+      <div class="uqz-l-right"><i class="fa-solid fa-chevron-right"></i>
       </div>
-
-      <!-- RESULT -->
-      <div class="quiz-result" id="quiz-result" style="display:none" data-aos="fade-up">
-        <h2>Hasil Quiz</h2>
-        <p>Skor kamu: <span id="final-score">0</span> poin</p>
-        <div class="rank-box">
-          <h3>Peringkatmu: <span id="player-rank">-</span></h3>
-        </div>
-        <button class="btn-primary" id="restart-btn">
-          <i class="fa-solid fa-rotate-right"></i> Ulangi Quiz
-        </button>
+     </div>
+     <div class="uqz-level-card uqz-medium" onclick="chooseLevel('medium')" id="mediumCard">
+      <div class="uqz-l-left">
+       <h4>Sedang <span>3 poin/soal</span></h4>
+       <p>Pengetahuan menengah tentang pengelolaan sampah</p>
+       <div class="uqz-meta">
+        <i class="fa-solid fa-fire"></i> 10 pertanyaan · ⏱ 25s
+       </div>
       </div>
-
-      <!-- LEADERBOARD -->
-      <div class="leaderboard-box" id="leaderboard-box" style="display:none" data-aos="fade-up">
-        <h2>Leaderboard</h2>
-        <ul id="leaderboard-list"></ul>
+      <div class="uqz-l-right"><i class="fa-solid fa-chevron-right"></i>
       </div>
+     </div>
+     <div class="uqz-level-card uqz-hard" onclick="chooseLevel('hard')" id="hardCard">
+      <div class="uqz-l-left">
+       <h4>Sulit <span>5 poin/soal</span></h4>
+       <p>Tantangan untuk kamu yang sudah jago lingkungan</p>
+       <div class="uqz-meta">
+        <i class="fa-solid fa-bolt"></i> 15 pertanyaan · ⏱ 20s
+       </div>
+      </div>
+      <div class="uqz-l-right"><i class="fa-solid fa-chevron-right"></i>
+      </div>
+     </div><button class="uqz-start-btn" onclick="startQuiz()" id="startBtn" disabled> <i class="fa-solid fa-play"></i> <span id="startButtonText">Mulai Quiz Sekarang!</span> </button>
+     <p class="uqz-free-tag">GRATIS · Tidak perlu daftar · Hasil langsung keluar</p>
     </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-final">
-    <div class="container" data-aos="fade-up">
-      <h2>Mau belajar lebih banyak tentang lingkungan?</h2>
-      <p>Kunjungi halaman belajar kami penuh materi lengkap!</p>
-      <a href="belajar.html" class="btn-primary">Ke Halaman Belajar</a>
+    <div class="uqz-features">
+     <h3><i class="fa-solid fa-sparkles"></i> Fitur Quiz</h3>
+     <div class="uqz-feature-item"><i class="fa-solid fa-stopwatch"></i>
+      <div>
+       <h4>Timer Challenge</h4>
+       <p>Waktu semakin cepat setiap level meningkat</p>
+      </div>
+     </div>
+     <div class="uqz-feature-item"><i class="fa-solid fa-trophy"></i>
+      <div>
+       <h4>Sistem Poin</h4>
+       <p>Dapatkan poin lebih besar untuk soal sulit</p>
+      </div>
+     </div>
+     <div class="uqz-feature-item"><i class="fa-solid fa-book-open"></i>
+      <div>
+       <h4>Penjelasan</h4>
+       <p>Lihat jawaban benar di akhir sesi</p>
+      </div>
+     </div>
+     <div class="uqz-feature-item"><i class="fa-solid fa-ranking-star"></i>
+      <div>
+       <h4>Leaderboard</h4>
+       <p>Bandingkan skor dengan pemain lain</p>
+      </div>
+     </div>
     </div>
-  </section>
+    <div class="uqz-tips">
+     <h3><i class="fa-solid fa-lightbulb"></i> Tips Bermain</h3>
+     <ul>
+      <li>📝 Baca soal secara teliti</li>
+      <li>⏱ Gunakan waktu sebaik mungkin</li>
+      <li>📘 Pelajari jawaban benar</li>
+      <li>🔄 Coba semua tingkat kesulitan</li>
+     </ul>
+    </div>
+    <div class="leaderboard" id="homeLeaderboard">
+     <h3><i class="fa-solid fa-ranking-star"></i> Leaderboard Teratas</h3>
+     <div id="leaderboardList"></div>
+    </div>
+   </div><!-- Quiz Screen -->
+   <div class="quiz-screen" id="quizScreen">
+    <div class="quiz-header">
+     <div class="quiz-progress" id="quizProgress">
+      Soal 1 / 5
+     </div>
+     <div class="quiz-timer" id="quizTimer">
+      30
+     </div>
+     <div class="quiz-score" id="quizScore">
+      Skor: 0
+     </div>
+    </div>
+    <div class="question-card">
+     <div class="question-text" id="questionText"></div>
+     <div id="answersContainer"></div>
+    </div><button class="quiz-nav-btn" onclick="nextQuestion()" id="nextBtn" disabled> Lanjut <i class="fa-solid fa-arrow-right"></i> </button>
+   </div><!-- Results Screen -->
+   <div class="results-screen" id="resultsScreen">
+    <div class="results-trophy">
+     🏆
+    </div>
+    <div class="results-score" id="finalScore">
+     0
+    </div>
+    <div class="results-message" id="resultsMessage">
+     Selamat!
+    </div>
+    <div class="results-stats">
+     <div class="results-stat-item"><span>Tingkat Kesulitan:</span> <strong id="resultLevel">-</strong>
+     </div>
+     <div class="results-stat-item"><span>Jawaban Benar:</span> <strong id="resultCorrect">0</strong>
+     </div>
+     <div class="results-stat-item"><span>Total Soal:</span> <strong id="resultTotal">0</strong>
+     </div>
+     <div class="results-stat-item"><span>Akurasi:</span> <strong id="resultAccuracy">0%</strong>
+     </div>
+    </div>
+    <div class="results-actions"><button class="results-btn primary" onclick="restartQuiz()"> <i class="fa-solid fa-rotate-right"></i> Main Lagi </button> <button class="results-btn" onclick="changeDifficulty()"> <i class="fa-solid fa-sliders"></i> Ganti Tingkat </button>
+    </div>
+    <div class="leaderboard">
+     <h3><i class="fa-solid fa-ranking-star"></i> Leaderboard</h3>
+     <div id="resultsLeaderboard"></div>
+    </div>
+   </div><!-- Name Input Modal -->
+   <div class="name-modal" id="nameModal">
+    <div class="name-modal-content">
+     <h2>Masukkan Nama Kamu</h2>
+     <p style="margin-bottom: 20px; opacity: 0.9;">Untuk menyimpan skor di leaderboard</p><input type="text" id="playerNameInput" placeholder="Nama kamu..." maxlength="20"> <button class="name-modal-btn" onclick="submitName()" id="submitNameBtn"> Simpan &amp; Lihat Hasil </button>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            background_color: "#667eea",
+            surface_color: "#ffffff",
+            text_color: "#ffffff",
+            primary_action_color: "#ffd700",
+            secondary_action_color: "#764ba2",
+            font_family: "Inter",
+            font_size: 16,
+            main_title: "Siap untuk Tantangan?",
+            subtitle: "Uji pengetahuanmu tentang pengelolaan sampah dan lingkungan dengan quiz interaktif yang seru, edukatif, dan menantang!",
+            start_button_text: "Mulai Quiz Sekarang!"
+        };
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 EcoLearn. Bangun generasi peduli lingkungan.</p>
-  </footer>
+        let config = { ...defaultConfig };
+        let currentRecords = [];
+        let selectedLevel = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let timer = null;
+        let timeLeft = 0;
+        let currentQuestions = [];
+        let playerAnswers = [];
 
-  <!-- SCRIPT -->
-  <script src="script.js"></script>
+        const questions = {
+            easy: [
+                { q: "Sampah organik contohnya adalah?", a: ["Sisa makanan", "Plastik", "Kaleng", "Kaca"], correct: 0 },
+                { q: "Warna tempat sampah untuk sampah organik adalah?", a: ["Hijau", "Kuning", "Merah", "Biru"], correct: 0 },
+                { q: "Berapa lama plastik terurai di alam?", a: ["500-1000 tahun", "1 tahun", "10 tahun", "50 tahun"], correct: 0 },
+                { q: "Sampah yang bisa didaur ulang adalah?", a: ["Botol plastik", "Sisa sayuran", "Tisu bekas", "Popok bayi"], correct: 0 },
+                { q: "Kegiatan mengolah sampah organik menjadi pupuk disebut?", a: ["Composting", "Recycling", "Reducing", "Reusing"], correct: 0 },
+                { q: "Sampah anorganik adalah?", a: ["Plastik", "Daun", "Kulit buah", "Nasi"], correct: 0 },
+                { q: "3R dalam pengelolaan sampah adalah?", a: ["Reduce, Reuse, Recycle", "Redo, Remake, Recycle", "Remove, Repair, Recycle", "Reduce, Remake, Return"], correct: 0 }
+            ],
+            medium: [
+                { q: "Bank sampah pertama di Indonesia didirikan di kota?", a: ["Yogyakarta", "Jakarta", "Surabaya", "Bandung"], correct: 0 },
+                { q: "Gas rumah kaca yang dihasilkan dari pembusukan sampah organik adalah?", a: ["Metana", "Oksigen", "Nitrogen", "Helium"], correct: 0 },
+                { q: "Proses pengolahan sampah dengan pembakaran suhu tinggi disebut?", a: ["Incinerator", "Landfill", "Composting", "Sanitary"], correct: 0 },
+                { q: "Sampah B3 singkatan dari?", a: ["Bahan Berbahaya Beracun", "Bahan Basah Biasa", "Bahan Besar Berat", "Bahan Buangan Bekas"], correct: 0 },
+                { q: "Mikroplastik berbahaya karena?", a: ["Masuk rantai makanan", "Mudah terbakar", "Berat", "Bau"], correct: 0 },
+                { q: "Prinsip Zero Waste bertujuan untuk?", a: ["Mengurangi sampah ke TPA", "Membakar semua sampah", "Mengubur sampah", "Mengekspor sampah"], correct: 0 },
+                { q: "Ecobrick adalah?", a: ["Botol plastik diisi sampah plastik", "Batu bata hijau", "Tas dari daur ulang", "Tempat sampah khusus"], correct: 0 },
+                { q: "Leachate adalah?", a: ["Air lindi dari TPA", "Pupuk kompos", "Plastik daur ulang", "Gas dari sampah"], correct: 0 },
+                { q: "Reduce artinya?", a: ["Mengurangi penggunaan", "Menggunakan kembali", "Mendaur ulang", "Membuang sampah"], correct: 0 },
+                { q: "Sampah elektronik disebut?", a: ["E-waste", "Plastik", "Organik", "B3"], correct: 0 }
+            ],
+            hard: [
+                { q: "Peraturan tentang pengelolaan sampah di Indonesia diatur dalam UU nomor?", a: ["UU No. 18 Tahun 2008", "UU No. 32 Tahun 2009", "UU No. 23 Tahun 1997", "UU No. 41 Tahun 1999"], correct: 0 },
+                { q: "Extended Producer Responsibility (EPR) adalah konsep yang mewajibkan?", a: ["Produsen mengelola sampah produknya", "Konsumen membuang sendiri", "Pemerintah mengolah semua sampah", "Importir mengekspor kembali"], correct: 0 },
+                { q: "Teknologi Waste to Energy mengubah sampah menjadi?", a: ["Listrik", "Air bersih", "Pupuk saja", "Tanah"], correct: 0 },
+                { q: "Sistem pengelolaan sampah berbasis circular economy bertujuan?", a: ["Sampah jadi sumber daya", "Sampah dibuang ke laut", "Sampah dikubur dalam", "Sampah diekspor"], correct: 0 },
+                { q: "TPST singkatan dari?", a: ["Tempat Pengolahan Sampah Terpadu", "Tempat Pembuangan Sampah Terakhir", "Tempat Penampungan Sampah Tetap", "Tempat Pemisahan Sampah Teratur"], correct: 0 },
+                { q: "Black Soldier Fly (BSF) digunakan untuk mengolah?", a: ["Sampah organik jadi protein", "Plastik jadi BBM", "Kaca jadi kaca baru", "Logam jadi perhiasan"], correct: 0 },
+                { q: "Anaerobic digestion adalah proses?", a: ["Fermentasi sampah tanpa oksigen", "Pembakaran dengan oksigen", "Pencucian dengan air", "Pengeringan di udara"], correct: 0 },
+                { q: "MRF dalam pengelolaan sampah adalah?", a: ["Material Recovery Facility", "Modern Recycling Factory", "Municipal Refuse Facility", "Main Reduction Facility"], correct: 0 },
+                { q: "Prinsip cradle to cradle adalah?", a: ["Produk bisa jadi bahan baku lagi", "Produk sekali pakai", "Produk tidak bisa didaur ulang", "Produk dibuang setelah rusak"], correct: 0 },
+                { q: "Pyrolysis adalah teknologi untuk?", a: ["Mengubah plastik jadi bahan bakar", "Membakar sampah biasa", "Mengompos sampah organik", "Menimbun sampah"], correct: 0 },
+                { q: "Single-use plastic yang paling banyak mencemari laut adalah?", a: ["Kantong plastik & sedotan", "Botol kaca", "Kertas", "Kardus"], correct: 0 },
+                { q: "Bio-plastic terbuat dari?", a: ["Pati jagung/singkong", "Minyak bumi", "Batu bara", "Gas alam"], correct: 0 },
+                { q: "Upaya mengurangi food waste bisa dengan?", a: ["Meal planning & composting", "Membeli lebih banyak", "Membuang ke TPA", "Mengekspor makanan"], correct: 0 },
+                { q: "EPR di Indonesia diterapkan pada produk?", a: ["Kemasan & elektronik", "Semua produk", "Hanya makanan", "Hanya pakaian"], correct: 0 },
+                { q: "Dampak mikroplastik pada kesehatan manusia?", a: ["Gangguan hormon & kanker", "Tidak berbahaya", "Hanya alergi ringan", "Hanya gatal"], correct: 0 }
+            ]
+        };
 
-  <!-- AOS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>AOS.init({ duration: 900, once: true });</script>
-</body>
+        function chooseLevel(level) {
+            selectedLevel = level;
+            document.querySelectorAll('.uqz-level-card').forEach(card => {
+                card.classList.remove('uqz-selected');
+            });
+            document.getElementById(level + 'Card').classList.add('uqz-selected');
+            document.getElementById('startBtn').disabled = false;
+        }
+
+        function startQuiz() {
+            if (!selectedLevel) return;
+
+            const levelConfig = {
+                easy: { questions: 5, time: 30, points: 2 },
+                medium: { questions: 10, time: 25, points: 3 },
+                hard: { questions: 15, time: 20, points: 5 }
+            };
+
+            const config = levelConfig[selectedLevel];
+            const allQuestions = questions[selectedLevel];
+            currentQuestions = allQuestions.sort(() => Math.random() - 0.5).slice(0, config.questions);
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            playerAnswers = [];
+            timeLeft = config.time;
+
+            document.getElementById('homeScreen').classList.remove('active');
+            document.getElementById('homeScreen').style.display = 'none';
+            document.getElementById('quizScreen').classList.add('active');
+
+            displayQuestion();
+            startTimer();
+        }
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            const levelConfig = {
+                easy: { questions: 5, time: 30 },
+                medium: { questions: 10, time: 25 },
+                hard: { questions: 15, time: 20 }
+            };
+            const config = levelConfig[selectedLevel];
+
+            document.getElementById('quizProgress').textContent = `Soal ${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('quizScore').textContent = `Skor: ${score}`;
+            document.getElementById('questionText').textContent = question.q;
+
+            const answersContainer = document.getElementById('answersContainer');
+            answersContainer.innerHTML = '';
+
+            question.a.forEach((answer, index) => {
+                const option = document.createElement('div');
+                option.className = 'answer-option';
+                option.textContent = answer;
+                option.onclick = () => selectAnswer(index);
+                answersContainer.appendChild(option);
+            });
+
+            document.getElementById('nextBtn').disabled = true;
+            timeLeft = config.time;
+            document.getElementById('quizTimer').textContent = timeLeft;
+        }
+
+        function selectAnswer(index) {
+            if (playerAnswers[currentQuestionIndex] !== undefined) return;
+
+            const question = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.answer-option');
+            const isCorrect = index === question.correct;
+
+            playerAnswers[currentQuestionIndex] = index;
+
+            options[index].classList.add('selected');
+            
+            if (isCorrect) {
+                options[index].classList.add('correct');
+                correctAnswers++;
+                const points = { easy: 2, medium: 3, hard: 5 }[selectedLevel];
+                score += points;
+                document.getElementById('quizScore').textContent = `Skor: ${score}`;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.correct].classList.add('correct');
+            }
+
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            document.getElementById('nextBtn').disabled = false;
+            
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function startTimer() {
+            if (timer) clearInterval(timer);
+
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('quizTimer').textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (playerAnswers[currentQuestionIndex] === undefined) {
+                        playerAnswers[currentQuestionIndex] = -1;
+                        const question = currentQuestions[currentQuestionIndex];
+                        const options = document.querySelectorAll('.answer-option');
+                        options[question.correct].classList.add('correct');
+                        options.forEach(opt => opt.style.pointerEvents = 'none');
+                        document.getElementById('nextBtn').disabled = false;
+                    }
+                }
+            }, 1000);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex >= currentQuestions.length) {
+                finishQuiz();
+            } else {
+                displayQuestion();
+                startTimer();
+            }
+        }
+
+        function finishQuiz() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            document.getElementById('quizScreen').classList.remove('active');
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('nameModal').classList.add('active');
+        }
+
+        async function submitName() {
+            const nameInput = document.getElementById('playerNameInput');
+            const name = nameInput.value.trim();
+
+            if (!name) {
+                nameInput.style.borderColor = '#f44336';
+                return;
+            }
+
+            document.getElementById('submitNameBtn').disabled = true;
+            document.getElementById('submitNameBtn').innerHTML = '<span class="loading"></span> Menyimpan...';
+
+            if (currentRecords.length >= 999) {
+                document.getElementById('nameModal').classList.remove('active');
+                showResults();
+                return;
+            }
+
+            const result = await window.dataSdk.create({
+                player_name: name,
+                level: selectedLevel,
+                score: score,
+                total_questions: currentQuestions.length,
+                correct_answers: correctAnswers,
+                completed_at: new Date().toISOString()
+            });
+
+            if (!result.isOk) {
+                document.getElementById('submitNameBtn').innerHTML = 'Simpan & Lihat Hasil';
+                document.getElementById('submitNameBtn').disabled = false;
+            } else {
+                document.getElementById('nameModal').classList.remove('active');
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('resultLevel').textContent = selectedLevel === 'easy' ? 'Mudah' : selectedLevel === 'medium' ? 'Sedang' : 'Sulit';
+            document.getElementById('resultCorrect').textContent = correctAnswers;
+            document.getElementById('resultTotal').textContent = currentQuestions.length;
+            const accuracy = Math.round((correctAnswers / currentQuestions.length) * 100);
+            document.getElementById('resultAccuracy').textContent = accuracy + '%';
+
+            let message = '';
+            if (accuracy >= 90) message = 'Luar Biasa! Kamu Master Lingkungan! 🌟';
+            else if (accuracy >= 70) message = 'Hebat! Pengetahuan Sangat Baik! 🎉';
+            else if (accuracy >= 50) message = 'Bagus! Terus Belajar! 👍';
+            else message = 'Jangan Menyerah! Coba Lagi! 💪';
+
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('resultsScreen').classList.add('active');
+
+            renderLeaderboard('resultsLeaderboard');
+        }
+
+        function restartQuiz() {
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('resultsScreen').style.display = 'none';
+            startQuiz();
+        }
+
+        function changeDifficulty() {
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('homeScreen').style.display = 'block';
+            document.getElementById('homeScreen').classList.add('active');
+            selectedLevel = null;
+            document.querySelectorAll('.uqz-level-card').forEach(card => {
+                card.classList.remove('uqz-selected');
+            });
+            document.getElementById('startBtn').disabled = true;
+        }
+
+        function renderLeaderboard(containerId) {
+            const container = document.getElementById(containerId);
+            
+            if (currentRecords.length === 0) {
+                container.innerHTML = '<div class="empty-leaderboard">Belum ada skor tersimpan. Jadilah yang pertama! 🏆</div>';
+                return;
+            }
+
+            const sorted = [...currentRecords].sort((a, b) => b.score - a.score).slice(0, 10);
+            
+            container.innerHTML = sorted.map((record, index) => `
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">${index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1)}</div>
+                    <div class="leaderboard-info">
+                        <div class="leaderboard-name">${record.player_name}</div>
+                        <div class="leaderboard-level">${record.level === 'easy' ? 'Mudah' : record.level === 'medium' ? 'Sedang' : 'Sulit'} · ${record.correct_answers}/${record.total_questions}</div>
+                    </div>
+                    <div class="leaderboard-score">${record.score}</div>
+                </div>
+            `).join('');
+        }
+
+        const dataHandler = {
+            onDataChanged(data) {
+                currentRecords = data;
+                renderLeaderboard('leaderboardList');
+                if (document.getElementById('resultsScreen').classList.contains('active')) {
+                    renderLeaderboard('resultsLeaderboard');
+                }
+            }
+        };
+
+        async function onConfigChange(config) {
+            document.body.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
+            
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = 'Inter, Segoe UI, sans-serif';
+
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            document.body.style.fontSize = `${baseSize}px`;
+
+            document.getElementById('mainTitle').innerHTML = (config.main_title || defaultConfig.main_title).replace('Tantangan', '<span>Tantangan</span>');
+            document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+            document.getElementById('startButtonText').textContent = config.start_button_text || defaultConfig.start_button_text;
+
+            const allButtons = document.querySelectorAll('.uqz-start-btn, .quiz-nav-btn, .results-btn.primary, .name-modal-btn');
+            allButtons.forEach(btn => {
+                btn.style.background = `linear-gradient(90deg, ${config.primary_action_color || defaultConfig.primary_action_color}, ${config.primary_action_color || defaultConfig.primary_action_color})`;
+                btn.style.color = config.background_color || defaultConfig.background_color;
+            });
+
+            const surfaces = document.querySelectorAll('.uqz-badge, .uqz-level-card, .uqz-features, .uqz-tips, .leaderboard, .quiz-header, .question-card, .results-stats, .name-modal-content');
+            surfaces.forEach(surface => {
+                surface.style.background = `rgba(255, 255, 255, 0.15)`;
+                surface.style.backdropFilter = 'blur(10px)';
+            });
+
+            document.querySelectorAll('.uqz-header h1, .uqz-header p, .uqz-levels h3, .uqz-features h3, .uqz-tips h3, .question-text, .results-message').forEach(el => {
+                el.style.color = config.text_color || defaultConfig.text_color;
+            });
+
+            const icons = document.querySelectorAll('.uqz-feature-item i, .quiz-timer, .results-score, .leaderboard-score');
+            icons.forEach(icon => {
+                icon.style.color = config.primary_action_color || defaultConfig.primary_action_color;
+            });
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["main_title", config.main_title || defaultConfig.main_title],
+                    ["subtitle", config.subtitle || defaultConfig.subtitle],
+                    ["start_button_text", config.start_button_text || defaultConfig.start_button_text]
+                ])
+            });
+        }
+
+        (async () => {
+            if (window.dataSdk) {
+                const initResult = await window.dataSdk.init(dataHandler);
+                if (!initResult.isOk) {
+                    console.error("Failed to initialize data SDK");
+                }
+            }
+
+            if (window.elementSdk && window.elementSdk.config) {
+                await onConfigChange(window.elementSdk.config);
+            }
+        })();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a7b214357bdea7d',t:'MTc2NDY4MTcxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

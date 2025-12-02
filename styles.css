@@ -1620,8 +1620,8 @@ footer {
   left: 50%;
   
   /* Cover penuh di semua layar */
-  width: 100%;
-  height: 100%;
+  width: 100vh;
+  height: 100vh;
   
   object-fit: cover;
   transform: translate(-50%, -50%);

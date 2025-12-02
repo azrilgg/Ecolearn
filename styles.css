@@ -1624,7 +1624,6 @@ footer {
   height: 100%;
 
   object-fit: cover;
-  object-position: center;
   transform: translate(-50%, -50%);
 
   z-index: -1;

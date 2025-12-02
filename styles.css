@@ -3549,7 +3549,7 @@ RESPONSIVE BREAKPOINTS
 .ultra-hero-title {
   font-size: clamp(2.1rem, 5vw, 3.3rem);
   font-weight: 700;
-  color: #1d1d1d;
+  color: #F5F7FA;
   line-height: 1.25;
   margin-bottom: 1rem;
 }
@@ -3568,7 +3568,7 @@ RESPONSIVE BREAKPOINTS
 /* Subtitle */
 .ultra-hero-subtitle {
   font-size: 1.05rem;
-  color: #4e4e4e;
+  color: #F5F7FA;
   max-width: 560px;
   margin: 0 auto 2rem;
   line-height: 1.7;

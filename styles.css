@@ -3388,3 +3388,121 @@ RESPONSIVE BREAKPOINTS
         font-size: 14px;
     }
 }
+
+.lb-wrapper {
+    font-family: 'Poppins', sans-serif;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.lb-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.lb-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #D8F9E5;
+    color: #059E55;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.lb-title {
+    font-size: 32px;
+    margin: 10px 0;
+    font-weight: 700;
+}
+.lb-title span { color: #06C167; }
+
+.lb-desc {
+    color: #666;
+    font-size: 15px;
+}
+
+/* TABS (CSS ONLY) */
+.lb-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.lb-tabs input { display: none; }
+
+.lb-tab {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid #06C167;
+    cursor: pointer;
+    font-weight: 600;
+    color: #06C167;
+    transition: .3s;
+}
+
+.lb-tabs input:checked + .lb-tab {
+    background: #06C167;
+    color: white;
+}
+
+/* LIST */
+.lb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.lb-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.lb-item.top1 { background: #FFFAD1; }
+.lb-item.top2 { background: #E8F7EB; }
+.lb-item.top3 { background: #FFF3D8; }
+
+.rank {
+    font-weight: 700;
+    color: #06C167;
+    width: 35px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 3px solid #E5F7EE;
+}
+
+.info { flex: 1; }
+
+.name {
+    font-weight: 600;
+    color: #222;
+}
+
+.meta {
+    font-size: 13px;
+    color: #666;
+}
+
+.medal {
+    font-weight: 700;
+}
+.gold { color: #D4AF37; }
+.silver { color: #C0C0C0; }
+.bronze { color: #CD7F32; }
+
+@media (max-width: 600px) {
+    .avatar { width: 40px; height: 40px; }
+    .rank { width: 28px; }
+    .name { font-size: 14px; }
+}

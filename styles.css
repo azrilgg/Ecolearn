@@ -3658,3 +3658,19 @@ RESPONSIVE BREAKPOINTS
   position: relative;
   overflow: hidden;
 }
+
+.ultra-kontak-section {
+  width: 100%;
+  min-height: 100vh;
+  background: url("image/kontak-bg.jpg"), linear-gradient(#e9fff2, #d9fbe5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}

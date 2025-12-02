@@ -89,132 +89,135 @@
       </div>
     </div>
   </section>
-<section class="quiz-wrapper">
 
-    <!-- TOP BADGE -->
-    <div class="quiz-badge" data-aos="fade-down">
+  <section class="uqz-wrapper" id="uqz-section">
+
+    <!-- BADGE -->
+    <div class="uqz-badge" data-aos="fade-down">
         <i class="fa-solid fa-medal"></i> Quiz Challenge
     </div>
 
     <!-- HEADER -->
-    <div class="quiz-header" data-aos="fade-up">
+    <div class="uqz-header" data-aos="fade-up">
         <h1>Siap untuk <span>Tantangan</span>?</h1>
-        <p>Uji pengetahuanmu tentang pengelolaan sampah dan lingkungan dengan quiz interaktif yang
-           seru dan edukatif!</p>
+        <p>
+            Uji pengetahuanmu tentang pengelolaan sampah dan lingkungan dengan quiz interaktif yang
+            seru, edukatif, dan menantang!
+        </p>
     </div>
 
-    <!-- LEVEL CARD -->
-    <div class="level-section" data-aos="fade-up">
+    <!-- LEVEL SELECTOR -->
+    <div class="uqz-levels" data-aos="fade-up">
 
         <h3><i class="fa-solid fa-bullseye"></i> Pilih Tingkat Kesulitan</h3>
 
-        <div class="level-card easy" onclick="chooseLevel('easy')">
-            <div class="left">
+        <div class="uqz-level-card uqz-easy" onclick="uqzChooseLevel('easy')">
+            <div class="uqz-l-left">
                 <h4>Mudah <span>10–15 poin</span></h4>
-                <p>Pertanyaan dasar tentang sampah dan lingkungan</p>
-                <div class="meta"><i class="fa-solid fa-leaf"></i> 5 pertanyaan · ⏱ 30s</div>
+                <p>Pertanyaan dasar tentang sampah & lingkungan</p>
+                <div class="uqz-meta"><i class="fa-solid fa-leaf"></i> 5 pertanyaan · ⏱ 30s</div>
             </div>
-            <div class="right">
+            <div class="uqz-l-right">
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
 
-        <div class="level-card medium" onclick="chooseLevel('medium')">
-            <div class="left">
+        <div class="uqz-level-card uqz-medium" onclick="uqzChooseLevel('medium')">
+            <div class="uqz-l-left">
                 <h4>Sedang <span>15–20 poin</span></h4>
-                <p>Pengetahuan mendalam tentang pengelolaan sampah</p>
-                <div class="meta"><i class="fa-solid fa-fire"></i> 10 pertanyaan · ⏱ 25s</div>
+                <p>Pengetahuan menengah tentang pengelolaan sampah</p>
+                <div class="uqz-meta"><i class="fa-solid fa-fire"></i> 10 pertanyaan · ⏱ 25s</div>
             </div>
-            <div class="right">
+            <div class="uqz-l-right">
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
 
-        <div class="level-card hard" onclick="chooseLevel('hard')">
-            <div class="left">
+        <div class="uqz-level-card uqz-hard" onclick="uqzChooseLevel('hard')">
+            <div class="uqz-l-left">
                 <h4>Sulit <span>20–25 poin</span></h4>
-                <p>Tantangan untuk ahli lingkungan sejati</p>
-                <div class="meta"><i class="fa-solid fa-bolt"></i> 20 pertanyaan · ⏱ 20s</div>
+                <p>Tantangan untuk kamu yang sudah jago lingkungan</p>
+                <div class="uqz-meta"><i class="fa-solid fa-bolt"></i> 20 pertanyaan · ⏱ 20s</div>
             </div>
-            <div class="right">
+            <div class="uqz-l-right">
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
 
-        <button class="start-btn" onclick="startQuiz()" id="startBtn">
+        <button class="uqz-start-btn" onclick="uqzStartQuiz()" id="uqzStartBtn">
             <i class="fa-solid fa-play"></i> Mulai Quiz Sekarang!
         </button>
 
-        <p class="free-tag">Gratis · Tidak perlu daftar · Hasil langsung</p>
+        <p class="uqz-free-tag">GRATIS · Tidak perlu daftar · Hasil langsung keluar</p>
     </div>
 
-    <!-- FITUR -->
-    <div class="features" data-aos="fade-up">
+    <!-- FEATURES -->
+    <div class="uqz-features" data-aos="fade-up">
         <h3><i class="fa-solid fa-sparkles"></i> Fitur Quiz</h3>
 
-        <div class="feature-item">
+        <div class="uqz-feature-item">
             <i class="fa-solid fa-stopwatch"></i>
             <div>
                 <h4>Timer Challenge</h4>
-                <p>Setiap pertanyaan memiliki batas waktu</p>
+                <p>Waktu semakin cepat setiap level meningkat</p>
             </div>
         </div>
 
-        <div class="feature-item">
+        <div class="uqz-feature-item">
             <i class="fa-solid fa-trophy"></i>
             <div>
                 <h4>Sistem Poin</h4>
-                <p>Dapatkan poin berdasarkan tingkat kesulitan</p>
+                <p>Dapatkan poin lebih besar untuk soal sulit</p>
             </div>
         </div>
 
-        <div class="feature-item">
+        <div class="uqz-feature-item">
             <i class="fa-solid fa-book-open"></i>
             <div>
-                <h4>Penjelasan Detail</h4>
-                <p>Pelajari jawaban yang benar setelah menjawab</p>
+                <h4>Penjelasan</h4>
+                <p>Lihat jawaban benar di akhir sesi</p>
             </div>
         </div>
 
-        <div class="feature-item">
+        <div class="uqz-feature-item">
             <i class="fa-solid fa-ranking-star"></i>
             <div>
-                <h4>Ranking System</h4>
+                <h4>Leaderboard</h4>
                 <p>Bandingkan skor dengan pemain lain</p>
             </div>
         </div>
     </div>
 
     <!-- TIPS -->
-    <div class="tips-section" data-aos="fade-up">
-        <h3><i class="fa-solid fa-lightbulb"></i> Tips Sukses</h3>
+    <div class="uqz-tips" data-aos="fade-up">
+        <h3><i class="fa-solid fa-lightbulb"></i> Tips Bermain</h3>
 
         <ul>
-            <li>📝 Baca pertanyaan dengan teliti sebelum menjawab</li>
-            <li>⏱ Manfaatkan waktu dengan bijak</li>
-            <li>📘 Pelajari penjelasan setelah menjawab</li>
-            <li>🔄 Coba beberapa tingkat kesulitan</li>
+            <li>📝 Baca soal secara teliti</li>
+            <li>⏱ Gunakan waktu sebaik mungkin</li>
+            <li>📘 Pelajari jawaban benar</li>
+            <li>🔄 Coba semua tingkat kesulitan</li>
         </ul>
     </div>
 
-    <!-- STATISTIK -->
-    <div class="stats-section" data-aos="fade-up">
+    <!-- STATS -->
+    <div class="uqz-stats" data-aos="fade-up">
         <h3>Statistik Quiz</h3>
 
-        <div class="stats-list">
-            <div class="item">
+        <div class="uqz-stats-grid">
+            <div class="uqz-stat-item">
                 <p>Total Pemain</p>
                 <h2>12,547</h2>
             </div>
-            <div class="item">
+            <div class="uqz-stat-item">
                 <p>Quiz Hari Ini</p>
                 <h2>234</h2>
             </div>
-            <div class="item">
+            <div class="uqz-stat-item">
                 <p>Skor Tertinggi</p>
                 <h2>2,450</h2>
             </div>
-            <div class="item">
+            <div class="uqz-stat-item">
                 <p>Rata-rata Skor</p>
                 <h2>1,280</h2>
             </div>
@@ -223,36 +226,35 @@
 
 </section>
 
-
 <!-- QUIZ BOX -->
-<section id="quizBox" class="hidden quiz-box">
-    <div class="quiz-card">
-        <div class="top">
-            <div id="progressBar"><div id="progress"></div></div>
-            <div class="timer">⏱ <span id="timer">20</span>s</div>
+<section id="uqzQuizBox" class="uqz-hidden">
+    <div class="uqz-quiz-card">
+
+        <div class="uqz-top">
+            <div class="uqz-progress">
+                <div id="uqzProgressFill"></div>
+            </div>
+            <div class="uqz-timer">⏱ <span id="uqzTimer">20</span>s</div>
         </div>
 
-        <h2 id="questionText">Question?</h2>
-        <div id="optionsBox" class="options"></div>
+        <h2 id="uqzQuestionText"></h2>
+        <div id="uqzOptionsBox" class="uqz-options"></div>
 
-        <button id="nextBtn" onclick="nextQuestion()" class="next-btn" disabled>
-            Selanjutnya
-        </button>
+        <button id="uqzNextBtn" class="uqz-next-btn" disabled>Selanjutnya</button>
     </div>
 </section>
 
 <!-- RESULT -->
-<section id="quizResult" class="hidden result-box">
-    <div class="result-card">
-        <h2 id="scoreText"></h2>
-        <p id="scoreMessage"></p>
+<section id="uqzResultBox" class="uqz-hidden">
+    <div class="uqz-result-card">
+        <h2 id="uqzScoreText"></h2>
+        <p id="uqzScoreMessage"></p>
 
-        <button onclick="restartQuiz()" class="restart-btn">
+        <button onclick="uqzRestartQuiz()" class="uqz-restart-btn">
             Coba Lagi
         </button>
     </div>
 </section>
-  
 
   <!-- QUIZ SECTION -->
   <section class="quiz-section">

@@ -275,165 +275,155 @@ faqItems.forEach(item => {
   });
 });
 
-/* =====================================================
-   UQZ – QUIZ SYSTEM (100% NO CONFLICT)
-===================================================== */
+            
 
-// STATE
-let uqzLevel = null;
-let uqzIndex = 0;
+/* ============================================================
+   ECOLEARN QUIZ – ULTRA SAFE & CLEAN JAVASCRIPT
+   Prefix: uqz-
+============================================================ */
+
+/* ===========================
+   ELEMENTS
+=========================== */
+const uqzSection       = document.getElementById("uqz-section");
+const uqzQuizBox       = document.getElementById("uqzQuizBox");
+const uqzResultBox     = document.getElementById("uqzResultBox");
+
+const uqzQuestionText  = document.getElementById("uqzQuestionText");
+const uqzOptionsBox    = document.getElementById("uqzOptionsBox");
+const uqzNextBtn       = document.getElementById("uqzNextBtn");
+
+const uqzProgressFill  = document.getElementById("uqzProgressFill");
+const uqzTimerEl       = document.getElementById("uqzTimer");
+
+const uqzScoreText     = document.getElementById("uqzScoreText");
+const uqzScoreMessage  = document.getElementById("uqzScoreMessage");
+
+/* ===========================
+   VARIABLES
+=========================== */
+let uqzCurrentLevel = null;
+let uqzQuestionIndex = 0;
 let uqzScore = 0;
-let uqzTime = 0;
-let uqzTimerId = null;
+let uqzTimeLeft = 0;
+let uqzTimerInterval = null;
 
-// DOM
-const uqzSection = document.querySelector(".uqz-wrapper");
-const uqzQuizBox = document.getElementById("uqzQuizBox");
-const uqzResultBox = document.getElementById("uqzResultBox");
-
-const uqzQuestionText = document.getElementById("uqzQuestionText");
-const uqzOptionsBox = document.getElementById("uqzOptionsBox");
-const uqzNextBtn = document.getElementById("uqzNextBtn");
-
-const uqzProgressFill = document.getElementById("uqzProgressFill");
-const uqzTimerEl = document.getElementById("uqzTimer");
-
-const uqzScoreText = document.getElementById("uqzScoreText");
-const uqzScoreMessage = document.getElementById("uqzScoreMessage");
-
-
-// =====================================================
-// QUIZ BANK (5 Easy – 10 Medium – 20 Hard)
-// =====================================================
-const UQZ_BANK = {
+/* ===========================
+   QUIZ DATA BY LEVEL
+=========================== */
+const uqzLevels = {
     easy: {
         time: 30,
         questions: [
-            { q: "Apa warna tempat sampah organik?", o: ["Hijau", "Merah", "Kuning"], a: 0 },
-            { q: "Sampah daun termasuk kategori?", o: ["Anorganik", "Organik", "B3"], a: 1 },
-            { q: "Apa bentuk bumi?", o: ["Kotak", "Bulat", "Segitiga"], a: 1 },
-            { q: "Apa sumber energi terbesar?", o: ["Gas", "Matahari", "Api"], a: 1 },
-            { q: "Botol plastik termasuk?", o: ["Organik", "Anorganik", "B3"], a: 1 }
+            { q: "Apa warna tong sampah organik?", o: ["Merah", "Hijau", "Kuning"], a: 1 },
+            { q: "Apa contoh sampah organik?", o: ["Plastik", "Daun", "Botol"], a: 1 },
+            { q: "Apa manfaat daur ulang?", o: ["Menambah sampah", "Mengurangi sampah", "Membuat sampah bau"], a: 1 },
+            { q: "Apa gas utama pemanasan global?", o: ["Oksigen", "CO2", "Hidrogen"], a: 1 },
+            { q: "Energi ramah lingkungan?", o: ["Surya", "Batubara", "Bensin"], a: 0 }
         ]
     },
-
     medium: {
         time: 25,
         questions: Array.from({ length: 10 }).map((_, i) => ({
-            q: `Soal tingkat sedang #${i + 1}`,
-            o: ["Pilihan A", "Pilihan B", "Pilihan C"],
+            q: `Pertanyaan tingkat sedang #${i + 1}, mana jawaban paling tepat?`,
+            o: ["Jawaban A", "Jawaban B", "Jawaban C"],
             a: Math.floor(Math.random() * 3)
         }))
     },
-
     hard: {
         time: 20,
         questions: Array.from({ length: 20 }).map((_, i) => ({
-            q: `Soal tingkat sulit #${i + 1}`,
-            o: ["Jawaban 1", "Jawaban 2", "Jawaban 3"],
+            q: `Pertanyaan sulit #${i + 1}, mana jawaban benar?`,
+            o: ["Pilihan 1", "Pilihan 2", "Pilihan 3"],
             a: Math.floor(Math.random() * 3)
         }))
     }
 };
 
-
-// =====================================================
-// SELECT LEVEL
-// =====================================================
-function uqzChooseLevel(lv) {
-    uqzLevel = lv;
-
-    document.querySelectorAll(".uqz-level-card").forEach(c => c.classList.remove("uqz-active"));
-    document.querySelector(`.uqz-${lv}`).classList.add("uqz-active");
+/* ===========================
+   CHOOSE LEVEL
+=========================== */
+function uqzChooseLevel(level) {
+    uqzCurrentLevel = level;
+    console.log("Level dipilih:", level);
 }
 
-
-
-// =====================================================
-// START QUIZ
-// =====================================================
+/* ===========================
+   START QUIZ
+=========================== */
 function uqzStartQuiz() {
-
-    if (!uqzLevel) {
-        alert("Pilih level dulu!");
+    if (!uqzCurrentLevel) {
+        alert("Pilih level terlebih dahulu!");
         return;
     }
 
-    uqzIndex = 0;
+    // Reset data
     uqzScore = 0;
+    uqzQuestionIndex = 0;
+    uqzTimeLeft = uqzLevels[uqzCurrentLevel].time;
 
-    uqzSection.classList.add("uqz-hidden");
+    // Hide level section
+    uqzSection.style.display = "none";
+
+    // Show quiz
     uqzQuizBox.classList.remove("uqz-hidden");
 
-    uqzTime = UQZ_BANK[uqzLevel].time;
+    // Start timer
     uqzStartTimer();
 
+    // Load first question
     uqzLoadQuestion();
 }
 
-
-
-// =====================================================
-// TIMER
-// =====================================================
+/* ===========================
+   TIMER
+=========================== */
 function uqzStartTimer() {
+    uqzTimerEl.textContent = uqzTimeLeft;
 
-    clearInterval(uqzTimerId);
+    uqzTimerInterval = setInterval(() => {
+        uqzTimeLeft--;
+        uqzTimerEl.textContent = uqzTimeLeft;
 
-    uqzTimerEl.textContent = uqzTime;
-
-    uqzTimerId = setInterval(() => {
-
-        uqzTimerEl.textContent = uqzTime;
-        uqzTime--;
-
-        if (uqzTime < 0) {
-            clearInterval(uqzTimerId);
-            uqzNextQuestion();
+        if (uqzTimeLeft <= 0) {
+            clearInterval(uqzTimerInterval);
+            uqzFinishQuiz();
         }
-
     }, 1000);
 }
 
-
-
-// =====================================================
-// LOAD QUESTION
-// =====================================================
+/* ===========================
+   LOAD QUESTION
+=========================== */
 function uqzLoadQuestion() {
-    const qData = UQZ_BANK[uqzLevel].questions[uqzIndex];
+    const data = uqzLevels[uqzCurrentLevel].questions[uqzQuestionIndex];
 
-    uqzQuestionText.textContent = qData.q;
-
+    uqzQuestionText.textContent = data.q;
     uqzOptionsBox.innerHTML = "";
     uqzNextBtn.disabled = true;
 
-    qData.o.forEach((opt, i) => {
+    data.o.forEach((opt, idx) => {
         const btn = document.createElement("button");
-        btn.className = "uqz-opt-btn";
+        btn.className = "uqz-option-btn";
         btn.textContent = opt;
 
-        btn.onclick = () => uqzSelectAnswer(i, btn);
+        btn.onclick = () => uqzSelectAnswer(idx, btn);
 
         uqzOptionsBox.appendChild(btn);
     });
 
-    // Progress
-    const total = UQZ_BANK[uqzLevel].questions.length;
-    uqzProgressFill.style.width = ((uqzIndex) / total) * 100 + "%";
+    uqzUpdateProgress();
 }
 
+/* ===========================
+   SELECT ANSWER
+=========================== */
+let uqzSelectedAnswer = null;
 
+function uqzSelectAnswer(index, btn) {
+    uqzSelectedAnswer = index;
 
-// =====================================================
-// SELECT ANSWER
-// =====================================================
-let uqzSelected = null;
-
-function uqzSelectAnswer(choice, btn) {
-    uqzSelected = choice;
-
-    document.querySelectorAll(".uqz-opt-btn")
+    document.querySelectorAll(".uqz-option-btn")
         .forEach(b => b.classList.remove("uqz-selected"));
 
     btn.classList.add("uqz-selected");
@@ -441,63 +431,55 @@ function uqzSelectAnswer(choice, btn) {
     uqzNextBtn.disabled = false;
 }
 
+/* ===========================
+   NEXT QUESTION
+=========================== */
+uqzNextBtn.addEventListener("click", () => {
+    const correct = uqzLevels[uqzCurrentLevel].questions[uqzQuestionIndex].a;
 
+    if (uqzSelectedAnswer === correct) uqzScore += 10;
 
-// =====================================================
-// NEXT QUESTION
-// =====================================================
-uqzNextBtn.addEventListener("click", uqzNextQuestion);
+    uqzQuestionIndex++;
 
-function uqzNextQuestion() {
-
-    const correct = UQZ_BANK[uqzLevel].questions[uqzIndex].a;
-    if (uqzSelected === correct) uqzScore++;
-
-    uqzIndex++;
-
-    if (uqzIndex >= UQZ_BANK[uqzLevel].questions.length) {
-        uqzFinish();
-        return;
+    if (uqzQuestionIndex < uqzLevels[uqzCurrentLevel].questions.length) {
+        uqzLoadQuestion();
+    } else {
+        uqzFinishQuiz();
     }
+});
 
-    uqzLoadQuestion();
+/* ===========================
+   PROGRESS BAR
+=========================== */
+function uqzUpdateProgress() {
+    const total = uqzLevels[uqzCurrentLevel].questions.length;
+    const percent = (uqzQuestionIndex / total) * 100;
+    uqzProgressFill.style.width = percent + "%";
 }
 
-
-
-// =====================================================
-// FINISH QUIZ
-// =====================================================
-function uqzFinish() {
-
-    clearInterval(uqzTimerId);
+/* ===========================
+   FINISH QUIZ
+=========================== */
+function uqzFinishQuiz() {
+    clearInterval(uqzTimerInterval);
 
     uqzQuizBox.classList.add("uqz-hidden");
     uqzResultBox.classList.remove("uqz-hidden");
 
-    const total = UQZ_BANK[uqzLevel].questions.length;
+    uqzScoreText.textContent = `Skor Kamu: ${uqzScore}`;
 
-    uqzScoreText.textContent = `Skor Kamu: ${uqzScore} / ${total}`;
+    let msg = "Mantap!";
+    if (uqzScore < 50) msg = "Tetap semangat!";
+    else if (uqzScore < 100) msg = "Bagus!";
+    else if (uqzScore < 150) msg = "Luar biasa!";
 
-    uqzScoreMessage.textContent =
-        uqzScore === total ? "Sempurna! Kamu jenius 🌟" :
-        uqzScore > total / 2 ? "Keren! Kamu paham lingkungan 👍" :
-        "Masih bisa lebih baik… coba lagi ya! 💪";
+    uqzScoreMessage.textContent = msg;
 }
 
-
-
-// =====================================================
-// RESTART
-// =====================================================
+/* ===========================
+   RESTART QUIZ
+=========================== */
 function uqzRestartQuiz() {
-
     uqzResultBox.classList.add("uqz-hidden");
-    uqzSection.classList.remove("uqz-hidden");
-
-    uqzLevel = null;
-    uqzIndex = 0;
-    uqzScore = 0;
-
-    document.querySelectorAll(".uqz-level-card").forEach(c => c.classList.remove("uqz-active"));
+    uqzSection.style.display = "block";
 }

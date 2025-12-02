@@ -311,6 +311,275 @@
   <!-- SCRIPT -->
   <script src="script.js"></script>
 
+  <script>
+/* ============================================================
+   SYSTEM 1 — UQZ QUIZ (Level: easy/medium/hard)
+============================================================ */
+let uqzLevel = null;
+let uqzIndex = 0;
+let uqzScore = 0;
+let uqzTimerValue = 20;
+let uqzTimerInterval = null;
+
+const uqzQuestions = {
+    easy: [
+        { q: "Apa warna sampah organik?", o: ["Hijau", "Merah", "Kuning"], a: 0 },
+        { q: "Apa itu kompos?", o: ["Pupuk alami", "Limbah plastik", "Air sabun"], a: 0 },
+        { q: "Sampah daun disebut?", o: ["Organik", "Anorganik", "B3"], a: 0 },
+        { q: "Botol plastik termasuk?", o: ["Organik", "Anorganik", "Gas"], a: 1 },
+        { q: "Manakah sampah organik?", o: ["Kertas", "Daun", "Botol"], a: 1 }
+    ],
+
+    medium: [
+        { q: "Plastik PET dapat didaur ulang menjadi?", o: ["Baju", "Sayur", "Batu"], a: 0 },
+        { q: "Apa fungsi bank sampah?", o: ["Menjual sampah bernilai", "Memusnahkan sampah", "Mengubur sampah"], a: 0 },
+        { q: "Limbah minyak goreng termasuk?", o: ["Organik", "Anorganik", "B3"], a: 2 },
+        { q: "Sampah kaca bisa menjadi?", o: ["Tanah", "Kaca baru", "Gas"], a: 1 },
+        { q: "Kode daur ulang plastik nomor 1 adalah?", o: ["PET", "HDPE", "PVC"], a: 0 },
+        { q: "Sampah medis termasuk?", o: ["Organik", "B3", "Plastik"], a: 1 },
+        { q: "Komposisi terbesar sampah rumah tangga?", o: ["Organik", "Metal", "Kaca"], a: 0 },
+        { q: "Sampah elektronik disebut?", o: ["PL", "DLP", "E-waste"], a: 2 },
+        { q: "Proses pengurangan sampah disebut?", o: ["Reduce", "Rotate", "Recover"], a: 0 },
+        { q: "Benda berikut yang bisa didaur ulang adalah?", o: ["Styrofoam", "Kaca", "Tisu"], a: 1 }
+    ],
+
+    hard: [
+        { q: "Apa fungsi insinerator?", o: ["Membakar sampah", "Menggiling sampah", "Mencuci sampah"], a: 0 },
+        { q: "Gas metana dari TPA dapat digunakan untuk?", o: ["Bahan bakar", "Air minum", "Pupuk"], a: 0 },
+        { q: "Plastik PP memiliki nomor daur ulang?", o: ["5", "3", "7"], a: 0 },
+        { q: "Metode LCA menganalisis?", o: ["Daur hidup produk", "Warna sampah", "Jumlah TPA"], a: 0 },
+        { q: "Sampah B3 berbahaya karena?", o: ["Toksik", "Murah", "Ringan"], a: 0 },
+        { q: "Proses composting membutuhkan?", o: ["Oksigen", "Gas CO2 saja", "Tidak butuh udara"], a: 0 },
+        { q: "Yang termasuk biohazard?", o: ["Darah", "Kertas", "Kardus"], a: 0 },
+        { q: "Plastik LDPE bernomor?", o: ["4", "6", "2"], a: 0 },
+        { q: "Metode RDF menghasilkan?", o: ["Bahan bakar padat", "Gas bersih", "Air"], a: 0 },
+        { q: "Sampah residu adalah?", o: ["Tak bisa didaur ulang", "Mudah didaur ulang", "Organik"], a: 0 },
+        { q: "Manakah contoh sampah B3?", o: ["Pestisida", "Buah", "Tanah"], a: 0 },
+        { q: "Sampah medis disterilkan dengan?", o: ["Autoclave", "Air panas", "Sabun"], a: 0 },
+        { q: "Reuse berarti?", o: ["Menggunakan ulang", "Membuang", "Mengubur"], a: 0 },
+        { q: "Sampah biomassa dapat digunakan untuk?", o: ["Energi", "Logam", "Kaca"], a: 0 },
+        { q: "Bioplastik terbuat dari?", o: ["Pati", "Besi", "Minyak bumi"], a: 0 },
+        { q: "Energi TPA berasal dari?", o: ["Gas metana", "Gas helium", "Ozon"], a: 0 },
+        { q: "Plastik No.7 adalah kategori?", o: ["Lainnya", "Organik", "B3"], a: 0 },
+        { q: "Pyrolysis menghasilkan?", o: ["Minyak", "Besi", "Tanah"], a: 0 },
+        { q: "Faktor utama composting?", o: ["C/N Ratio", "Kecepatan angin", "Tekanan"], a: 0 },
+        { q: "Limbah deterjen termasuk?", o: ["Kimia", "Organik", "Gas"], a: 0 }
+    ]
+};
+
+function uqzChooseLevel(level) {
+    uqzLevel = level;
+    document.getElementById("uqzStartBtn").disabled = false;
+}
+
+function uqzStartQuiz() {
+    document.querySelector(".uqz-levels").style.display = "none";
+    document.getElementById("uqzQuizBox").classList.remove("uqz-hidden");
+
+    uqzIndex = 0;
+    uqzScore = 0;
+
+    uqzLoadQuestion();
+    uqzStartTimer();
+}
+
+function uqzLoadQuestion() {
+    const q = uqzQuestions[uqzLevel][uqzIndex];
+    document.getElementById("uqzQuestionText").textContent = q.q;
+
+    const box = document.getElementById("uqzOptionsBox");
+    box.innerHTML = "";
+
+    q.o.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "uqz-option-btn";
+        btn.textContent = opt;
+        btn.onclick = () => uqzSelect(i);
+        box.appendChild(btn);
+    });
+
+    document.getElementById("uqzNextBtn").disabled = true;
+}
+
+function uqzSelect(i) {
+    const correct = uqzQuestions[uqzLevel][uqzIndex].a;
+    if (i === correct) uqzScore += 10;
+
+    document.querySelectorAll(".uqz-option-btn")[i].classList.add("selected");
+
+    document.getElementById("uqzNextBtn").disabled = false;
+}
+
+function uqzNext() {
+    uqzIndex++;
+    if (uqzIndex >= uqzQuestions[uqzLevel].length) return uqzFinish();
+
+    uqzLoadQuestion();
+    uqzStartTimer();
+}
+
+document.getElementById("uqzNextBtn").onclick = uqzNext;
+
+function uqzStartTimer() {
+    clearInterval(uqzTimerInterval);
+
+    let time = uqzLevel === "easy" ? 30 : uqzLevel === "medium" ? 25 : 20;
+
+    document.getElementById("uqzTimer").textContent = time;
+
+    const fill = document.getElementById("uqzProgressFill");
+    fill.style.width = "0%";
+
+    uqzTimerInterval = setInterval(() => {
+        time--;
+        document.getElementById("uqzTimer").textContent = time;
+
+        fill.style.width = ((time / 30) * 100) + "%";
+
+        if (time <= 0) {
+            clearInterval(uqzTimerInterval);
+            uqzNext();
+        }
+    }, 1000);
+}
+
+function uqzFinish() {
+    clearInterval(uqzTimerInterval);
+
+    document.getElementById("uqzQuizBox").classList.add("uqz-hidden");
+    document.getElementById("uqzResultBox").classList.remove("uqz-hidden");
+
+    document.getElementById("uqzScoreText").textContent =
+        `Skor Akhir: ${uqzScore} poin`;
+
+    document.getElementById("uqzScoreMessage").textContent =
+        uqzScore < 50 ? "Terus belajar ya!" :
+        uqzScore < 100 ? "Mantap, lumayan jago!" :
+        "Kamu master lingkungan!";
+}
+
+function uqzRestartQuiz() {
+    document.getElementById("uqzResultBox").classList.add("uqz-hidden");
+    document.querySelector(".uqz-levels").style.display = "block";
+}
+
+/* ============================================================
+   SYSTEM 2 — QUIZ BIASA (10 Soal)
+============================================================ */
+const quizData = [
+    { q: "Apa warna tempat sampah organik?", o: ["Hijau", "Biru", "Kuning"], a: 0 },
+    { q: "Sampah plastik termasuk?", o: ["Organik", "Anorganik", "Gas"], a: 1 },
+    { q: "Apa itu 3R?", o: ["Reduce Reuse Recycle", "Run Ride Roll", "Red Right Rule"], a: 0 },
+    { q: "Kompos berasal dari?", o: ["Sampah organik", "Sampah metal", "Sampah kaca"], a: 0 },
+    { q: "Mana yang tidak bisa didaur ulang?", o: ["Kaca", "Plastik", "Tisu"], a: 2 },
+    { q: "Apa fungsi bank sampah?", o: ["Jual sampah bernilai", "Buang sampah", "Bakar sampah"], a: 0 },
+    { q: "Sampah B3 adalah?", o: ["Berbahaya", "Basah", "Basi"], a: 0 },
+    { q: "Metal termasuk?", o: ["Organik", "Anorganik", "Cair"], a: 1 },
+    { q: "Sampah daun termasuk?", o: ["Organik", "Anorganik", "Plastik"], a: 0 },
+    { q: "Yang dapat didaur ulang?", o: ["Styrofoam", "Botol kaca", "Tisu"], a: 1 }
+];
+
+let qIndex = 0;
+let score = 0;
+
+function loadQuiz() {
+    const q = quizData[qIndex];
+    document.getElementById("quiz-question").textContent = q.q;
+
+    const options = document.getElementById("quiz-options");
+    options.innerHTML = "";
+
+    q.o.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option-btn";
+        btn.textContent = opt;
+        btn.onclick = () => selectOption(i);
+        options.appendChild(btn);
+    });
+
+    document.getElementById("quiz-progress-number").textContent = (qIndex + 1) + "/10";
+
+    document.getElementById("next-btn").disabled = true;
+
+    document.getElementById("progress-fill").style.width = ((qIndex) / 10) * 100 + "%";
+}
+
+function selectOption(i) {
+    const correct = quizData[qIndex].a;
+    if (i === correct) score += 10;
+
+    document.getElementById("next-btn").disabled = false;
+
+    document.querySelectorAll(".quiz-option-btn")[i].classList.add("selected");
+}
+
+document.getElementById("next-btn").onclick = () => {
+    qIndex++;
+    if (qIndex >= quizData.length) return finishQuiz();
+
+    loadQuiz();
+};
+
+function finishQuiz() {
+    document.getElementById("quiz-card").style.display = "none";
+    document.getElementById("quiz-result").style.display = "block";
+
+    document.getElementById("final-score").textContent = score;
+
+    const rank =
+        score >= 90 ? "S" :
+        score >= 70 ? "A" :
+        score >= 50 ? "B" :
+        "C";
+
+    document.getElementById("player-rank").textContent = rank;
+
+    saveLeaderboard(score);
+    showLeaderboard();
+}
+
+function saveLeaderboard(score) {
+    const list = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+
+    list.push({ score, date: new Date().toLocaleDateString() });
+
+    list.sort((a, b) => b.score - a.score);
+
+    if (list.length > 5) list.length = 5;
+
+    localStorage.setItem("leaderboard", JSON.stringify(list));
+}
+
+function showLeaderboard() {
+    const list = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+
+    const ul = document.getElementById("leaderboard-list");
+    ul.innerHTML = "";
+
+    list.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.score} poin — ${item.date}`;
+        ul.appendChild(li);
+    });
+
+    document.getElementById("leaderboard-box").style.display = "block";
+}
+
+document.getElementById("restart-btn").onclick = () => {
+    qIndex = 0;
+    score = 0;
+
+    document.getElementById("quiz-result").style.display = "none";
+    document.getElementById("leaderboard-box").style.display = "none";
+
+    document.getElementById("quiz-card").style.display = "block";
+
+    loadQuiz();
+};
+
+window.onload = loadQuiz;
+</script>
+
   <!-- AOS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>AOS.init({ duration: 900, once: true });</script>

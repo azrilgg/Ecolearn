@@ -275,8 +275,177 @@ faqItems.forEach(item => {
   });
 });
 
-// =========================================================
-// ECOLEARN — QUIZ LEVEL SYSTEM (NAMESPACED, NO CONFLICT)
-// =========================================================
+/* ======================================================
+   ULTRA QUIZ SYSTEM JS — NO CONFLICT VERSION
+   Prefix all : uqz-
+====================================================== */
 
-            
+// QUIZ DATA PER LEVEL
+const uqzQuestionSet = {
+    easy: {
+        time: 30,
+        questions: [
+            { q: "Apa tujuan utama dari EcoLearn?", o: ["Mengajarkan coding", "Mengajarkan lingkungan", "Mengajarkan matematika", "Mengajarkan kesehatan"], a: 1 },
+            { q: "Apa warna utama EcoLearn?", o: ["#ff0000", "#2ecc71", "#0000ff", "#f1c40f"], a: 1 },
+            { q: "Contoh langkah kecil menjaga bumi?", o: ["Buang sampah sembarangan", "Hemat listrik", "Bakar sampah plastik", "Boros air"], a: 1 },
+            { q: "Energi ramah lingkungan?", o: ["Solar", "Bensin", "PLTU", "Diesel"], a: 0 },
+            { q: "Gas pemanasan global?", o: ["Oksigen", "CO2", "Nitrogen", "Helium"], a: 1 }
+        ]
+    },
+
+    medium: {
+        time: 25,
+        questions: Array.from({ length: 10 }).map((_, i) => ({
+            q: `Pertanyaan sedang ke-${i + 1}: Apa jawaban paling benar?`,
+            o: ["Pilihan 1", "Pilihan 2", "Pilihan 3", "Pilihan 4"],
+            a: Math.floor(Math.random() * 4)
+        }))
+    },
+
+    hard: {
+        time: 20,
+        questions: Array.from({ length: 20 }).map((_, i) => ({
+            q: `Pertanyaan sulit ke-${i + 1}: Apa jawaban paling benar?`,
+            o: ["Pilihan 1", "Pilihan 2", "Pilihan 3"],
+            a: Math.floor(Math.random() * 3)
+        }))
+    }
+};
+
+/* ELEMENTS */
+const uqzQuizBox = document.getElementById("uqzQuizBox");
+const uqzQuestionText = document.getElementById("uqzQuestionText");
+const uqzOptionsBox = document.getElementById("uqzOptionsBox");
+const uqzNextBtn = document.getElementById("uqzNextBtn");
+const uqzTimerEl = document.getElementById("uqzTimer");
+const uqzProgressFill = document.getElementById("uqzProgressFill");
+
+const uqzResultBox = document.getElementById("uqzResultBox");
+const uqzScoreText = document.getElementById("uqzScoreText");
+const uqzScoreMessage = document.getElementById("uqzScoreMessage");
+
+let uqzCurrentQuestions = [];
+let uqzCurrentIndex = 0;
+let uqzScore = 0;
+let uqzTime = 20;
+let uqzCountDown;
+let uqzSelected = null;
+
+/* ==========================
+   CHOOSE LEVEL
+========================== */
+function uqzChooseLevel(level) {
+    uqzCurrentQuestions = uqzQuestionSet[level].questions;
+    uqzTime = uqzQuestionSet[level].time;
+    document.getElementById("uqzStartBtn").dataset.level = level;
+}
+
+/* ==========================
+   START QUIZ
+========================== */
+function uqzStartQuiz() {
+    const level = document.getElementById("uqzStartBtn").dataset.level;
+    if (!level) return alert("Pilih level dulu!");
+
+    uqzCurrentIndex = 0;
+    uqzScore = 0;
+
+    document.querySelector(".uqz-wrapper").style.display = "none";
+    uqzQuizBox.classList.remove("uqz-hidden");
+
+    uqzLoadQuestion();
+}
+
+/* ==========================
+   LOAD QUESTION
+========================== */
+function uqzLoadQuestion() {
+    clearInterval(uqzCountDown);
+
+    const q = uqzCurrentQuestions[uqzCurrentIndex];
+    uqzQuestionText.textContent = q.q;
+    uqzOptionsBox.innerHTML = "";
+    uqzSelected = null;
+
+    // TIMER
+    uqzTimerEl.textContent = uqzTime;
+    uqzCountDown = setInterval(() => {
+        uqzTimerEl.textContent--;
+        if (uqzTimerEl.textContent <= 0) {
+            clearInterval(uqzCountDown);
+            uqzNextBtn.click();
+        }
+    }, 1000);
+
+    // OPTIONS
+    q.o.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "uqz-option-btn";
+        btn.textContent = opt;
+
+        btn.onclick = () => uqzSelect(idx, btn);
+        uqzOptionsBox.appendChild(btn);
+    });
+
+    uqzUpdateProgress();
+    uqzNextBtn.disabled = true;
+}
+
+/* ==========================
+   SELECT ANSWER
+========================== */
+function uqzSelect(choice, btn) {
+    uqzSelected = choice;
+    uqzNextBtn.disabled = false;
+
+    document.querySelectorAll(".uqz-option-btn").forEach(b =>
+        b.classList.remove("uqz-selected")
+    );
+
+    btn.classList.add("uqz-selected");
+}
+
+/* ==========================
+   NEXT QUESTION
+========================== */
+uqzNextBtn.addEventListener("click", () => {
+    const correct = uqzCurrentQuestions[uqzCurrentIndex].a;
+    if (uqzSelected === correct) uqzScore += 10;
+
+    uqzCurrentIndex++;
+
+    if (uqzCurrentIndex < uqzCurrentQuestions.length) {
+        uqzLoadQuestion();
+    } else {
+        uqzFinish();
+    }
+});
+
+/* ==========================
+   PROGRESS
+========================== */
+function uqzUpdateProgress() {
+    const percent = (uqzCurrentIndex / uqzCurrentQuestions.length) * 100;
+    uqzProgressFill.style.width = percent + "%";
+}
+
+/* ==========================
+   FINISH QUIZ
+========================== */
+function uqzFinish() {
+    uqzQuizBox.classList.add("uqz-hidden");
+    uqzResultBox.classList.remove("uqz-hidden");
+
+    uqzScoreText.textContent = `Skormu: ${uqzScore}`;
+    uqzScoreMessage.textContent = uqzScore >= 50 
+        ? "Luar biasa! Kamu hebat 🔥"
+        : "Coba lagi, kamu pasti bisa!";
+}
+
+/* ==========================
+   RESTART
+========================== */
+function uqzRestartQuiz() {
+    uqzResultBox.classList.add("uqz-hidden");
+    document.querySelector(".uqz-wrapper").style.display = "block";
+}

@@ -275,207 +275,217 @@ faqItems.forEach(item => {
   });
 });
 
-// ==========================
-// EcoLearn Quiz JS
-// ==========================
+/* =========================================
+   ECOLEARN - QUIZ JAVASCRIPT (FULL)
+   ========================================= */
 
-// Namespace object untuk menghindari bentrok
-const uqz = {
-    currentLevel: null,
-    currentQuestionIndex: 0,
-    score: 0,
-    timer: null,
-    timeLeft: 0,
-    questions: {
-        easy: [
-            { question: "Apa yang dimaksud dengan 3R?", options: ["Reduce, Reuse, Recycle", "Run, Rest, Read", "Read, Reduce, Repeat"], answer: 0 },
-            { question: "Sampah organik contohnya?", options: ["Sayur, Buah", "Plastik, Botol", "Kertas, Karton"], answer: 0 },
-            { question: "Mengurangi sampah plastik dilakukan dengan?", options: ["Bawa tas sendiri", "Membeli plastik", "Membuang di sungai"], answer: 0 },
-            { question: "Tempat sampah organik berwarna?", options: ["Hijau", "Merah", "Biru"], answer: 0 },
-            { question: "Mengompos sampah artinya?", options: ["Mengubah sampah organik jadi pupuk", "Membuang sampah sembarangan", "Menyimpan plastik"], answer: 0 }
-        ],
-        medium: [
-            { question: "Apa keuntungan mendaur ulang kertas?", options: ["Mengurangi penebangan pohon", "Membuat polusi", "Meningkatkan sampah"], answer: 0 },
-            { question: "Sampah B3 adalah?", options: ["Bahan berbahaya & beracun", "Sampah rumah tangga", "Sampah organik"], answer: 0 },
-            { question: "Konsep Zero Waste artinya?", options: ["Tidak ada sampah", "Semua dibakar", "Semua dibuang ke laut"], answer: 0 },
-            { question: "Apa yang dimaksud pengomposan?", options: ["Menguraikan sampah organik menjadi pupuk", "Membuang sampah plastik ke sungai", "Mencuci sampah"], answer: 0 },
-            { question: "Contoh tindakan ramah lingkungan di sekolah?", options: ["Menanam pohon", "Membuang sampah sembarangan", "Membakar sampah"], answer: 0 },
-            { question: "Salah satu cara mengurangi sampah elektronik?", options: ["Mendaur ulang", "Membuang ke sungai", "Membakar"], answer: 0 },
-            { question: "Bank sampah berguna untuk?", options: ["Mengelola & menabung sampah", "Membuang sampah ke laut", "Membakar sampah"], answer: 0 },
-            { question: "Jenis sampah yang bisa didaur ulang?", options: ["Plastik, Kertas, Logam", "Sisa makanan", "Sampah B3"], answer: 0 },
-            { question: "Mengurangi penggunaan air dengan?", options: ["Matikan keran saat tidak dipakai", "Biarkan terus mengalir", "Gunakan air sembarangan"], answer: 0 },
-            { question: "Apa arti reduce pada 3R?", options: ["Mengurangi penggunaan barang", "Membakar sampah", "Membuang sampah ke sungai"], answer: 0 }
-        ],
-        hard: [
-            { question: "Metode composting paling cepat?", options: ["Vermicomposting", "Bokashi", "Manual"], answer: 1 },
-            { question: "Limbah plastik paling sulit terurai dalam?", options: ["500–1000 tahun", "1 tahun", "10 tahun"], answer: 0 },
-            { question: "Emisi gas rumah kaca terbesar dari?", options: ["Transportasi & energi", "Daur ulang", "Menanam pohon"], answer: 0 },
-            { question: "Manfaat E-waste management?", options: ["Mengurangi toksin & limbah elektronik", "Meningkatkan limbah elektronik", "Tidak ada manfaat"], answer: 0 },
-            { question: "Contoh prinsip circular economy?", options: ["Menggunakan kembali bahan untuk produk baru", "Membuang semua sampah", "Membakar limbah"], answer: 0 },
-            { question: "Jenis sampah yang perlu dipisahkan sebelum diolah?", options: ["Organik, Anorganik, B3", "Semuanya dicampur", "Hanya plastik"], answer: 0 },
-            { question: "Teknologi untuk mengubah sampah jadi energi?", options: ["Waste to Energy", "Composting", "Landfill"], answer: 0 },
-            { question: "Apa yang dimaksud biodegradable?", options: ["Bisa terurai secara alami", "Tidak bisa diolah", "Membuat polusi"], answer: 0 },
-            { question: "Salah satu indikator lingkungan sehat?", options: ["Udara bersih", "Bau sampah", "Air kotor"], answer: 0 },
-            { question: "Apa tujuan dari pengolahan limbah terpadu?", options: ["Mengurangi dampak negatif terhadap lingkungan", "Menimbulkan polusi", "Membuang sembarangan"], answer: 0 },
-            { question: "Konsep extended producer responsibility berarti?", options: ["Produsen bertanggung jawab terhadap limbah produknya", "Masyarakat bertanggung jawab sendiri", "Pemerintah tidak ikut campur"], answer: 0 },
-            { question: "Teknik reduce di sekolah?", options: ["Mengurangi penggunaan kertas", "Membakar kertas", "Membuang kertas ke sungai"], answer: 0 },
-            { question: "Apa itu landfill?", options: ["Tempat pembuangan akhir sampah", "Daur ulang sampah plastik", "Pengomposan"], answer: 0 },
-            { question: "Jenis pupuk dari sampah organik?", options: ["Kompos", "Plastik", "Semen"], answer: 0 },
-            { question: "Fungsi incinerator?", options: ["Membakar sampah menjadi energi", "Membuat kompos", "Menimbun sampah"], answer: 0 },
-            { question: "Contoh inovasi pengurangan sampah?", options: ["Botol refill", "Botol sekali pakai", "Makanan cepat saji"], answer: 0 },
-            { question: "Daur ulang kaca menghasilkan?", options: ["Botol baru", "Plastik baru", "Kertas baru"], answer: 0 },
-            { question: "Apa manfaat green building?", options: ["Menghemat energi & ramah lingkungan", "Meningkatkan polusi", "Tidak ada manfaat"], answer: 0 },
-            { question: "Jenis energi terbarukan dari limbah?", options: ["Biogas", "Batu bara", "Minyak bumi"], answer: 0 },
-            { question: "Prinsip reduce dalam kehidupan sehari-hari?", options: ["Kurangi penggunaan plastik sekali pakai", "Gunakan plastik sebanyak-banyaknya", "Bakar sampah"], answer: 0 }
-        ]
-    }
-};
+let uqzLevel = null;
+let uqzQuestions = [];
+let uqzIndex = 0;
+let uqzScore = 0;
+let uqzTimerValue = 20;
+let uqzTimerInterval = null;
 
-// ==========================
-// Pilih Level
-// ==========================
+/* ==============================
+   1. PILIH LEVEL
+============================== */
 function uqzChooseLevel(level) {
-    uqz.currentLevel = level;
+    uqzLevel = level;
 
-    // Highlight level yang dipilih
-    document.querySelectorAll(".uqz-level-card").forEach(card => {
-        card.classList.remove("selected");
-    });
-    document.querySelector(`.uqz-${level}`).classList.add("selected");
-
-    // Aktifkan tombol start
-    document.getElementById("uqzStartBtn").disabled = false;
+    const startBtn = document.getElementById("uqzStartBtn");
+    startBtn.style.display = "block";
+    startBtn.innerHTML = `<i class="fa-solid fa-play"></i> Mulai Level: ${level.toUpperCase()}`;
 }
 
-// ==========================
-// Start Quiz
-// ==========================
+/* ==============================
+   2. DATA SOAL
+============================== */
+const uqzBank = {
+    easy: [
+        { q: "Apa warna tempat sampah organik?", o: ["Merah", "Hijau", "Biru"], a: 1 },
+        { q: "Sampah plastik termasuk kategori?", o: ["Organik", "Anorganik", "B3"], a: 1 },
+        { q: "3R adalah singkatan dari Reduce, Reuse, dan…", o: ["Recycle", "Replace", "Restore"], a: 0 },
+        { q: "Kulit buah termasuk sampah…", o: ["Organik", "Anorganik", "B3"], a: 0 },
+        { q: "Botol kaca termasuk sampah…", o: ["Organik", "Kaca", "Anorganik"], a: 2 }
+    ],
+
+    medium: [
+        { q: "Apa yang dimaksud dengan kompos?", o: ["Pupuk organik", "Sampah plastik", "Gas metana"], a: 0 },
+        { q: "Manakah contoh Reduce?", o: ["Memakai ulang tas", "Mengurangi plastik", "Mendaur ulang kertas"], a: 1 },
+        { q: "Sampah B3 termasuk…", o: ["Berbahaya", "Biasa", "Organik"], a: 0 },
+        { q: "Daun kering dapat dijadikan…", o: ["Kompos", "Plastik", "Logam"], a: 0 },
+        { q: "Pembakaran sampah plastik menghasilkan…", o: ["Oksigen", "Dioxin", "Nitrogen"], a: 1 },
+        { q: "Bank sampah bertujuan…", o: ["Mengumpulkan sampah", "Mengolah limbah B3", "Membersihkan air"], a: 0 },
+        { q: "Sampah elektronik disebut…", o: ["E-waste", "Digiplastik", "Tech-trash"], a: 0 },
+        { q: "Pemilahan sampah dilakukan untuk…", o: ["Menghemat listrik", "Memudahkan daur ulang", "Membuat sampah lebih banyak"], a: 1 },
+        { q: "Plastik sekali pakai contohnya…", o: ["Botol minum ulang", "Sedotan plastik", "Tas kain"], a: 1 },
+        { q: "Penyebab utama sampah laut?", o: ["Gempa", "Aktivitas manusia", "Ikan"], a: 1 }
+    ],
+
+    hard: [
+        { q: "Pemanasan global dipicu oleh gas rumah kaca, terutama…", o: ["CO₂", "H₂O", "O₂"], a: 0 },
+        { q: "Metode daur ulang plastik PET adalah…", o: ["Extrusion", "Pyrolysis", "Hydrolysis"], a: 1 },
+        { q: "Limbah B3 harus diolah menggunakan metode…", o: ["Landfill biasa", "Pengolahan khusus", "Dibuang ke sungai"], a: 1 },
+        { q: "Biodegradable berarti…", o: ["Mudak terurai alami", "Tidak bisa terurai", "Berbahan logam"], a: 0 },
+        { q: "Zero Waste adalah…", o: ["Tidak menghasilkan sampah", "Membakar semua sampah", "Menyimpan sampah"], a: 0 },
+        { q: "Microplastic memiliki ukuran…", o: ["<5mm", ">5cm", ">10cm"], a: 0 },
+        { q: "Sampah residu adalah…", o: ["Sampah organik", "Sisa akhir yang tidak bisa didaur ulang", "Plastik bersih"], a: 1 },
+        { q: "Komposter anaerobik menghasilkan…", o: ["Oksigen", "Metana", "Hidrogen"], a: 1 },
+        { q: "Glass recycling menghemat energi hingga…", o: ["15%", "60%", "5%"], a: 1 },
+        { q: "Teknik incinerator modern dilengkapi dengan…", o: ["Scrubber gas", "Air laut", "Solar panel"], a: 0 },
+        // total 20 soal (duplikat jika mau)
+        { q: "Sumber emisi karbon terbesar?", o: ["Transportasi", "Ternak", "Industri"], a: 2 },
+        { q: "Limbah medis termasuk kategori…", o: ["Organik", "B3", "Anorganik biasa"], a: 1 },
+        { q: "Teknik pengolahan kompos cepat disebut…", o: ["Takakura", "Incinerator", "Reverse"], a: 0 },
+        { q: "Bioetanol berasal dari…", o: ["Plastik", "Fermentasi biomassa", "Logam"], a: 1 },
+        { q: "Daur ulang aluminium menghemat energi…", o: ["95%", "40%", "20%"], a: 0 },
+        { q: "IPAL berguna untuk…", o: ["Mengolah air limbah", "Menyaring udara", "Membuat listrik"], a: 0 },
+        { q: "Go Green berarti…", o: ["Gaya hidup ramah lingkungan", "Belanja sayur", "Tanpa internet"], a: 0 },
+        { q: "Bakteri pengurai disebut…", o: ["Decomposer", "Producer", "Consumer"], a: 0 },
+        { q: "Sampah rumah tangga paling banyak adalah…", o: ["Plastik", "Organik", "Kaca"], a: 1 },
+        { q: "Sumber microplastic terbesar di laut?", o: ["Ban mobil", "Bekas jala", "Serat pakaian"], a: 2 }
+    ]
+};
+
+/* ==============================
+   3. MULAI QUIZ
+============================== */
 function uqzStartQuiz() {
-    if (!uqz.currentLevel) {
-        alert("Pilih tingkat kesulitan terlebih dahulu!");
-        return;
-    }
+    if (!uqzLevel) return alert("Pilih level dulu!");
 
-    // Reset state
-    uqz.currentQuestionIndex = 0;
-    uqz.score = 0;
-
-    // Hide section utama, show quiz box
-    document.getElementById("uqz-section").classList.add("uqz-hidden");
+    document.querySelector(".uqz-wrapper").classList.add("uqz-hidden");
     document.getElementById("uqzQuizBox").classList.remove("uqz-hidden");
 
-    // Load first question
+    uqzQuestions = uqzBank[uqzLevel];
+    uqzIndex = 0;
+    uqzScore = 0;
+
+    uqzSetTimer();
     uqzLoadQuestion();
 }
 
-// ==========================
-// Load Question
-// ==========================
+/* ==============================
+   4. LOAD SOAL
+============================== */
 function uqzLoadQuestion() {
-    const q = uqz.questions[uqz.currentLevel][uqz.currentQuestionIndex];
-    document.getElementById("uqzQuestionText").innerText = q.question;
+    const qData = uqzQuestions[uqzIndex];
 
-    const optionsBox = document.getElementById("uqzOptionsBox");
-    optionsBox.innerHTML = "";
+    document.getElementById("uqzQuestionText").innerText = qData.q;
 
-    q.options.forEach((opt, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "uqz-option-btn";
+    const box = document.getElementById("uqzOptionsBox");
+    box.innerHTML = "";
+
+    qData.o.forEach((opt, i) => {
+        let btn = document.createElement("button");
+        btn.className = "uqz-option";
         btn.innerText = opt;
-        btn.onclick = () => uqzSelectOption(idx);
-        optionsBox.appendChild(btn);
+        btn.onclick = () => uqzSelect(i);
+        box.appendChild(btn);
     });
 
-    // Reset next button
-    const nextBtn = document.getElementById("uqzNextBtn");
-    nextBtn.disabled = true;
+    document.getElementById("uqzNextBtn").disabled = true;
 
-    // Set timer
-    uqzStartTimer();
+    uqzUpdateProgress();
 }
 
-// ==========================
-// Select Option
-// ==========================
-function uqzSelectOption(selectedIndex) {
-    const q = uqz.questions[uqz.currentLevel][uqz.currentQuestionIndex];
-    const optionsBtns = document.querySelectorAll(".uqz-option-btn");
+/* ==============================
+   5. PILIH JAWABAN
+============================== */
+function uqzSelect(i) {
+    let correct = uqzQuestions[uqzIndex].a;
 
-    // Disable semua button
-    optionsBtns.forEach(btn => btn.disabled = true);
+    const options = document.querySelectorAll(".uqz-option");
 
-    // Cek jawaban
-    if (selectedIndex === q.answer) {
-        optionsBtns[selectedIndex].classList.add("correct");
-        uqz.score += (uqz.currentLevel === "easy" ? 10 : uqz.currentLevel === "medium" ? 15 : 20);
+    options.forEach(o => o.disabled = true);
+
+    if (i === correct) {
+        options[i].classList.add("uqz-correct");
+
+        if (uqzLevel === "easy") uqzScore += 2;
+        if (uqzLevel === "medium") uqzScore += 3;
+        if (uqzLevel === "hard") uqzScore += 5;
     } else {
-        optionsBtns[selectedIndex].classList.add("wrong");
-        optionsBtns[q.answer].classList.add("correct");
+        options[i].classList.add("uqz-wrong");
+        options[correct].classList.add("uqz-correct");
     }
 
-    // Aktifkan next button
     document.getElementById("uqzNextBtn").disabled = false;
 
-    // Stop timer
-    clearInterval(uqz.timer);
+    document.getElementById("uqzNextBtn").onclick = uqzNext;
 }
 
-// ==========================
-// Next Question
-// ==========================
-document.getElementById("uqzNextBtn").addEventListener("click", () => {
-    uqz.currentQuestionIndex++;
-    if (uqz.currentQuestionIndex < uqz.questions[uqz.currentLevel].length) {
-        uqzLoadQuestion();
+/* ==============================
+   6. NEXT SOAL
+============================== */
+function uqzNext() {
+    uqzIndex++;
+
+    if (uqzIndex >= uqzQuestions.length) {
+        uqzFinish();
     } else {
-        uqzShowResult();
+        uqzLoadQuestion();
     }
-});
+}
 
-// ==========================
-// Timer
-// ==========================
-function uqzStartTimer() {
-    clearInterval(uqz.timer);
-    uqz.timeLeft = uqz.currentLevel === "easy" ? 30 : uqz.currentLevel === "medium" ? 25 : 20;
-    document.getElementById("uqzTimer").innerText = uqz.timeLeft;
+/* ==============================
+   7. TIMER
+============================== */
+function uqzSetTimer() {
+    clearInterval(uqzTimerInterval);
 
-    uqz.timer = setInterval(() => {
-        uqz.timeLeft--;
-        document.getElementById("uqzTimer").innerText = uqz.timeLeft;
-        if (uqz.timeLeft <= 0) {
-            clearInterval(uqz.timer);
-            uqzSelectOption(-1); // otomatis salah jika habis waktu
+    uqzTimerValue = (uqzLevel === "easy" ? 30 :
+                     uqzLevel === "medium" ? 25 : 20);
+
+    document.getElementById("uqzTimer").innerText = uqzTimerValue;
+
+    uqzTimerInterval = setInterval(() => {
+        uqzTimerValue--;
+        document.getElementById("uqzTimer").innerText = uqzTimerValue;
+
+        if (uqzTimerValue <= 0) {
+            clearInterval(uqzTimerInterval);
+            uqzFinish();
         }
     }, 1000);
 }
 
-// ==========================
-// Show Result
-// ==========================
-function uqzShowResult() {
+/* ==============================
+   8. PROGRESS BAR
+============================== */
+function uqzUpdateProgress() {
+    let fill = document.getElementById("uqzProgressFill");
+    let progress = ((uqzIndex) / uqzQuestions.length) * 100;
+
+    fill.style.width = progress + "%";
+}
+
+/* ==============================
+   9. SELESAI
+============================== */
+function uqzFinish() {
+    clearInterval(uqzTimerInterval);
+
     document.getElementById("uqzQuizBox").classList.add("uqz-hidden");
     document.getElementById("uqzResultBox").classList.remove("uqz-hidden");
 
-    const totalQuestions = uqz.questions[uqz.currentLevel].length;
-    const scoreText = `Skor Kamu: ${uqz.score} / ${totalQuestions * (uqz.currentLevel === "easy" ? 10 : uqz.currentLevel === "medium" ? 15 : 20)}`;
-    document.getElementById("uqzScoreText").innerText = scoreText;
+    document.getElementById("uqzScoreText").innerText =
+        "Skor Kamu: " + uqzScore;
 
-    const message = uqz.score >= totalQuestions * (uqz.currentLevel === "easy" ? 10 : uqz.currentLevel === "medium" ? 15 : 20) * 0.8 ? "Mantap! Kamu hebat!" : "Tetap semangat, coba lagi!";
-    document.getElementById("uqzScoreMessage").innerText = message;
+    let msg = "";
+
+    if (uqzScore < 20) msg = "Jangan menyerah! Coba lagi ya 😄";
+    else if (uqzScore < 40) msg = "Mantap! Kamu mulai menguasai 🎉";
+    else msg = "Luar biasa! Kamu master lingkungan! 🌱🔥";
+
+    document.getElementById("uqzScoreMessage").innerText = msg;
 }
 
-// ==========================
-// Restart Quiz
-// ==========================
+/* ==============================
+   10. ULANG QUIZ
+============================== */
 function uqzRestartQuiz() {
     document.getElementById("uqzResultBox").classList.add("uqz-hidden");
-    document.getElementById("uqz-section").classList.remove("uqz-hidden");
+    document.querySelector(".uqz-wrapper").classList.remove("uqz-hidden");
 
-    // Reset highlight level
-    document.querySelectorAll(".uqz-level-card").forEach(card => card.classList.remove("selected"));
-    document.getElementById("uqzStartBtn").disabled = true;
-}     
-
-
-    
+    uqzLevel = null;
+}

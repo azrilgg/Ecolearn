@@ -279,193 +279,285 @@ faqItems.forEach(item => {
 // ECOLEARN — QUIZ LEVEL SYSTEM (NAMESPACED, NO CONFLICT)
 // =========================================================
 
-// -----------------------------------------
-// QUESTION BANK
-// -----------------------------------------
-const ecoQuizQuestions = {
-    easy: [
-        { q: "Apa warna tempat sampah untuk sampah organik?", o: ["Biru", "Hijau", "Kuning", "Merah"], a: 1 },
-        { q: "Sampah dedaunan termasuk jenis apa?", o: ["Anorganik", "Organik", "B3", "Elektronik"], a: 1 },
-        { q: "Plastik termasuk sampah…", o: ["Organik", "B3", "Anorganik", "Radioaktif"], a: 2 },
-        { q: "Sampah yang bisa membusuk disebut…", o: ["Organik", "Anorganik", "E-waste", "B3"], a: 0 },
-        { q: "Botol kaca termasuk sampah…", o: ["Organik", "Elektronik", "Anorganik", "B3"], a: 2 }
-    ],
+/* =========================================================
+   ECOLEARN – QUIZ ENGINE (100% STANDALONE, NO CONFLICT)
+========================================================= */
 
-    medium: [
-        { q: "Apa tujuan utama dari daur ulang?", o: ["Menambah sampah", "Mengurangi limbah", "Membakar sampah", "Menghasilkan polusi"], a: 1 },
-        { q: "Apa yang dimaksud 3R?", o: ["Reduce, Reuse, Recycle", "Rework, Reload, Remove", "Rewash, Reverse, Rebuild", "Recycle, Remove, Run"], a: 0 },
-        { q: "Kelompok sampah berikut yang bisa dikompos?", o: ["Plastik", "Kaca", "Sisa makanan", "Aluminium"], a: 2 },
-        { q: "Baterai bekas termasuk kategori…", o: ["Organik", "Anorganik", "B3", "Kompos"], a: 2 },
-        { q: "Pengolahan sampah terpadu disebut…", o: ["TPA", "TPS", "TPST", "Bank Sampah"], a: 2 },
-        { q: "Apa fungsi bank sampah?", o: ["Untuk menyimpan uang", "Menimbun sampah", "Mengolah sampah bernilai", "Membuang limbah"], a: 2 },
-        { q: "Sampah elektronik disebut…", o: ["E-waste", "Eco waste", "Bio waste", "Heat waste"], a: 0 },
-        { q: "Kegiatan memilah sampah dinamakan…", o: ["Sorting", "Cleaning", "Reducing", "Melting"], a: 0 },
-        { q: "Mengurangi penggunaan plastik adalah contoh…", o: ["Reuse", "Recycle", "Reduce", "Recreate"], a: 2 },
-        { q: "Komposter digunakan untuk…", o: ["Mencuci sampah", "Membakar plastik", "Menguraikan sampah organik", "Menghancurkan kaca"], a: 2 }
-    ],
+/* -------------------------
+   QUIZ DATABASE (3 LEVEL)
+-------------------------- */
 
-    hard: [
-        { q: "Gas rumah kaca yang paling berkontribusi pada pemanasan global adalah…", o: ["CO₂", "O₃", "N₂", "H₂"], a: 0 },
-        { q: "Proses laut menyerap CO₂ dan membuat asam disebut…", o: ["Eutrofikasi", "Asidifikasi laut", "Denitrifikasi", "Sedimentasi"], a: 1 },
-        { q: "Lapisan ozon berada di…", o: ["Troposfer", "Stratosfer", "Mesosfer", "Termosfer"], a: 1 },
-        { q: "Hewan paling sensitif terhadap naiknya suhu laut adalah…", o: ["Paus", "Karang", "Hiu", "Penguin"], a: 1 },
-        { q: "Gas yang termasuk B3 adalah…", o: ["CO₂", "N₂", "Mercury vapor", "Oksigen"], a: 2 },
-        { q: "Pembakaran fosil melepaskan…", o: ["Nitrogen", "Oksigen", "Karbon dioksida", "Hidrogen"], a: 2 },
-        { q: "Energi geothermal berasal dari…", o: ["Matahari", "Inti bumi", "Arus laut", "Reaksi kimia tanah"], a: 1 },
-        { q: "Gas metana dari sampah terbentuk karena…", o: ["Fermentasi anaerob", "Oksidasi", "Aerasi", "Denaturasi"], a: 0 },
-        { q: "Dampak terburuk deforestasi adalah…", o: ["Lahan bermain berkurang", "Oksigen berkurang", "Kehilangan hayati", "Kabut"], a: 2 },
-        { q: "Panel surya mengubah energi…", o: ["Panas", "Cahaya", "Angin", "Gelombang"], a: 1 },
-        { q: "PLTA itu…", o: ["Tanpa emisi karbon", "Limbah radioaktif", "Pakai minyak bumi", "Tidak butuh air"], a: 0 },
-        { q: "Biofuel berasal dari…", o: ["Fosil", "Petroleum", "Biomassa", "Logam panas"], a: 2 },
-        { q: "Carbon footprint adalah…", o: ["Jumlah pohon", "Jumlah karbon aktivitas manusia", "Oksigen atmosfer", "Logam berat"], a: 1 },
-        { q: "Penghijauan kembali disebut…", o: ["Deforestasi", "Reforestasi", "Erosi", "Desalinasi"], a: 1 },
-        { q: "Sampah medis termasuk…", o: ["Organik", "Anorganik", "B3", "Kompos"], a: 2 },
-        { q: "Permukaan laut naik karena…", o: ["Hujan sedikit", "Tanah mengembang", "Es mencair", "Gunung meletus"], a: 2 },
-        { q: "Biopori bermanfaat untuk…", o: ["Membakar sampah", "Mengurangi banjir", "Menghasilkan listrik", "Mengolah logam"], a: 1 },
-        { q: "Penipisan ozon disebabkan oleh…", o: ["CO₂", "CFC", "O₂", "N₂"], a: 1 },
-        { q: "Zero Waste fokus pada…", o: ["Menghilangkan limbah", "Mengumpulkan sampah", "Membakar plastik", "Menimbun B3"], a: 0 },
-        { q: "Keanekaragaman hayati tertinggi ada di…", o: ["Gurun", "Hutan hujan tropis", "Tundra", "Gletser"], a: 1 }
+const ecoQuiz = {
+    easy: {
+        time: 30,
+        questions: [
+            { q: "Apa itu sampah organik?", o: ["Sampah plastik", "Sampah yang bisa membusuk", "Sampah logam"], a: 1 },
+            { q: "Contoh sampah anorganik?", o: ["Daun", "Botol plastik", "Sisa makanan"], a: 1 },
+            { q: "Warna tempat sampah organik?", o: ["Hijau", "Merah", "Hitam"], a: 0 },
+            { q: "Apa manfaat daur ulang?", o: ["Merusak alam", "Mengurangi sampah", "Menambah polusi"], a: 1 },
+            { q: "Apa energi ramah lingkungan?", o: ["Solar panel", "Batubara", "Bensin"], a: 0 }
+        ]
+    },
+
+    medium: {
+        time: 25,
+        questions: [
+            { q: "Gas rumah kaca terbesar?", o: ["CO₂", "O₂", "N₂"], a: 0 },
+            { q: "Plastik terurai dalam…", o: ["1 tahun", "50–500 tahun", "1 minggu"], a: 1 },
+            { q: "Apa itu kompos?", o: ["Pupuk alami", "Pupuk kimia", "Bahan plastik"], a: 0 },
+            { q: "Manfaat menanam pohon?", o: ["Menghasilkan oksigen", "Menghilangkan air", "Menyerap polusi"], a: 0 },
+            { q: "Apa itu recycle?", o: ["Membuang", "Mengolah kembali", "Membakar"], a: 1 },
+            { q: "Energi terbarukan adalah…", o: ["Tidak habis", "Cepat habis", "Berbahaya"], a: 0 },
+            { q: "Apa itu emisi?", o: ["Gas yang dilepas", "Air sungai", "Tanah subur"], a: 0 },
+            { q: "Apa itu biodegradable?", o: ["Sulit terurai", "Mudah terurai", "Tidak bisa terurai"], a: 1 },
+            { q: "Pohon menyerap…", o: ["CO₂", "O₂", "H₂"], a: 0 },
+            { q: "Reuse artinya…", o: ["Dipakai sekali", "Dipakai ulang", "Dibuang"], a: 1 }
+        ]
+    },
+
+    hard: {
+    time: 20,
+    questions: [
+        {
+            q: "Apa penyebab terbesar hilangnya keanekaragaman hayati secara global?",
+            o: ["Perubahan iklim", "Kerusakan habitat", "Aktivitas vulkanik"],
+            a: 1
+        },
+        {
+            q: "Gas rumah kaca mana yang memiliki potensi pemanasan global (GWP) tertinggi?",
+            o: ["Metana (CH₄)", "Dinitrogen oksida (N₂O)", "Sulfur heksafluorida (SF₆)"],
+            a: 2
+        },
+        {
+            q: "Apa dampak utama pengasaman laut pada organisme bercangkang?",
+            o: ["Memperkuat cangkang", "Menghambat pembentukan kalsium", "Meningkatkan reproduksi"],
+            a: 1
+        },
+        {
+            q: "Sebagian besar pemutihan karang terjadi karena…",
+            o: ["Suhu laut meningkat", "Salinitas berubah", "Kadar oksigen naik"],
+            a: 0
+        },
+        {
+            q: "Sumber emisi CH₄ terbesar berasal dari…",
+            o: ["Pabrik industri", "Limbah dan peternakan", "Transportasi darat"],
+            a: 1
+        },
+        {
+            q: "Lapisan ozon melindungi bumi dari…",
+            o: ["Sinar UV-B berbahaya", "Sinar inframerah", "Radiasi mikro"],
+            a: 0
+        },
+        {
+            q: "Apa penyebab utama eutrofikasi pada danau?",
+            o: ["Kekurangan cahaya", "Kelebihan nutrisi nitrogen & fosfor", "Arus air terlalu kuat"],
+            a: 1
+        },
+        {
+            q: "Mikroplastik paling banyak ditemukan pada…",
+            o: ["Air hujan", "Laut dalam", "Tanah gurun"],
+            a: 1
+        },
+        {
+            q: "Apa yang disebut 'tipping point' dalam perubahan iklim?",
+            o: ["Batas saat suhu turun drastis", "Batas perubahan tidak bisa dipulihkan", "Puncak musim panas"],
+            a: 1
+        },
+        {
+            q: "Gas CO₂ paling banyak dihasilkan dari…",
+            o: ["Kendaraan transportasi", "Industri energi & listrik", "Pertanian"],
+            a: 1
+        },
+        {
+            q: "Apa istilah untuk spesies yang tidak berasal dari ekosistem setempat dan dapat merusak ekosistem?",
+            o: ["Endemik", "Invasif", "Ekoton"],
+            a: 1
+        },
+        {
+            q: "Ekosistem penyerap karbon terbesar di bumi adalah…",
+            o: ["Padang rumput", "Lautan", "Hutan pinus"],
+            a: 1
+        },
+        {
+            q: "Apa efek utama deforestasi terhadap siklus air?",
+            o: ["Curah hujan meningkat", "Cycle air melemah dan tanah mengering", "Awan lebih cepat terbentuk"],
+            a: 1
+        },
+        {
+            q: "Hewan yang paling terdampak oleh pencairan es Arktik adalah…",
+            o: ["Pinguin", "Beruang kutub", "Serigala kutub"],
+            a: 1
+        },
+        {
+            q: "Apa dampak utama urban heat island?",
+            o: ["Suhu kota lebih panas daripada desa", "Kota menjadi lebih gelap", "Awan sulit terbentuk"],
+            a: 0
+        },
+        {
+            q: "Apa tujuan utama teknologi carbon capture?",
+            o: ["Menyimpan CO₂ di atmosfer", "Mengurangi emisi CO₂", "Mengubah CO₂ menjadi ozon"],
+            a: 1
+        },
+        {
+            q: "Apa indikator kualitas udara yang paling umum dipakai?",
+            o: ["API", "AQI", "AQM"],
+            a: 1
+        },
+        {
+            q: "Sumber energi dengan emisi karbon paling rendah adalah…",
+            o: ["PLTU batubara", "Geothermal", "Diesel"],
+            a: 1
+        },
+        {
+            q: "Apa dampak utama hilangnya hutan mangrove?",
+            o: ["Laut menjadi lebih jernih", "Pesisir lebih rentan abrasi", "Populasi ikan meningkat"],
+            a: 1
+        },
+        {
+            q: "Greenwashing berarti…",
+            o: ["Produk benar-benar ramah lingkungan", "Klaim palsu seolah ramah lingkungan", "Teknik mencuci limbah"],
+            a: 1
+        }
     ]
-};
+                }
 
-// -----------------------------------------
-// VARIABLES (RENAMED)
-// -----------------------------------------
+/* -------------------------
+   ELEMENT SELECTOR
+-------------------------- */
+
+const ecoBox = document.getElementById("quizBox");
+const ecoResult = document.getElementById("quizResult");
+
+const ecoQuestion = document.getElementById("questionText");
+const ecoOptions = document.getElementById("optionsBox");
+const ecoNext = document.getElementById("nextBtn");
+
+const ecoTimer = document.getElementById("timer");
+const ecoProgress = document.getElementById("progress");
+
 let ecoLevel = null;
-let ecoList = [];
+let ecoData = null;
 let ecoIndex = 0;
 let ecoScore = 0;
-let ecoTimer = 0;
-let ecoTimerInterval = null;
+let ecoCountdown = null;
 
-// -----------------------------------------
-// LEVEL SELECTION
-// -----------------------------------------
-function chooseLevel(lv) {
-    ecoLevel = lv;
-    document.getElementById("startBtn").style.display = "block";
+/* -------------------------
+   LEVEL PICKER
+-------------------------- */
+
+function chooseLevel(level) {
+    ecoLevel = level;
+    ecoData = ecoQuiz[level];
+    document.getElementById("startBtn").disabled = false;
 }
 
-// -----------------------------------------
-// START QUIZ
-// -----------------------------------------
+/* -------------------------
+   START QUIZ
+-------------------------- */
 function startQuiz() {
-    if (!ecoLevel) return alert("Pilih level dulu!");
+    document.querySelector(".quiz-wrapper").style.display = "none";
+    ecoBox.classList.remove("hidden");
 
-    ecoList = ecoQuizQuestions[ecoLevel];
     ecoIndex = 0;
     ecoScore = 0;
 
-    ecoTimer = ecoLevel === "easy" ? 30 : ecoLevel === "medium" ? 25 : 20;
-
-    document.querySelector(".quiz-wrapper").classList.add("hidden");
-    document.getElementById("quizBox").classList.remove("hidden");
-
+    runTimer();
     loadEcoQuestion();
-    startEcoTimer();
 }
 
-// -----------------------------------------
-// TIMER
-// -----------------------------------------
-function startEcoTimer() {
-    clearInterval(ecoTimerInterval);
-    document.getElementById("timer").textContent = ecoTimer;
+/* -------------------------
+   LOAD QUESTION
+-------------------------- */
+function loadEcoQuestion() {
+    const q = ecoData.questions[ecoIndex];
 
-    ecoTimerInterval = setInterval(() => {
-        ecoTimer--;
-        document.getElementById("timer").textContent = ecoTimer;
+    ecoQuestion.textContent = q.q;
+    ecoOptions.innerHTML = "";
+    ecoNext.disabled = true;
 
-        if (ecoTimer <= 0) {
-            clearInterval(ecoTimerInterval);
-            nextEcoQuestion();
+    q.o.forEach((text, i) => {
+        const opt = document.createElement("div");
+        opt.className = "eco-option";
+        opt.textContent = text;
+        opt.onclick = () => ecoSelect(i, opt);
+        ecoOptions.appendChild(opt);
+    });
+
+    ecoProgress.style.width = (ecoIndex / ecoData.questions.length) * 100 + "%";
+}
+
+/* -------------------------
+   SELECT OPTION
+-------------------------- */
+let ecoSelected = -1;
+
+function ecoSelect(i, element) {
+    ecoSelected = i;
+    ecoNext.disabled = false;
+
+    document.querySelectorAll(".eco-option").forEach(o => o.classList.remove("active"));
+    element.classList.add("active");
+}
+
+/* -------------------------
+   NEXT QUESTION
+-------------------------- */
+function nextQuestion() {
+    if (ecoSelected === ecoData.questions[ecoIndex].a) {
+        ecoScore += 10;
+    }
+
+    ecoIndex++;
+
+    if (ecoIndex < ecoData.questions.length) {
+        ecoSelected = -1;
+        loadEcoQuestion();
+    } else {
+        finishEcoQuiz();
+    }
+}
+
+/* -------------------------
+   TIMER SYSTEM
+-------------------------- */
+function runTimer() {
+    let timeLeft = ecoData.time;
+    ecoTimer.textContent = timeLeft;
+
+    ecoCountdown = setInterval(() => {
+        timeLeft--;
+        ecoTimer.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(ecoCountdown);
+            nextQuestion();
         }
     }, 1000);
 }
 
-// -----------------------------------------
-// LOAD QUESTION
-// -----------------------------------------
-function loadEcoQuestion() {
-    const nextBtn = document.getElementById("nextBtn");
-    nextBtn.disabled = true;
-    nextBtn.classList.remove("active");
+/* -------------------------
+   FINISH QUIZ
+-------------------------- */
+function finishEcoQuiz() {
+    clearInterval(ecoCountdown);
 
-    const q = ecoList[ecoIndex];
-    document.getElementById("questionText").textContent = q.q;
-
-    const box = document.getElementById("optionsBox");
-    box.innerHTML = "";
-
-    q.o.forEach((option, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => selectEco(btn, i);
-        box.appendChild(btn);
-    });
-
-    document.getElementById("progress").style.width =
-        ((ecoIndex + 1) / ecoList.length) * 100 + "%";
-}
-
-// -----------------------------------------
-// SELECT OPTION
-// -----------------------------------------
-function selectEco(btn, choice) {
-    const q = ecoList[ecoIndex];
-    const allBtns = document.querySelectorAll("#optionsBox button");
-
-    allBtns.forEach(b => b.disabled = true);
-
-    if (choice === q.a) {
-        btn.classList.add("correct");
-        ecoScore += ecoLevel === "easy" ? 10 : ecoLevel === "medium" ? 15 : 20;
-    } else {
-        btn.classList.add("wrong");
-        allBtns[q.a].classList.add("correct");
-    }
-
-    const nextBtn = document.getElementById("nextBtn");
-    nextBtn.disabled = false;
-    nextBtn.classList.add("active");
-}
-
-// -----------------------------------------
-// NEXT QUESTION
-// -----------------------------------------
-function nextEcoQuestion() {
-    ecoIndex++;
-
-    if (ecoIndex >= ecoList.length) return endEcoQuiz();
-
-    ecoTimer = ecoLevel === "easy" ? 30 : ecoLevel === "medium" ? 25 : 20;
-    startEcoTimer();
-    loadEcoQuestion();
-}
-
-// -----------------------------------------
-// END QUIZ
-// -----------------------------------------
-function endEcoQuiz() {
-    clearInterval(ecoTimerInterval);
-
-    document.getElementById("quizBox").classList.add("hidden");
-    document.getElementById("quizResult").classList.remove("hidden");
+    ecoBox.classList.add("hidden");
+    ecoResult.classList.remove("hidden");
 
     document.getElementById("scoreText").textContent = `Skor Kamu: ${ecoScore}`;
-
     document.getElementById("scoreMessage").textContent =
-        ecoScore < ecoList.length * 10 * 0.5
-            ? "Masih bisa lebih baik, semangat!"
-            : ecoScore < ecoList.length * 10 * 0.8
-            ? "Keren! Pengetahuanmu bagus!"
-            : "Luar biasa! Kamu ahli lingkungan!";
+        ecoScore >= ecoData.questions.length * 7
+            ? "Luar biasa! Kamu pahlawan lingkungan!"
+            : "Tetap semangat! Masih bisa lebih baik!";
 }
 
-// -----------------------------------------
-// RESTART
-// -----------------------------------------
+/* -------------------------
+   RESTART QUIZ
+-------------------------- */
 function restartQuiz() {
-    document.getElementById("quizResult").classList.add("hidden");
-    document.querySelector(".quiz-wrapper").classList.remove("hidden");
+    ecoResult.classList.add("hidden");
+    document.querySelector(".quiz-wrapper").style.display = "block";
+
+    ecoProgress.style.width = "0%";
+    ecoTimer.textContent = "-";
 }

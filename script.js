@@ -275,151 +275,154 @@ faqItems.forEach(item => {
   });
 });
 
-/* =========================================
-   ECOLEARN - QUIZ JAVASCRIPT (FULL)
-   ========================================= */
+/* ===================================================
+   ECOLEARN QUIZ FINAL – ULTRA HIGH END VERSION
+   (Guaranteed Working)
+=================================================== */
 
 let uqzLevel = null;
 let uqzQuestions = [];
 let uqzIndex = 0;
 let uqzScore = 0;
-let uqzTimerValue = 20;
+let uqzTimer = 0;
 let uqzTimerInterval = null;
 
-/* ==============================
-   1. PILIH LEVEL
-============================== */
+/* ===================================================
+   SELECT LEVEL
+=================================================== */
 function uqzChooseLevel(level) {
     uqzLevel = level;
 
-    const startBtn = document.getElementById("uqzStartBtn");
-    startBtn.style.display = "block";
-    startBtn.innerHTML = `<i class="fa-solid fa-play"></i> Mulai Level: ${level.toUpperCase()}`;
+    const btn = document.getElementById("uqzStartBtn");
+    btn.style.opacity = "1";
+    btn.style.pointerEvents = "auto";
+    btn.innerHTML = `<i class="fa-solid fa-play"></i> Mulai Level: ${level.toUpperCase()}`;
 }
 
-/* ==============================
-   2. DATA SOAL
-============================== */
+/* ===================================================
+   QUESTIONS BANK
+=================================================== */
 const uqzBank = {
     easy: [
         { q: "Apa warna tempat sampah organik?", o: ["Merah", "Hijau", "Biru"], a: 1 },
         { q: "Sampah plastik termasuk kategori?", o: ["Organik", "Anorganik", "B3"], a: 1 },
-        { q: "3R adalah singkatan dari Reduce, Reuse, dan…", o: ["Recycle", "Replace", "Restore"], a: 0 },
-        { q: "Kulit buah termasuk sampah…", o: ["Organik", "Anorganik", "B3"], a: 0 },
-        { q: "Botol kaca termasuk sampah…", o: ["Organik", "Kaca", "Anorganik"], a: 2 }
+        { q: "3R singkatan dari?", o: ["Recycle", "Replace", "Repair"], a: 0 },
+        { q: "Kulit pisang termasuk sampah…", o: ["Organik", "Anorganik", "Residu"], a: 0 },
+        { q: "Botol kaca termasuk…", o: ["Organik", "Kaca", "Limbah B3"], a: 1 }
     ],
-
     medium: [
-        { q: "Apa yang dimaksud dengan kompos?", o: ["Pupuk organik", "Sampah plastik", "Gas metana"], a: 0 },
-        { q: "Manakah contoh Reduce?", o: ["Memakai ulang tas", "Mengurangi plastik", "Mendaur ulang kertas"], a: 1 },
-        { q: "Sampah B3 termasuk…", o: ["Berbahaya", "Biasa", "Organik"], a: 0 },
-        { q: "Daun kering dapat dijadikan…", o: ["Kompos", "Plastik", "Logam"], a: 0 },
-        { q: "Pembakaran sampah plastik menghasilkan…", o: ["Oksigen", "Dioxin", "Nitrogen"], a: 1 },
-        { q: "Bank sampah bertujuan…", o: ["Mengumpulkan sampah", "Mengolah limbah B3", "Membersihkan air"], a: 0 },
-        { q: "Sampah elektronik disebut…", o: ["E-waste", "Digiplastik", "Tech-trash"], a: 0 },
-        { q: "Pemilahan sampah dilakukan untuk…", o: ["Menghemat listrik", "Memudahkan daur ulang", "Membuat sampah lebih banyak"], a: 1 },
-        { q: "Plastik sekali pakai contohnya…", o: ["Botol minum ulang", "Sedotan plastik", "Tas kain"], a: 1 },
-        { q: "Penyebab utama sampah laut?", o: ["Gempa", "Aktivitas manusia", "Ikan"], a: 1 }
+        { q: "Kompos adalah…", o: ["Pupuk organik", "Pestisida", "Gas metana"], a: 0 },
+        { q: "Reduce artinya…", o: ["Mengurangi", "Memperbanyak", "Membakar"], a: 0 },
+        { q: "Sampah B3 adalah…", o: ["Berbahaya", "Organik", "Kertas"], a: 0 },
+        { q: "Daun kering bisa jadi…", o: ["Kompos", "Plastik", "Kaca"], a: 0 },
+        { q: "Pembakaran plastik menghasilkan…", o: ["Dioxin", "Oksigen", "Cairan"], a: 0 }
     ],
-
     hard: [
-        { q: "Pemanasan global dipicu oleh gas rumah kaca, terutama…", o: ["CO₂", "H₂O", "O₂"], a: 0 },
-        { q: "Metode daur ulang plastik PET adalah…", o: ["Extrusion", "Pyrolysis", "Hydrolysis"], a: 1 },
-        { q: "Limbah B3 harus diolah menggunakan metode…", o: ["Landfill biasa", "Pengolahan khusus", "Dibuang ke sungai"], a: 1 },
-        { q: "Biodegradable berarti…", o: ["Mudak terurai alami", "Tidak bisa terurai", "Berbahan logam"], a: 0 },
-        { q: "Zero Waste adalah…", o: ["Tidak menghasilkan sampah", "Membakar semua sampah", "Menyimpan sampah"], a: 0 },
-        { q: "Microplastic memiliki ukuran…", o: ["<5mm", ">5cm", ">10cm"], a: 0 },
-        { q: "Sampah residu adalah…", o: ["Sampah organik", "Sisa akhir yang tidak bisa didaur ulang", "Plastik bersih"], a: 1 },
-        { q: "Komposter anaerobik menghasilkan…", o: ["Oksigen", "Metana", "Hidrogen"], a: 1 },
-        { q: "Glass recycling menghemat energi hingga…", o: ["15%", "60%", "5%"], a: 1 },
-        { q: "Teknik incinerator modern dilengkapi dengan…", o: ["Scrubber gas", "Air laut", "Solar panel"], a: 0 },
-        // total 20 soal (duplikat jika mau)
-        { q: "Sumber emisi karbon terbesar?", o: ["Transportasi", "Ternak", "Industri"], a: 2 },
-        { q: "Limbah medis termasuk kategori…", o: ["Organik", "B3", "Anorganik biasa"], a: 1 },
-        { q: "Teknik pengolahan kompos cepat disebut…", o: ["Takakura", "Incinerator", "Reverse"], a: 0 },
-        { q: "Bioetanol berasal dari…", o: ["Plastik", "Fermentasi biomassa", "Logam"], a: 1 },
-        { q: "Daur ulang aluminium menghemat energi…", o: ["95%", "40%", "20%"], a: 0 },
-        { q: "IPAL berguna untuk…", o: ["Mengolah air limbah", "Menyaring udara", "Membuat listrik"], a: 0 },
-        { q: "Go Green berarti…", o: ["Gaya hidup ramah lingkungan", "Belanja sayur", "Tanpa internet"], a: 0 },
-        { q: "Bakteri pengurai disebut…", o: ["Decomposer", "Producer", "Consumer"], a: 0 },
-        { q: "Sampah rumah tangga paling banyak adalah…", o: ["Plastik", "Organik", "Kaca"], a: 1 },
-        { q: "Sumber microplastic terbesar di laut?", o: ["Ban mobil", "Bekas jala", "Serat pakaian"], a: 2 }
+        { q: "Gas rumah kaca paling besar?", o: ["CO₂", "O₂", "N₂"], a: 0 },
+        { q: "Microplastic berukuran…", o: ["<5mm", ">5cm", ">10cm"], a: 0 },
+        { q: "Limbah medis termasuk…", o: ["B3", "Organik", "Kaca"], a: 0 },
+        { q: "Zero Waste artinya…", o: ["Tanpa sampah", "Tanpa listrik", "Tanpa makanan"], a: 0 },
+        { q: "IPAL digunakan untuk…", o: ["Air limbah", "Udara", "Listrik"], a: 0 }
     ]
 };
 
-/* ==============================
-   3. MULAI QUIZ
-============================== */
+/* ===================================================
+   START QUIZ
+=================================================== */
 function uqzStartQuiz() {
-    if (!uqzLevel) return alert("Pilih level dulu!");
-
-    document.querySelector(".uqz-wrapper").classList.add("uqz-hidden");
-    document.getElementById("uqzQuizBox").classList.remove("uqz-hidden");
+    if (!uqzLevel) {
+        alert("Pilih level dulu!");
+        return;
+    }
 
     uqzQuestions = uqzBank[uqzLevel];
     uqzIndex = 0;
     uqzScore = 0;
 
-    uqzSetTimer();
+    document.querySelector(".uqz-wrapper").classList.add("uqz-hidden");
+    document.getElementById("uqzQuizBox").classList.remove("uqz-hidden");
+
+    uqzStartTimer();
     uqzLoadQuestion();
 }
 
-/* ==============================
-   4. LOAD SOAL
-============================== */
-function uqzLoadQuestion() {
-    const qData = uqzQuestions[uqzIndex];
+/* ===================================================
+   TIMER
+=================================================== */
+function uqzStartTimer() {
+    clearInterval(uqzTimerInterval);
 
-    document.getElementById("uqzQuestionText").innerText = qData.q;
+    uqzTimer =
+        uqzLevel === "easy"
+            ? 30
+            : uqzLevel === "medium"
+            ? 25
+            : 20;
+
+    document.getElementById("uqzTimer").innerText = uqzTimer;
+
+    uqzTimerInterval = setInterval(() => {
+        uqzTimer--;
+        document.getElementById("uqzTimer").innerText = uqzTimer;
+
+        if (uqzTimer <= 0) {
+            clearInterval(uqzTimerInterval);
+            uqzFinish();
+        }
+    }, 1000);
+}
+
+/* ===================================================
+   LOAD QUESTION
+=================================================== */
+function uqzLoadQuestion() {
+    let q = uqzQuestions[uqzIndex];
+    document.getElementById("uqzQuestionText").innerText = q.q;
 
     const box = document.getElementById("uqzOptionsBox");
     box.innerHTML = "";
 
-    qData.o.forEach((opt, i) => {
+    q.o.forEach((txt, idx) => {
         let btn = document.createElement("button");
         btn.className = "uqz-option";
-        btn.innerText = opt;
-        btn.onclick = () => uqzSelect(i);
+        btn.innerText = txt;
+
+        btn.onclick = () => uqzSelect(idx);
+
         box.appendChild(btn);
     });
 
     document.getElementById("uqzNextBtn").disabled = true;
 
-    uqzUpdateProgress();
+    uqzSetProgress();
 }
 
-/* ==============================
-   5. PILIH JAWABAN
-============================== */
-function uqzSelect(i) {
+/* ===================================================
+   SELECT ANSWER
+=================================================== */
+function uqzSelect(choice) {
     let correct = uqzQuestions[uqzIndex].a;
+    let opts = document.querySelectorAll(".uqz-option");
 
-    const options = document.querySelectorAll(".uqz-option");
+    opts.forEach(o => (o.disabled = true));
 
-    options.forEach(o => o.disabled = true);
-
-    if (i === correct) {
-        options[i].classList.add("uqz-correct");
-
-        if (uqzLevel === "easy") uqzScore += 2;
-        if (uqzLevel === "medium") uqzScore += 3;
-        if (uqzLevel === "hard") uqzScore += 5;
+    if (choice === correct) {
+        opts[choice].classList.add("uqz-correct");
+        uqzScore += uqzLevel === "easy" ? 2 : uqzLevel === "medium" ? 3 : 5;
     } else {
-        options[i].classList.add("uqz-wrong");
-        options[correct].classList.add("uqz-correct");
+        opts[choice].classList.add("uqz-wrong");
+        opts[correct].classList.add("uqz-correct");
     }
 
     document.getElementById("uqzNextBtn").disabled = false;
-
     document.getElementById("uqzNextBtn").onclick = uqzNext;
 }
 
-/* ==============================
-   6. NEXT SOAL
-============================== */
+/* ===================================================
+   NEXT
+=================================================== */
 function uqzNext() {
     uqzIndex++;
-
     if (uqzIndex >= uqzQuestions.length) {
         uqzFinish();
     } else {
@@ -427,62 +430,40 @@ function uqzNext() {
     }
 }
 
-/* ==============================
-   7. TIMER
-============================== */
-function uqzSetTimer() {
-    clearInterval(uqzTimerInterval);
-
-    uqzTimerValue = (uqzLevel === "easy" ? 30 :
-                     uqzLevel === "medium" ? 25 : 20);
-
-    document.getElementById("uqzTimer").innerText = uqzTimerValue;
-
-    uqzTimerInterval = setInterval(() => {
-        uqzTimerValue--;
-        document.getElementById("uqzTimer").innerText = uqzTimerValue;
-
-        if (uqzTimerValue <= 0) {
-            clearInterval(uqzTimerInterval);
-            uqzFinish();
-        }
-    }, 1000);
-}
-
-/* ==============================
-   8. PROGRESS BAR
-============================== */
-function uqzUpdateProgress() {
+/* ===================================================
+   PROGRESS BAR
+=================================================== */
+function uqzSetProgress() {
     let fill = document.getElementById("uqzProgressFill");
-    let progress = ((uqzIndex) / uqzQuestions.length) * 100;
+    let percentage = (uqzIndex / uqzQuestions.length) * 100;
 
-    fill.style.width = progress + "%";
+    fill.style.width = percentage + "%";
 }
 
-/* ==============================
-   9. SELESAI
-============================== */
+/* ===================================================
+   FINISH
+=================================================== */
 function uqzFinish() {
     clearInterval(uqzTimerInterval);
 
     document.getElementById("uqzQuizBox").classList.add("uqz-hidden");
     document.getElementById("uqzResultBox").classList.remove("uqz-hidden");
 
-    document.getElementById("uqzScoreText").innerText =
-        "Skor Kamu: " + uqzScore;
+    document.getElementById("uqzScoreText").innerText = `Skor Kamu: ${uqzScore}`;
 
-    let msg = "";
-
-    if (uqzScore < 20) msg = "Jangan menyerah! Coba lagi ya 😄";
-    else if (uqzScore < 40) msg = "Mantap! Kamu mulai menguasai 🎉";
-    else msg = "Luar biasa! Kamu master lingkungan! 🌱🔥";
+    let msg =
+        uqzScore < 10
+            ? "Jangan menyerah! Kamu pasti bisa 😄"
+            : uqzScore < 20
+            ? "Luar biasa! Kamu mulai jago 🌿"
+            : "MASTER LINGKUNGAN! 🔥🌱";
 
     document.getElementById("uqzScoreMessage").innerText = msg;
 }
 
-/* ==============================
-   10. ULANG QUIZ
-============================== */
+/* ===================================================
+   RESTART
+=================================================== */
 function uqzRestartQuiz() {
     document.getElementById("uqzResultBox").classList.add("uqz-hidden");
     document.querySelector(".uqz-wrapper").classList.remove("uqz-hidden");

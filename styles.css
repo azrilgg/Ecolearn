@@ -3941,3 +3941,121 @@ RESPONSIVE BREAKPOINTS
     border: none;
     border-radius: 30px;
 }
+
+
+.testimoni-luxury {
+    width: 100%;
+    padding: 140px 20px;
+    background: linear-gradient(160deg, #0f172a, #1e293b);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative Glow Elements */
+.testimoni-luxury::before,
+.testimoni-luxury::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.testimoni-luxury::before {
+    width: 450px;
+    height: 450px;
+    top: -80px;
+    right: -100px;
+    background: rgba(94, 234, 212, 0.5);
+}
+
+.testimoni-luxury::after {
+    width: 300px;
+    height: 300px;
+    bottom: -60px;
+    left: -70px;
+    background: rgba(139, 92, 246, 0.4);
+}
+
+.luxury-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.luxury-container h2 {
+    font-size: 3.2rem;
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 80px;
+    letter-spacing: -0.5px;
+}
+
+/* Grid */
+.luxury-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+/* Card */
+.luxury-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 40px 30px;
+    border-radius: 26px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    transition: 0.35s ease;
+    text-align: center;
+}
+
+.luxury-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.15);
+}
+
+/* Photo */
+.luxury-photo {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6EE7B7;
+    box-shadow: 0px 0px 20px rgba(110, 231, 183, 0.5);
+}
+
+.luxury-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Text */
+.luxury-card p {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+.luxury-card h4 {
+    color: #6EE7B7;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .luxury-container h2 {
+        font-size: 2.4rem;
+    }
+    .luxury-card {
+        padding: 32px 22px;
+    }
+}
